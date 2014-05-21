@@ -1,6 +1,6 @@
 Ping::Application.routes.draw do
-  root 'events#index'
-  resources :events
+  root 'pingas#index'
+  resources :pingas
   resources :sessions
   resources :users
 end

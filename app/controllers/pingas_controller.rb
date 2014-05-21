@@ -1,4 +1,4 @@
-class EventsController < ApplicationController
+class PingasController < ApplicationController
   def index
   end
 
