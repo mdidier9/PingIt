@@ -14,3 +14,20 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+.repl_history
+build
+tags
+app/pixate_code.rb
+resources/*.nib
+resources/*.momd
+resources/*.storyboardc
+.DS_Store
+nbproject
+.redcar
+#*#
+*~
+*.sw[po]
+.eprj
+.sass-cache
+.idea
+.dat*.*
