@@ -32,11 +32,30 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+
+#google maps requirements
+gem 'geocoder', '~>1.2.1'
+gem 'gmaps4rails', '~>2.1.2'
+
+#omniauth for facebook o-auth
+gem 'omniauth', '~> 1.2.1'
+
+#test and development only
+group :test, :development do
+  gem "rspec-rails", '~> 2.14.2'
+end
+
+#test environment only
+group :test do
+  gem "capybara", '~> 2.2.1'
+  gem "database_cleaner", '~> 1.2.0'
+end
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
 # Use unicorn as the app server
-# gem 'unicorn'
+gem 'unicorn', '~> 4.8.3'
 
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development
