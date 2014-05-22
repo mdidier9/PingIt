@@ -13,6 +13,7 @@
 
 ActiveRecord::Schema.define(version: 20140522020322) do
 
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -46,7 +47,13 @@ ActiveRecord::Schema.define(version: 20140522020322) do
     t.float    "longitude"
     t.datetime "created_at"
     t.datetime "updated_at"
+<<<<<<< HEAD
     t.string   "ip_address"
+=======
+    t.string   "name"
+    t.string   "provider"
+    t.string   "uid"
+>>>>>>> master
   end
 
 end

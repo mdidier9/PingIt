@@ -1,5 +1,6 @@
 require 'spec_helper'
 
 describe UserPinga do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it { should belong_to(:pinga) }
+  it { should belong_to(:user) }
 end

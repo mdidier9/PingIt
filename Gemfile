@@ -39,6 +39,7 @@ gem 'gmaps4rails', '~>2.1.2'
 
 #omniauth for facebook o-auth
 gem 'omniauth', '~> 1.2.1'
+gem 'omniauth-facebook', '1.4.0'
 
 #test and development only
 group :test, :development do
@@ -49,6 +50,7 @@ end
 group :test do
   gem "capybara", '~> 2.2.1'
   gem "database_cleaner", '~> 1.2.0'
+  gem 'shoulda-matchers', '~> 2.6.1'
 end
 
 # Use ActiveModel has_secure_password

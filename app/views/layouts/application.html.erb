@@ -8,7 +8,12 @@
 </head>
 <body>
 
-<%= yield %>
+<% if current_user %>
+  <%= yield %>
+  <div id="logout"><%= link_to "Logout", signout_path,  method: :delete, id: "sign_out" %></div>
+<% else  %>
+  <%= render partial: "shared/login" %>
+<% end %>
 
 </body>
 </html>
