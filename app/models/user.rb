@@ -29,7 +29,7 @@ class User < ActiveRecord::Base
       marker.lat pinga.latitude
       marker.lng pinga.longitude
       marker.infowindow("active")
-      marker.picture({ "url" => "",
+      marker.picture({ "url" => "assets/active.png",
                        "width" => 20,
                        "height" => 34})
     end
@@ -40,9 +40,9 @@ class User < ActiveRecord::Base
       marker.lat pinga.latitude
       marker.lng pinga.longitude
       marker.infowindow("pending")
-      marker.picture({# "url" => "pending.png",
+      marker.picture({"url" => "assets/pending.png",
                       "width" => 20,
-                      "height" => 20})
+                      "height" => 34})
     end
   end
 
@@ -51,9 +51,9 @@ class User < ActiveRecord::Base
       marker.lat pinga.latitude
       marker.lng pinga.longitude
       marker.infowindow("grey")
-      marker.picture({  # "url" => "pending.png",
+      marker.picture({  "url" => "assets/grey.png",
                         "width" => 20,
-                        "height" => 20})
+                        "height" => 34})
     end
   end
 
