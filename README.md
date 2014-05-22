@@ -7,8 +7,9 @@
 
 ---
 ####Project Journal
-WA = Web App...
-MA = Mobile App.
+WA = Web App
+
+MA = Mobile App
 
 
 __5/21/14__
@@ -63,18 +64,19 @@ __5/28/14__
  
 Goals and Status:
  
+ 
 1. 
 
- __5/29/14__
+__5/29/14__
+ 
+Goals and Status:
+  
+1. 
+
+__5/30/14__
  
 Goals and Status:
  
-1. 
-
- __5/30/14__
- 
-
-
 
 
 
