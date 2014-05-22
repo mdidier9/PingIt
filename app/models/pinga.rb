@@ -8,4 +8,11 @@ class Pinga < ActiveRecord::Base
 
   geocoded_by :address
   after_validation :geocode
+
+  private
+
+  def pinga_params
+    params.require(:pinga).permit(:title, :description, :status, :start_time, :end_time, :address, :latitude, :longitude, :creator_id)
+  end
+  
 end

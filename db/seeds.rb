@@ -1,4 +1,7 @@
 # Needs status
+User.destroy_all
+Pinga.destroy_all
+
 User.create!()
 User.create!()
 User.create!()
