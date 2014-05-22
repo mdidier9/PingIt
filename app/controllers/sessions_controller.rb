@@ -1,4 +1,4 @@
-class SessionController < ActionController::Base
+class SessionsController < ActionController::Base
 
   # def index
   #   @user = User.find_by_id(session[:user_id])

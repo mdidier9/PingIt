@@ -14,3 +14,13 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+// $(function() {
+
+//   $('#login').on("click", function(event){
+//     event.preventDefault();
+//     FB.login(response) {
+      
+//     }
+//   };
+
+// });

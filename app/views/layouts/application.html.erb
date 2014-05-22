@@ -10,9 +10,9 @@
 </head>
 <body>
 
-<% if session[:user_id] %>
+<% if current_user %>
   <%= yield %>
-  <div id="logout"><%= link_to "Logout", session_path(User.find(session[:user_id])), method: :delete%></div>
+  <div id="logout"><%= link_to "Logout", signout_path,  id: "sign_out" %></div>
 <% else  %>
   <%= render partial: "shared/login" %>
 <% end %>
