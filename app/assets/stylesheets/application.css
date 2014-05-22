@@ -9,5 +9,47 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
+ *= require normalize-rails
  *= require_tree .
  */
+
+.container {
+  margin: 20px auto;
+  width: 80%;
+  padding: 0px 20px 20px 20px;
+  /*border: 1px dotted black;*/
+  background-color: #F6F6EF;
+}
+
+.map {
+	float: left;
+	margin-right: 20px;
+	padding-right: 20px;
+}
+
+.index-list {
+ float: right;
+ margin-left: 20px;
+}
+
+.fixed_height_ping_div {
+  float:right;
+  height: 300px;
+  width:480px; 
+  background:black;
+}
+
+.ping_list{
+  height:270px;
+  overflow:auto;
+  background:#fff;
+  list-style-type: none;
+}
+
+.ping {
+	border-style:solid;
+	border-width:3px;	
+	margin-top: 5px;
+	padding: 5px;	
+}
+
