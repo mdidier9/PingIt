@@ -1,5 +1,7 @@
 require 'spec_helper'
 
 describe Pinga do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it { should belong_to(:creator) }
+  it { should have_many(:user_pingas) }
+  it { should have_many(:users).through(:user_pingas) }
 end
