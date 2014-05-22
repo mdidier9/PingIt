@@ -9,9 +9,4 @@ class Pinga < ActiveRecord::Base
   geocoded_by :address
   after_validation :geocode
 
-
-  def approx_start_time
-		from_time = Time.now
-		distance_of_time_in_words(from_time, from_time + 50.minutes)  
-  end
 end

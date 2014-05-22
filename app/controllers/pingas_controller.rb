@@ -1,4 +1,5 @@
 class PingasController < ApplicationController
+
   def index
     @user = User.all.last ## CHANGE
     @user_marker = @user.marker
