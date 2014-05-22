@@ -1,33 +1,25 @@
 <h2>Pingas#new new.html.erb Creating a new pinga here</h2>
-
+<div id="new_pinga_map">
+<script>
+  handler = Gmaps.build('Google');
+  handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+    markers = handler.addMarkers([
+      {
+        "lat": 0,
+        "lng": 0,
+        "picture": {
+          "url": "https://addons.cdn.mozilla.net/img/uploads/addon_icons/13/13028-64.png",
+          "width":  36,
+          "height": 36
+        },
+        "infowindow": "hello!"
+      }
+    ]);
+    handler.bounds.extendWith(markers);
+    handler.fitMapToBounds();
+  });
+</script>
+</div>
 <div id="form">
   <%= render partial: "form" %>
 </div>
-
-<div id="locationField">
-  <input id="autocomplete" placeholder="Enter your address"
-         onFocus="geolocate()" type="text"></input>
-</div>
-
-<table id="address">
-  <tr>
-    <td class="label">Street address</td>
-    <td class="slimField"><input class="field" id="street_number"
-          disabled="true"></input></td>
-    <td class="wideField" colspan="2"><input class="field" id="route"
-          disabled="true"></input></td>
-  </tr>
-  <tr>
-    <td class="label">City</td>
-    <td class="wideField" colspan="3"><input class="field" id="locality"
-          disabled="true"></input></td>
-  </tr>
-  <tr>
-    <td class="label">State</td>
-    <td class="slimField"><input class="field"
-          id="administrative_area_level_1" disabled="true"></input></td>
-    <td class="label">Zip code</td>
-    <td class="wideField"><input class="field" id="postal_code"
-          disabled="true"></input></td>
-  </tr>
-</table>

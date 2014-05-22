@@ -14,15 +14,22 @@ class PingasController < ApplicationController
   end
 
   def new
+    # @user = User.find_by_id(session[:user_id])
     @pinga = Pinga.new
   end
 
   def create
-    @pinga = Pinga.new(params[:pinga])
+    @pinga = Pinga.new(title: params["pinga"]["title"])
+    @pinga.status = "pending" # this needs to be checked against the start time
+    @pinga.description = params["pinga"]["description"]
+    @pinga.start_time = params["pinga"]["start_time"]
+    @pinga.end_time = params["pinga"]["end_time"]
+    @pinga.address = params[:address]
+    @pinga.creator_id = session[:user_id]
     if @pinga.save
-      redirect_to root_path
+      redirect_to pinga_path(@pinga)
     else
-      redirect_to new
+      redirect_to new_pinga
     end
   end
 end
