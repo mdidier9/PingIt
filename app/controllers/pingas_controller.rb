@@ -1,33 +1,22 @@
 class PingasController < ApplicationController
   def index
-    @user = User.create(ip_address: "74.122.9.196") ## CHANGE
-    @pingas = Pinga.all
-    # Gmaps.search_map.map_options.raw.streetViewControl = false;
-    @user_marker = Gmaps4rails.build_markers(@user) do |user, marker|
-      marker.lat user.latitude
-      marker.lng user.longitude
-    end
-    @pinga_markers = Gmaps4rails.build_markers(@pingas) do |pinga, marker|
-      marker.lat(pinga.latitude)
-      marker.lng(pinga.longitude)
-      marker.infowindow(pinga.title)
-      marker.picture({
-          # "url" => "link",
-          "width" => 20,
-          "height" => 20})
-    end
+    @user = User.all.last ## CHANGE
+    @user_marker = @user.marker
+    @active_pinga_markers = @user.active_pinga_markers
+    @pending_pinga_markers = @user.pending_pinga_markers
+    @grey_pinga_markers = @user.grey_pinga_markers
   end
 
   def show
-    @pinga.find(params[:id])
+    @pinga = Pinga.find(params[:id])
   end
 
   def new
-    @pinga.new
+    @pinga = Pinga.new
   end
 
   def create
-    @pinga.new(params[:pinga])
+    @pinga = Pinga.new(params[:pinga])
     if @pinga.save
       redirect_to root_path
     else
