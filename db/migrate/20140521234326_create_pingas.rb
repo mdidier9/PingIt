@@ -7,7 +7,8 @@ class CreatePingas < ActiveRecord::Migration
     	t.datetime 	:start_time
     	t.datetime 	:end_time
     	t.string		:address
-    	t.integer		:location_id
+      t.float     :latitude
+      t.float     :longitude
     	t.integer 	:creator_id #user_id
       t.timestamps
     end

@@ -16,13 +16,6 @@ ActiveRecord::Schema.define(version: 20140521234331) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "locations", force: true do |t|
-    t.float    "latitude"
-    t.float    "longitude"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "pingas", force: true do |t|
     t.string   "title"
     t.string   "description"
@@ -30,7 +23,8 @@ ActiveRecord::Schema.define(version: 20140521234331) do
     t.datetime "start_time"
     t.datetime "end_time"
     t.string   "address"
-    t.integer  "location_id"
+    t.float    "latitude"
+    t.float    "longitude"
     t.integer  "creator_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -48,7 +42,8 @@ ActiveRecord::Schema.define(version: 20140521234331) do
   create_table "users", force: true do |t|
     t.string   "oauth_token"
     t.datetime "oauth_expires_at"
-    t.integer  "location_id"
+    t.float    "latitude"
+    t.float    "longitude"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
