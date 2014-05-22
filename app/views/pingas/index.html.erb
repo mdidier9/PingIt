@@ -9,7 +9,7 @@
 				<% @pingas.each do |pinga| %>
 					<li class="ping">
 						<h4><%= link_to pinga.title, pinga %></h4>
-						<p><%= pinga.description %> - <%= pinga.start_time%></p>
+						<p><%= pinga.description %> - starts in <%= distance_of_time_in_words(Time.now, pinga.start_time) %></p>
 					</li>
 				<% end %>
 			</ul>
