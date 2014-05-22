@@ -17,11 +17,14 @@ __5/21/14__
 Goals and Status:
 
 1. Ruby Motion Tutorial
-2. Database (migrations, models, associations, tests)
-   * complete (minus tests)
+2. Database (migrations, models, associations-tests)
+   * complete
 3. WA - Routes, Makeshift views
+   * routes complete and views complete  
 4. Facebook omniauth
+   * complete. still needs tests.
 5. Googlemaps api research
+   * going well.  integration maybe tomorrow.
 6. Check user stories
 
 __5/22/14__

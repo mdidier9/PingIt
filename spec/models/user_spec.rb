@@ -1,5 +1,7 @@
 require 'spec_helper'
 
 describe User do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it { should have_many(:created_pingas) }
+  it { should have_many(:user_pingas) }
+  it { should have_many(:pingas).through(:user_pingas) }
 end
