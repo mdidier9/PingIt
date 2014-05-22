@@ -1,4 +1,19 @@
-<h2>Pingas#index</h2>
+<div class="container">
+	<div class="map">
+		<%= render partial: "shared/map" %>
+	</div>
+	<div class="index_list">
+		<h2>Explore Pings Near Me!</h2>
+		<div class="fixed_height_ping_div">
+			<ul class="ping_list">
+				<% @pingas.each do |pinga| %>
+					<li class="ping">
+						<h4><%= link_to pinga.title, pinga %></h4>
+						<p><%= pinga.description %> - starts in <%= start_time(pinga) %></p>
+					</li>
+				<% end %>
+			</ul>
+		</div>
+	</div>
+</div>
 
-<%= render partial: "shared/map" %>
-<%= link_to "Create a pinga", new_pinga_path %>
