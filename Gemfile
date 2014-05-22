@@ -39,6 +39,7 @@ gem 'gmaps4rails', '~>2.1.2'
 
 #omniauth for facebook o-auth
 gem 'omniauth', '~> 1.2.1'
+gem 'omniauth-facebook'
 
 #test and development only
 group :test, :development do
