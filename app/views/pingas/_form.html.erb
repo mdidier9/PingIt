@@ -1,0 +1,8 @@
+<%= form_for @pinga do |f| %> <!-- status: defaults to 'pending' unless start time is now. lat long are auto generated -->
+  <%= f.text_field :title %>
+  <%= f.text_area :description, size: "60x12" %>
+  <%= f.string :start_time %> <!-- datetime object -->
+  <%= f.string :end_time %>
+  <%= f.string :address %>
+  <%= f.submit "Create" %>
+<% end %>
