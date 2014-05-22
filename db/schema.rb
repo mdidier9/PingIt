@@ -46,10 +46,10 @@ ActiveRecord::Schema.define(version: 20140522020322) do
     t.float    "longitude"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "ip_address"
     t.string   "name"
     t.string   "provider"
     t.string   "uid"
+    t.string   "ip_address"
   end
 
 end

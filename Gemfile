@@ -32,6 +32,8 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+# rails normalize
+gem 'normalize-rails', '~> 3.0.1'
 
 #google maps requirements
 gem 'geocoder', '~>1.2.1'
