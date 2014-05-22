@@ -5,4 +5,7 @@ class Pinga < ActiveRecord::Base
 
   validates :status, inclusion: { in: ["pending", "active", "inactive"] }
   validates :title, :description, :address, presence: true
+
+  geocoded_by :address
+  after_validation :geocode
 end
