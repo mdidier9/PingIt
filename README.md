@@ -22,7 +22,7 @@ Goals and Status:
 3. WA - Routes, Makeshift views
    * routes complete and views complete  
 4. Facebook omniauth
-   * almost there
+   * complete. still needs tests.
 5. Googlemaps api research
    * going well.  integration maybe tomorrow.
 6. Check user stories
