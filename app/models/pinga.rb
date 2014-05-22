@@ -3,6 +3,9 @@ class Pinga < ActiveRecord::Base
 	has_many :user_pingas
 	has_many :users, through: :user_pingas
 
+  validates :status, inclusion: { in: ["pending", "active", "inactive"] }
+  validates :title, :description, :address, presence: true
+
   geocoded_by :address
   after_validation :geocode
 end
