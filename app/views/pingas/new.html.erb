@@ -1,18 +1,24 @@
 <h2>Pingas#new new.html.erb Creating a new pinga here</h2>
-  <script src='//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js' type='text/javascript'></script>
+
 <div style='width: 500px;'>
   <div id="create-pinga-map" style='width: 500px; height: 500px;'></div>
 </div>
-  <script>
-    handler = Gmaps.build('Google');
-    handler.buildMap({ provider: {}, internal: {id: 'create-pinga-map'}}, function(){
-      user_marker = handler.addMarkers(<%= raw @user_marker.to_json %>);
-      handler.bounds.extendWith(user_marker);
-      handler.getMap().setZoom(15);
-      handler.getMap().setCenter(new google.maps.LatLng(41.8899109, -87.6376566)); //this needs to be the users center
-    });
-  </script>
+
+<script>
+  handler = Gmaps.build('Google');
+  handler.buildMap({ provider: {}, internal: {id: 'create-pinga-map'}}, function(){
+    user_marker = handler.addMarkers(<%= raw @user_marker.to_json %>);
+    handler.bounds.extendWith(user_marker);
+    handler.getMap().setZoom(15);
+    handler.getMap().setCenter(new google.maps.LatLng(41.8899109, -87.6376566)); //this needs to be the users center
+  });
+</script>
+
 <div id="form">
   <%= render partial: "form" %>
 </div>
+
+<%= content_for :page_script do %>
+  <%= javascript_include_tag "create-pingas" %>
+<% end %>
 

@@ -2,14 +2,15 @@
 <html>
 	<head>
 	  <title>Ping</title>
-	  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-	  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+	  <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
+	  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places,geometry"></script>
+    <script src='//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js' type='text/javascript'></script>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
 	  <%= csrf_meta_tags %>
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places,geometry"></script>
 	</head>
-	
 	<body>
-        <%= render partial: "layouts/topnav" %>
-        <%= yield %>
+    <%= render "layouts/topnav" %>
+    <%= yield %>
+    <%= yield :page_script %>
 	</body>
 </html>
