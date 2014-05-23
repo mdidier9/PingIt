@@ -1,26 +1,24 @@
 <h2>Pingas#new new.html.erb Creating a new pinga here</h2>
-<div id="new_pinga_map">
-  <script type-"text/javascript">
-  handler = Gmaps.build('Google');
-  handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
-    markers = handler.addMarkers([
-      {
-        "lat": 0,
-        "lng": 0,
-        "picture": {
-          "url": "https://addons.cdn.mozilla.net/img/uploads/addon_icons/13/13028-64.png",
-          "width":  36,
-          "height": 36
-        },
-        "infowindow": "hello!"
-      }
-    ]);
-    handler.bounds.extendWith(markers);
-    handler.fitMapToBounds();
-  });
-  </script>
+
+<div style='width: 500px;'>
+  <div id="create-pinga-map" style='width: 500px; height: 500px;'></div>
 </div>
+
+<script>
+  handler = Gmaps.build('Google');
+  handler.buildMap({ provider: {}, internal: {id: 'create-pinga-map'}}, function(){
+    user_marker = handler.addMarkers(<%= raw @user_marker.to_json %>);
+    handler.bounds.extendWith(user_marker);
+    handler.getMap().setZoom(15);
+    handler.getMap().setCenter(new google.maps.LatLng(41.8899109, -87.6376566)); //this needs to be the users center
+  });
+</script>
+
 <div id="form">
   <%= render partial: "form" %>
 </div>
+
+<%= content_for :page_script do %>
+  <%= javascript_include_tag "create-pingas" %>
+<% end %>
 
