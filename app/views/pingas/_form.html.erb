@@ -1,16 +1,12 @@
-<%= form_for @pinga do |f| %>
-  <%= f.label :title %>
-  <%= f.text_field :title %>
-  <%= f.label :description %>
-  <%= f.text_area :description, size: "60x12" %>
-  <div id="locationField">
-    <input id="autocomplete" placeholder="Enter your address" onFocus="" type="text" name="address"></input>
-  </div>
-  <%= f.label :start_time %>
-  <%= f.datetime_local_field :start_time %>
-  <%= f.label :end_time %>
-  <%= f.datetime_local_field :end_time %>
-  <%= f.submit "Create" %>
-<% end %>
-
-<!-- status: defaults to 'pending' unless start time is now. lat long are auto generated -->
+<div>
+  <%= form_for @pinga do |f| %>
+    <%= f.text_field :title, placeholder: "Event Title" %><br>
+    <%= f.text_area :description, placeholder: "Event Description" %><br>
+    <%= f.text_field :address,  id: "autocomplete", placeholder: "Event Address" %><br>
+    <%= f.label :start_time %><br>
+    <%= f.datetime_local_field :start_time %><br>
+    <%= f.label :end_time %><br>
+    <%= f.datetime_local_field :end_time %><br>
+    <%= f.submit "Ping it!" %>
+  <% end %>
+</div>
