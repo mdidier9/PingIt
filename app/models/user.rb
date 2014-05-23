@@ -80,6 +80,11 @@ class User < ActiveRecord::Base
   end
 
   def pingas_ordered_by_received_in_listening_radius
-    Pinga.joins(:user).order("colors.name")
+    Pinga.near(self, self.listening_radius)
+  end
+
+  def pingas_ordered_by_distance_in_listening_radius
+    pingas = Pinga.near(self, self.listening_radius)
+    pingas.sort_by { |pinga| pinga.distance_to(self) }
   end
 end
