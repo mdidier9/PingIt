@@ -6,7 +6,7 @@ class SessionsController < ActionController::Base
 
   def create
     user = User.from_omniauth(env["omniauth.auth"])
-    user.ip_address = request.location.ip
+    user.ip_address = "74.122.9.196"
     user.listening_radius = 1
     user.save!
     session[:user_id] = user.id

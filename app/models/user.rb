@@ -77,4 +77,23 @@ class User < ActiveRecord::Base
   def pingas_outside_listening_radius
     Pinga.all - pending_pingas_in_listening_radius - active_pingas_in_listening_radius
   end
+
+  def update_user_pingas
+    Pinga.near(self, self.listening_radius).where(status: ["pending", "active"]).each do |pinga|
+      self.pingas << pinga unless self.pingas.include?(pinga)
+    end
+    self.save
+  end
+
+  def pingas_ordered_by_received_in_listening_radius
+    Pinga.near(self, self.listening_radius).sort_by { |pinga| UserPinga.where(user_id: self.id, pinga_id: pinga.id)[0].created_at }
+  end
+
+  def pingas_ordered_by_distance_in_listening_radius
+    Pinga.near(self, self.listening_radius).sort_by { |pinga| pinga.distance_to(self) }
+  end
+
+  def pingas_ordered_by_start_time_in_listening_radius
+    Pinga.near(self, self.listening_radius).sort_by { |pinga| pinga.start_time }
+  end
 end
