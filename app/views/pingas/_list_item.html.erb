@@ -1,0 +1,5 @@
+<li class="ping <%= pinga.category.title %>">
+	<h4><%= link_to pinga.title, pinga %></h4>
+	<p><%= pinga.description %> - <%= start_time(pinga) %></p>
+	<p><%= @user.distance(pinga) %> miles away</p>
+</li>
