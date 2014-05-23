@@ -9,10 +9,6 @@ class Pinga < ActiveRecord::Base
   geocoded_by :address
   after_validation :geocode
 
-  def distance ## returns the distance to current user
-    self.distance_to(current_user)
-  end
-
   private
 
   def pinga_params

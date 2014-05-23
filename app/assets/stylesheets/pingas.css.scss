@@ -6,8 +6,7 @@ $yellow: #ffe583;
 
 .map {
   float: left;
-  margin-right: 20px;
-  padding-right: 20px;
+  margin: 10px;
   border: 5px solid $red;
 }
 
@@ -16,14 +15,13 @@ $yellow: #ffe583;
   margin-left: 20px;
 }
 
-.fixed_height_ping_div {
+#tabs  {
   float:right;
-  height: 300px;
-  width:480px;
-  background:black;
+  height: 360px;
+  width:550px;
 }
 
-.ping_list{
+.scroll {
   height:270px;
   overflow:auto;
   background:#fff;
@@ -35,4 +33,12 @@ $yellow: #ffe583;
   border-width:3px;
   margin-top: 5px;
   padding: 5px;
+}
+
+.ping_list {
+  list-style-type: none;
+}
+
+#format {
+  padding: 10px;
 }

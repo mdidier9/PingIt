@@ -9,6 +9,7 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
+ *= require jquery.ui.all
  *= require normalize-rails
  *= require_tree .
  */
@@ -19,4 +20,4 @@
   padding: 0px 20px 20px 20px;
   border: 1px dotted black;
   background-color: #F6F6EF;
-}
+
