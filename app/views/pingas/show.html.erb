@@ -3,15 +3,19 @@
     <div id="pingit-show-map" style='width: 500px; height: 500px;'></div>
   </div>
 </div>
-
-<h2>Pingas#create show.html.erb</h2>
-<p><%= @pinga.title%></p>
-<p><%= @pinga.description%></p>
-<p><%= @pinga.address%></p>
-<p><%= @pinga.start_time%></p>
-<p><%= @pinga.end_time%></p>
-<p><%= @pinga.creator.name%></p>
+<h2><%= @pinga.title%></h2>
+<p>Description <%= @pinga.description%></p>
+<p>Address <%= @pinga.address%></p>
+<p>Start Time <%= @pinga.start_time%></p>
+<p>End Time <%= @pinga.end_time%></p>
+<p>PingIt Creator <%= @pinga.creator.name%></p>
 <p id="pingit-coords" hidden><%= {lat: @pinga.latitude, lng: @pinga.longitude }.to_json %></p>
+
+<% if @pinga.creator_id == session[:user_id] %>
+  <%= link_to "Edit this PingIt", edit_pinga_path(@pinga) %>
+  <%= link_to "Delete this PingIt", pinga_path(@pinga), method: :delete %>
+<% end %>
+
 <%= content_for :page_script do %>
   <%= javascript_include_tag "show-pingas" %>
 <% end %>

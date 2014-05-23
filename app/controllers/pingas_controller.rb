@@ -49,4 +49,11 @@ class PingasController < ApplicationController
       render :new
     end
   end
+
+  def destroy
+    @pinga = Pinga.find(params[:id])
+    @pinga.status = "inactive"
+    @pinga.save
+    redirect_to root_url
+  end
 end
