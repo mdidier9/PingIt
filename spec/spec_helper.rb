@@ -29,10 +29,10 @@ RSpec.configure do |config|
   end
 
   #factory girl
-  config.include FactoryGirl::Syntax::Methods
-  config.before(:suite) do
-    FactoryGirl.lint
-  end
+  # config.include FactoryGirl::Syntax::Methods
+  # config.before(:suite) do
+  #   FactoryGirl.lint
+  # end
 
   #capybara config
   config.include Capybara::DSL
