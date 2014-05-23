@@ -1,10 +1,13 @@
 var placeSearch, autocomplete, geocoder;
 
 function initialize() {
+  
+  var map_style = [{featureType:"water",elementType:"geometry",stylers:[{color:"#a2daf2"}]},{featureType:"landscape.man_made",elementType:"geometry",stylers:[{color:"#f7f1df"}]},{featureType:"landscape.natural",elementType:"geometry",stylers:[{color:"#d0e3b4"}]},{featureType:"landscape.natural.terrain",elementType:"geometry",stylers:[{visibility:"off"}]},{featureType:"poi.park",elementType:"geometry",stylers:[{color:"#bde6ab"}]},{featureType:"poi",elementType:"labels",stylers:[{visibility:"off"}]},{featureType:"poi.medical",elementType:"geometry",stylers:[{color:"#fbd3da"}]},{featureType:"poi.business",stylers:[{visibility:"off"}]},{featureType:"road",elementType:"geometry.stroke",stylers:[{visibility:"off"}]},{featureType:"road",elementType:"labels",stylers:[{visibility:"off"}]},{featureType:"road.highway",elementType:"geometry.fill",stylers:[{color:"#ffe15f"}]},{featureType:"road.highway",elementType:"geometry.stroke",stylers:[{color:"#efd151"}]},{featureType:"road.arterial",elementType:"geometry.fill",stylers:[{color:"#ffffff"}]},{featureType:"road.local",elementType:"geometry.fill",stylers:[{color:"black"}]},{featureType:"transit.station.airport",elementType:"geometry.fill",stylers:[{color:"#cfb2db"}]}]
 
   var mapOptions = {
     zoom: 17,
-    center: new google.maps.LatLng(41.8899109, -87.6376566) // this needs to be the user's location, or the location of the last pinga in an incorrectly submitted form
+    center: new google.maps.LatLng(41.8899109, -87.6376566),
+    styles: map_style // this needs to be the user's location, or the location of the last pinga in an incorrectly submitted form
   };
 
   var map = new google.maps.Map(document.getElementById('create-pinga-map'),
@@ -33,7 +36,7 @@ function initialize() {
 
   google.maps.event.addListener(autocomplete, 'place_changed', function() {
     var place = autocomplete.getPlace();
-    map.setCenter(place.geometry.location);
+    map.panTo(place.geometry.location);
     map.setZoom(17);
     userMarker.setPosition(place.geometry.location);
     userMarker.setVisible(true);
