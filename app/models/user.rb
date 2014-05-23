@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
 	has_many :pingas, through: :user_pingas
 
   geocoded_by :ip_address
-  after_validation :geocode
+  before_save :geocode
 
   def self.from_omniauth(auth)
     where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
       user.oauth_token = auth.credentials.token
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)
       user.save!
+      p auth
     end
   end
 
