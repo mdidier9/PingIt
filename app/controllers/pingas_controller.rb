@@ -17,6 +17,10 @@ class PingasController < ApplicationController
 
   def show
     @pinga = Pinga.find(params[:id])
+    if @pinga.status == "inactive"
+      # flash message saying that pinga has been deactivated?
+      redirect_to root_url
+    end
   end
 
   def new
