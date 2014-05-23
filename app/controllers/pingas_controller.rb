@@ -4,10 +4,7 @@ class PingasController < ApplicationController
     @user = User.find_by_id(session[:user_id])
     @user.update_user_pingas
     @user_marker = @user.marker
-    @pingas = @user.active_pingas_in_listening_radius
-    @active_pinga_markers = @user.active_pinga_markers
-    @pending_pinga_markers = @user.pending_pinga_markers
-    @grey_pinga_markers = @user.grey_pinga_markers
+    @pinga_markers = @user.active_pinga_markers + @user.pending_pinga_markers + @user.grey_pinga_markers
     
     @pingas_by_received_time = @user.pingas_ordered_by_received_in_listening_radius
     @pingas_by_distance = @user.pingas_ordered_by_distance_in_listening_radius
