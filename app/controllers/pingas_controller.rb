@@ -9,9 +9,9 @@ class PingasController < ApplicationController
     @pending_pinga_markers = @user.pending_pinga_markers
     @grey_pinga_markers = @user.grey_pinga_markers
     
-    @pingas_by_received_time = Pinga.all
-    @pingas_by_distance = Pinga.all
-    @pingas_by_start_time = Pinga.all
+    @pingas_by_received_time = @user.pingas_ordered_by_received_in_listening_radius
+    @pingas_by_distance = @user.pingas_ordered_by_distance_in_listening_radius
+    @pingas_by_start_time = @user.pingas_ordered_by_start_time_in_listening_radius
 
   end
 
