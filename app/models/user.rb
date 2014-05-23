@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
 	has_many :pingas, through: :user_pingas
 
   geocoded_by :ip_address
-  before_save :geocode
+  before_create :geocode
 
   # def override_ip_address
   #   if self.ip_address == "127.0.0"
@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
     Gmaps4rails.build_markers(self.active_pingas_in_listening_radius) do |pinga, marker|
       marker.lat pinga.latitude
       marker.lng pinga.longitude
-      marker.infowindow("active")
+      marker.infowindow(pinga.title)
       marker.picture({ "url" => "assets/active.png",
                        "width" => 20,
                        "height" => 34})
@@ -46,7 +46,7 @@ class User < ActiveRecord::Base
     Gmaps4rails.build_markers(self.pending_pingas_in_listening_radius) do |pinga, marker|
       marker.lat pinga.latitude
       marker.lng pinga.longitude
-      marker.infowindow("pending")
+      marker.infowindow(pinga.title)
       marker.picture({"url" => "assets/pending.png",
                       "width" => 20,
                       "height" => 34})
@@ -57,7 +57,7 @@ class User < ActiveRecord::Base
     Gmaps4rails.build_markers(self.pingas_outside_listening_radius) do |pinga, marker|
       marker.lat pinga.latitude
       marker.lng pinga.longitude
-      marker.infowindow("grey")
+      marker.infowindow(pinga.title)
       marker.picture({  "url" => "assets/grey.png",
                         "width" => 20,
                         "height" => 34})

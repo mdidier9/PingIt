@@ -32,14 +32,16 @@
         handler.map.centerOn({ lat: <%= @user.latitude %>, lng: <%= @user.longitude %> });
 
         google.maps.event.addListener(user_marker[0].getServiceObject(), "dragend", function(event) {
-            console.log(event.latLng);
             $.ajax({
                 url: '/users/' + <%= @user.id %>,
                 type: 'PUT',
                 data: {latitude: event.latLng.k, longitude: event.latLng.A},
                 dataType: 'json',
-                success: function (status) {
-
+                success: function (data) {
+                    console.log(data);
+                    handler.addMarkers(data);
+//                    handler.map.removeCircle();
+                    handler.map.centerOn({ lat: event.latLng.k, lng: event.latLng.A });
                 }
             });
         });
