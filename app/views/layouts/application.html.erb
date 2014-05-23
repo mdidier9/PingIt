@@ -8,11 +8,7 @@
 	</head>
 	
 	<body>
-		<% if current_user %>
-		  <%= render partial: "layouts/topnav" %>
-		  <%= yield %>
-		<% else  %>
-		  <%= render partial: "shared/login" %>
-		<% end %>
+        <%= render partial: "layouts/topnav" %>
+        <%= yield %>
 	</body>
 </html>
