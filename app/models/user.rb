@@ -80,7 +80,7 @@ class User < ActiveRecord::Base
   end
 
   def pingas_ordered_by_received_in_listening_radius
-    Pinga.near(self, self.listening_radius)
+    Pinga.near(self, self.listening_radius).sort_by { |pinga| UserPinga.where(user_id: self.id, pinga_id: pinga.id)[0].created_at }
   end
 
   def pingas_ordered_by_distance_in_listening_radius
@@ -88,6 +88,6 @@ class User < ActiveRecord::Base
   end
 
   def pingas_ordered_by_start_time_in_listening_radius
-    Pinga.near(self, self.listening_radius)
+    Pinga.near(self, self.listening_radius).sort_by { |pinga| pinga.start_time }
   end
 end
