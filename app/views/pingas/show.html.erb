@@ -1,3 +1,9 @@
+<div class="map">
+  <div style='width: 500px;'>
+    <div id="pingit-show-map" style='width: 500px; height: 500px;'></div>
+  </div>
+</div>
+
 <h2>Pingas#create show.html.erb</h2>
 <p><%= @pinga.title%></p>
 <p><%= @pinga.description%></p>
@@ -5,3 +11,7 @@
 <p><%= @pinga.start_time%></p>
 <p><%= @pinga.end_time%></p>
 <p><%= @pinga.creator.name%></p>
+<p id="pingit-coords" hidden><%= {lat: @pinga.latitude, lng: @pinga.longitude }.to_json %></p>
+<%= content_for :page_script do %>
+  <%= javascript_include_tag "show-pingas" %>
+<% end %>
