@@ -7,7 +7,7 @@
 
 <script>
     map_style = [{featureType:"water",elementType:"geometry",stylers:[{color:"#a2daf2"}]},{featureType:"landscape.man_made",elementType:"geometry",stylers:[{color:"#f7f1df"}]},{featureType:"landscape.natural",elementType:"geometry",stylers:[{color:"#d0e3b4"}]},{featureType:"landscape.natural.terrain",elementType:"geometry",stylers:[{visibility:"off"}]},{featureType:"poi.park",elementType:"geometry",stylers:[{color:"#bde6ab"}]},{featureType:"poi",elementType:"labels",stylers:[{visibility:"off"}]},{featureType:"poi.medical",elementType:"geometry",stylers:[{color:"#fbd3da"}]},{featureType:"poi.business",stylers:[{visibility:"off"}]},{featureType:"road",elementType:"geometry.stroke",stylers:[{visibility:"off"}]},{featureType:"road",elementType:"labels",stylers:[{visibility:"off"}]},{featureType:"road.highway",elementType:"geometry.fill",stylers:[{color:"#ffe15f"}]},{featureType:"road.highway",elementType:"geometry.stroke",stylers:[{color:"#efd151"}]},{featureType:"road.arterial",elementType:"geometry.fill",stylers:[{color:"#ffffff"}]},{featureType:"road.local",elementType:"geometry.fill",stylers:[{color:"black"}]},{featureType:"transit.station.airport",elementType:"geometry.fill",stylers:[{color:"#cfb2db"}]}]
-    map_options = { maxZoom: 15, styles: map_style }
+    map_options = { maxZoom: 15, styles: map_style };
     handler = Gmaps.build('Google');
     handler.buildMap({ provider: map_options, internal: {id: 'map'} }, function(){
 //        SETS USER MARKER
@@ -33,6 +33,47 @@
         handler.fitMapToBounds();
 //        CENTERS ON USER
         handler.map.centerOn({ lat: <%= @user.latitude %>, lng: <%= @user.longitude %> });
+        google.maps.event.addListener(user_marker[0].getServiceObject(), "dragend", function(event) {
+            console.log(event.latLng.e);
+            $.ajax({
+                url: '',
+                type: 'POST',
+                data: {latitude: latLng.d, longitude: latLng.E},
+                dataType: 'json',
+                success: function (status) {
+
+                }
+            });
+        });
+
 
     });
+
+
+//    handler.HandleDragend = function(pos) {
+//        var geocoder = new google.maps.Geocoder();
+//        geocoder.geocode({
+//            latLng: pos
+//        }, function(responses) {
+//            if (responses && responses.length > 0) {
+//                alert(responses[0].formatted_address);
+//            } else {
+//                alert('Cannot determine address at this location.');
+//            }
+//        });
+//    };
+//
+//    handler.callback = function() {
+//            google.maps.event.addListener(user_marker[0].getServiceObject(), "dragend", function(event) { handler.HandleDragend(this.getPosition()) });
+//    };
+
 </script>
+<!--Gmaps.loadMaps()-->
+<!--// if you are using markers-->
+<!--markers_json = JSON.parse(markers)-->
+<!--Gmaps.map.replaceMarkers(markers_json)-->
+<!--// if you are using circle-->
+<!--Gmaps.map.clear_circles()-->
+<!--circle_json = JSON.parse(circle)-->
+<!--Gmaps.map.circles = circle_json-->
+<!--Gmaps.map.create_circles()-->
