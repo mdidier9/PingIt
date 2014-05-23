@@ -1,4 +1,5 @@
 class PingasController < ApplicationController
+
   def index
     @user = User.find_by_id(session[:user_id])
     @user_marker = @user.marker

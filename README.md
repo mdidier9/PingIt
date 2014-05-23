@@ -14,6 +14,8 @@ MA = Mobile App
 
 __5/21/14__
 
+Biggest Hurdle: Establishing the scope of the project.
+
 Goals and Status:
 
 1. Ruby Motion Tutorial
@@ -28,10 +30,16 @@ Goals and Status:
 6. Check user stories
 
 __5/22/14__
- 
+
+Biggest Hurdle: Understanding the requirements of Ruby Motion
+
 Goals and Status:
  
-1. 
+1. Ruby Motion Tutorial (cont.)
+2. WA - Google maps integration
+3. WA - Controller interaction with database
+4. WA - Testing Models
+5. MA - Routing, views, database interaction
 
 __5/23/14__
  
