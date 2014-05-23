@@ -38,6 +38,8 @@ class PingasController < ApplicationController
   end
 
   def create
+    valid_start_time = Time.now + 12.hours
+    p valid_start_time
     @user = User.find(session[:user_id])
     @pinga = Pinga.new(title: params["pinga"]["title"])
     @pinga.status = "pending" # this needs to be checked against the start time
@@ -46,6 +48,13 @@ class PingasController < ApplicationController
     @pinga.end_time = params["pinga"]["end_time"]
     @pinga.address = params["pinga"]["address"]
     @pinga.creator = @user
+
+    # if @pinga.start_time < Time.now # earlier than right now
+    #   @status = "active"
+    # elsif @pinga.start_time 
+    # else @pinga.start_time < Time.now
+    # end
+
     if @pinga.save
       redirect_to pinga_path(@pinga)
     else
