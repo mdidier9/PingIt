@@ -1,7 +1,7 @@
 class PingasController < ApplicationController
 
   def index
-    @user = User.all.last ## CHANGE
+    @user = User.find_by_id(session[:user_id]) ## CHANGE
     @user_marker = @user.marker
     @pingas = @user.active_pingas_in_listening_radius
     @active_pinga_markers = @user.active_pinga_markers

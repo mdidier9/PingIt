@@ -46,6 +46,7 @@ gem 'omniauth-facebook', '1.4.0'
 #test and development only
 group :test, :development do
   gem "rspec-rails", '~> 2.14.2'
+	gem "factory_girl_rails", '~> 4.4.1'
 end
 
 #test environment only
@@ -57,6 +58,8 @@ end
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
+
+# factory-girl
 
 # Use unicorn as the app server
 gem 'unicorn', '~> 4.8.3'
