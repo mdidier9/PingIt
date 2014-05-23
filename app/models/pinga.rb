@@ -7,7 +7,7 @@ class Pinga < ActiveRecord::Base
   validates :title, :description, :address, presence: true
 
   geocoded_by :address
-  after_validation :geocode
+  before_save :geocode # after_validation?
 
   def distance ## returns the distance to current user
     self.distance_to(current_user)
