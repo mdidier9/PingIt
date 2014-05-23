@@ -1,19 +1,10 @@
-<h2>Pingas#new new.html.erb Creating a new pinga here</h2>
+<h2>create a new pingit</h2>
 
 <div style='width: 500px;'>
   <div id="create-pinga-map" style='width: 500px; height: 500px;'></div>
 </div>
 
-<script>
-  handler = Gmaps.build('Google');
-  handler.buildMap({ provider: {}, internal: {id: 'create-pinga-map'}}, function(){
-    user_marker = handler.addMarkers(<%= raw @user_marker.to_json %>);
-    handler.bounds.extendWith(user_marker);
-    handler.getMap().setZoom(15);
-    handler.getMap().setCenter(new google.maps.LatLng(41.8899109, -87.6376566)); //this needs to be the users center
-  });
-</script>
-
+<!-- error handling -->
 <div id="form">
   <%= render partial: "form" %>
 </div>

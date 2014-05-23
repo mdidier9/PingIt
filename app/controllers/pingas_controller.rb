@@ -37,11 +37,12 @@ class PingasController < ApplicationController
     @pinga.description = params["pinga"]["description"]
     @pinga.start_time = params["pinga"]["start_time"]
     @pinga.end_time = params["pinga"]["end_time"]
-    @pinga.address = params[:address]
+    @pinga.address = params["pinga"]["address"]
     @pinga.creator = @user
     if @pinga.save
       redirect_to pinga_path(@pinga)
     else
+      @pinga.geocode
       render :new
     end
   end

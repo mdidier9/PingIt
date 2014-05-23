@@ -30,7 +30,7 @@
 				<% @pingas_by_distance.each do |pinga| %>
 						<li class="ping">
 							<h4><%= link_to pinga.title, pinga %></h4>
-							<p><%= pinga.description %> - starts in <%= start_time(pinga)%></p>
+							<p><%= pinga.description %> - <%= start_time(pinga)%></p>
 							<p><%= @user.distance(pinga) %> miles away</p>
 						</li>
 					<% end %>
@@ -41,7 +41,8 @@
 				<% @pingas_by_received_time.each do |pinga| %>
 						<li class="ping">
 							<h4><%= link_to pinga.title, pinga %></h4>
-							<p><%= pinga.description %> - starts in <%= start_time(pinga) %></p>
+							<p><%= pinga.description %> - <%= start_time(pinga) %></p>
+							<p><%= @user.distance(pinga) %> miles away</p>
 						</li>
 					<% end %>
 				</ul>
@@ -51,7 +52,7 @@
 				<% @pingas_by_start_time.each do |pinga| %>
 						<li class="ping">
 							<h4><%= link_to pinga.title, pinga %></h4>
-							<p><%= pinga.description %> - starts in <%= start_time(pinga) %></p>
+							<p><%= pinga.description %> - <%= start_time(pinga) %></p>						<p><%= @user.distance(pinga) %> miles away</p>
 						</li>
 					<% end %>
 				</ul>

@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   # end
 
   def distance(pinga) ## returns the distance to current user
-    self.distance_to(pinga)
+    self.distance_to(pinga).round(2)
   end
 
   def self.from_omniauth(auth)

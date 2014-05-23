@@ -1,5 +1,6 @@
 class Pinga < ActiveRecord::Base
 	belongs_to :creator, class_name: "User"
+  belongs_to :category
 	has_many :user_pingas
 	has_many :users, through: :user_pingas
 
@@ -7,7 +8,7 @@ class Pinga < ActiveRecord::Base
   validates :title, :description, :address, presence: true
 
   geocoded_by :address
-  after_validation :geocode
+  before_save :geocode # after_validation?
 
   private
 
