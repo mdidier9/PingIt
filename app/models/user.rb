@@ -6,6 +6,12 @@ class User < ActiveRecord::Base
   geocoded_by :ip_address
   before_save :geocode
 
+  # def override_ip_address
+  #   if self.ip_address == "127.0.0"
+  #     self.ip_address = "74.122.9.196"
+  #   end
+  # end
+
   def self.from_omniauth(auth)
     where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
       user.provider = auth.provider

@@ -4,11 +4,10 @@
   <%= f.label :description %>
   <%= f.text_area :description, size: "60x12" %>
   <div id="locationField">
-  <input id="autocomplete" placeholder="Enter your address"
-         onFocus="geolocate()" type="text" name="address"></input>
+    <input id="autocomplete" placeholder="Enter your address" onFocus="" type="text" name="address"></input>
   </div>
   <%= f.label :start_time %>
-  <%= f.datetime_local_field :start_time %> <!-- datetime object -->
+  <%= f.datetime_local_field :start_time %>
   <%= f.label :end_time %>
   <%= f.datetime_local_field :end_time %>
   <%= f.submit "Create" %>
