@@ -1,5 +1,3 @@
- 
-
 <div class="container" style='width: 1100px; height: 520px;'> 
 
 	<div class="map">
@@ -27,33 +25,22 @@
 		  </ul>
 		  <div class="scroll" id="tabs-1">
 		    <ul class="ping_list">
-				<% @pingas_by_distance.each do |pinga| %>
-						<li class="ping">
-							<h4><%= link_to pinga.title, pinga %></h4>
-							<p><%= pinga.description %> - <%= start_time(pinga)%></p>
-							<p><%= @user.distance(pinga) %> miles away</p>
-						</li>
+					<% @pingas_by_distance.each do |pinga| %>
+						<%= render partial: "list_item", locals: {pinga: pinga} %>
 					<% end %>
 				</ul>
 		  </div>
 		  <div class="scroll" id="tabs-2">
 		    <ul class="ping_list">
-				<% @pingas_by_received_time.each do |pinga| %>
-						<li class="ping">
-							<h4><%= link_to pinga.title, pinga %></h4>
-							<p><%= pinga.description %> - <%= start_time(pinga) %></p>
-							<p><%= @user.distance(pinga) %> miles away</p>
-						</li>
+					<% @pingas_by_received_time.each do |pinga| %>
+						<%= render partial: "list_item", locals: {pinga: pinga} %>
 					<% end %>
 				</ul>
 		  </div>
 		  <div class="scroll" id="tabs-3">
 		    <ul class="ping_list">
-				<% @pingas_by_start_time.each do |pinga| %>
-						<li class="ping">
-							<h4><%= link_to pinga.title, pinga %></h4>
-							<p><%= pinga.description %> - <%= start_time(pinga) %></p>						<p><%= @user.distance(pinga) %> miles away</p>
-						</li>
+					<% @pingas_by_start_time.each do |pinga| %>
+						<%= render partial: "list_item", locals: {pinga: pinga} %>
 					<% end %>
 				</ul>
 		  </div>
