@@ -1,7 +1,7 @@
 var placeSearch, autocomplete;
 
 $(document).on("page:load", function() {
-
+  
   autocomplete = new google.maps.places.Autocomplete(
       (document.getElementById('autocomplete')),
       { types: ['geocode'] });
@@ -17,5 +17,5 @@ $(document).on("page:load", function() {
           geolocation));
     });
   }
-  
+
 })

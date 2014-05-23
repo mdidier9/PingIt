@@ -14,5 +14,4 @@ class Pinga < ActiveRecord::Base
   def pinga_params
     params.require(:pinga).permit(:title, :status, :description, :start_time, :end_time, :address, :creator_id)
   end
-
 end
