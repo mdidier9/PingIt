@@ -1,6 +1,6 @@
 <h2>Pingas#new new.html.erb Creating a new pinga here</h2>
 <div id="new_pinga_map">
-<script>
+  <script type-"text/javascript">
   handler = Gmaps.build('Google');
   handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
     markers = handler.addMarkers([
@@ -18,7 +18,7 @@
     handler.bounds.extendWith(markers);
     handler.fitMapToBounds();
   });
-</script>
+  </script>
 </div>
 <div id="form">
   <%= render partial: "form" %>

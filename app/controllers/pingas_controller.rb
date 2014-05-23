@@ -14,7 +14,10 @@ class PingasController < ApplicationController
   end
 
   def new
-    # @user = User.find_by_id(session[:user_id])
+    @user = User.find(session[:user_id])
+    @user.ip_address = request.location.ip
+    @user.save
+    @user_marker = @user.marker
     @pinga = Pinga.new
   end
 

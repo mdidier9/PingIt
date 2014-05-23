@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
 	has_many :pingas, through: :user_pingas
 
   geocoded_by :ip_address
-  after_validation :geocode
+  before_save :geocode
 
   def self.from_omniauth(auth)
     where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
