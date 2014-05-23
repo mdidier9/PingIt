@@ -2,11 +2,17 @@ class PingasController < ApplicationController
 
   def index
     @user = User.find_by_id(session[:user_id])
+    @user.update_user_pingas
     @user_marker = @user.marker
     @pingas = @user.active_pingas_in_listening_radius
     @active_pinga_markers = @user.active_pinga_markers
     @pending_pinga_markers = @user.pending_pinga_markers
     @grey_pinga_markers = @user.grey_pinga_markers
+    
+    @pingas_by_received_time = Pinga.all
+    @pingas_by_distance = Pinga.all
+    @pingas_by_start_time = Pinga.all
+
   end
 
   def show

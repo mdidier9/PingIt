@@ -71,4 +71,15 @@ class User < ActiveRecord::Base
   def pingas_outside_listening_radius
     Pinga.all - pending_pingas_in_listening_radius - active_pingas_in_listening_radius
   end
+
+  def update_user_pingas
+    Pinga.near(self, self.listening_radius).where(status: ["pending", "active"]).each do |pinga|
+      self.pingas << pinga unless self.pingas.include?(pinga)
+    end
+    self.save
+  end
+
+  def pingas_ordered_by_received_in_listening_radius
+    Pinga.joins(:user).order("colors.name")
+  end
 end
