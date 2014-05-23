@@ -15,24 +15,31 @@ class PingasController < ApplicationController
 
   def new
     @user = User.find(session[:user_id])
-    @user.ip_address = request.location.ip
-    @user.save
+    p request
+    if request.remote_ip == '127.0.0.1'
+      @user.latitude = 41.8899109
+      @user.longitude = -87.6376566
+    else
+      @user.ip_address = request.remote_ip
+    end
+    @user.save!
     @user_marker = @user.marker
     @pinga = Pinga.new
   end
 
   def create
+    @user = User.find(session[:user_id])
     @pinga = Pinga.new(title: params["pinga"]["title"])
     @pinga.status = "pending" # this needs to be checked against the start time
     @pinga.description = params["pinga"]["description"]
     @pinga.start_time = params["pinga"]["start_time"]
     @pinga.end_time = params["pinga"]["end_time"]
     @pinga.address = params[:address]
-    @pinga.creator_id = session[:user_id]
+    @pinga.creator_id = @user
     if @pinga.save
       redirect_to pinga_path(@pinga)
     else
-      redirect_to new_pinga
+      render :new
     end
   end
 end
