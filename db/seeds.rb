@@ -1,6 +1,6 @@
 # Needs status
-User.create!(listening_radius: 0.3, ip_address: "74.122.9.196")
-User.create!(listening_radius: 0.3, ip_address: "74.122.9.196")
+# User.create!(listening_radius: 0.3, ip_address: "74.122.9.196")
+# User.create!(listening_radius: 0.3, ip_address: "74.122.9.196")
 
 
 # out of range
