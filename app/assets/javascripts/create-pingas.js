@@ -4,10 +4,11 @@ function initialize() {
   
   var map_style = [{featureType:"water",elementType:"geometry",stylers:[{color:"#a2daf2"}]},{featureType:"landscape.man_made",elementType:"geometry",stylers:[{color:"#f7f1df"}]},{featureType:"landscape.natural",elementType:"geometry",stylers:[{color:"#d0e3b4"}]},{featureType:"landscape.natural.terrain",elementType:"geometry",stylers:[{visibility:"off"}]},{featureType:"poi.park",elementType:"geometry",stylers:[{color:"#bde6ab"}]},{featureType:"poi",elementType:"labels",stylers:[{visibility:"off"}]},{featureType:"poi.medical",elementType:"geometry",stylers:[{color:"#fbd3da"}]},{featureType:"poi.business",stylers:[{visibility:"off"}]},{featureType:"road",elementType:"geometry.stroke",stylers:[{visibility:"off"}]},{featureType:"road",elementType:"labels",stylers:[{visibility:"off"}]},{featureType:"road.highway",elementType:"geometry.fill",stylers:[{color:"#ffe15f"}]},{featureType:"road.highway",elementType:"geometry.stroke",stylers:[{color:"#efd151"}]},{featureType:"road.arterial",elementType:"geometry.fill",stylers:[{color:"#ffffff"}]},{featureType:"road.local",elementType:"geometry.fill",stylers:[{color:"black"}]},{featureType:"transit.station.airport",elementType:"geometry.fill",stylers:[{color:"#cfb2db"}]}]
 
+  // want map to center on user at first
   var mapOptions = {
     zoom: 17,
-    center: new google.maps.LatLng(41.8899109, -87.6376566),
-    styles: map_style // this needs to be the user's location, or the location of the last pinga in an incorrectly submitted form
+    center: new google.maps.LatLng(41.8899109, -87.6376566), // this needs to be the user's location, or the location of the last pinga in an incorrectly submitted form
+    styles: map_style
   };
 
   var map = new google.maps.Map(document.getElementById('create-pinga-map'),
@@ -51,13 +52,13 @@ function initialize() {
     });
   };
 
-  google.maps.event.addListener(map, 'center_changed', function() {
-    // 3 seconds after the center of the map has changed, pan back to the
-    // marker.
-    window.setTimeout(function() {
-      map.panTo(userMarker.getPosition());
-    }, 3000);
-  });
+  // google.maps.event.addListener(map, 'center_changed', function() {
+  //   // 3 seconds after the center of the map has changed, pan back to the
+  //   // marker.
+  //   window.setTimeout(function() {
+  //     map.panTo(userMarker.getPosition());
+  //   }, 3000);
+  // });
 
   google.maps.event.addListener(userMarker, 'click', function() {
     map.setZoom(18);

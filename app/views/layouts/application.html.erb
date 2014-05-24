@@ -10,7 +10,9 @@
 	</head>
 	<body>
     <%= render "layouts/topnav" %>
-    <%= yield %>
-    <%= yield :page_script %>
+    <div class="container" style='width: 1100px; height: 520px;'>
+        <%= yield %>
+    </div>
+    <%= render "layouts/footer" %>
 	</body>
 </html>
