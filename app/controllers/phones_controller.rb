@@ -12,10 +12,14 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
 
 	def recieve_request_create_event
 		p "THIS IS INSIDE CREATE EVENT ACTION ********************"
-		p params[:data]
 
 		#geocode it with geocode gem (look for a method that can allow me to convert the address to the to the lat long)
 
+		create_event_data = params[:data]
+
+		p create_event_data
+
+		return create_event_data.to_json
 
 
 
