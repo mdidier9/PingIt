@@ -28,45 +28,6 @@ class User < ActiveRecord::Base
     end
   end
 
-  def pinga_markers
-    self.active_pinga_markers + self.pending_pinga_markers + self.grey_pinga_markers
-  end
-
-  def active_pinga_markers
-    Gmaps4rails.build_markers(self.active_pingas_in_listening_radius) do |pinga, marker|
-      marker.lat pinga.latitude
-      marker.lng pinga.longitude
-      marker.infowindow(pinga.title)
-      marker.picture({ "url" => "assets/active.png",
-                       "width" => 20,
-                       "height" => 34})
-    end
-  end
-
-  def pending_pinga_markers
-    Gmaps4rails.build_markers(self.pending_pingas_in_listening_radius) do |pinga, marker|
-      marker.lat pinga.latitude
-      marker.lng pinga.longitude
-      marker.infowindow(pinga.title)
-      marker.picture({"url" => "assets/pending.png",
-                      "width" => 20,
-                      "height" => 34})
-    end
-  end
-
-  def grey_pinga_markers
-    Gmaps4rails.build_markers(self.pingas_outside_listening_radius) do |pinga, marker|
-      marker.lat pinga.latitude
-      marker.lng pinga.longitude
-      marker.infowindow(pinga.title)
-      marker.picture({  "url" => "assets/grey.png",
-                        "width" => 20,
-                        "height" => 34})
-    end
-  end
-
-
-
   def active_pingas_in_listening_radius
     Pinga.near(self, self.listening_radius).where(status: "active")
   end
