@@ -40,7 +40,6 @@
         radiusCircle = new google.maps.Circle(radiusOptions);
 
         google.maps.event.addListener(user_marker, "dragend", function(event) {
-
             var point = user_marker.getPosition();
             map.panTo(point);
                 $.ajax({
@@ -49,14 +48,25 @@
                     data: {latitude: event.latLng.k, longitude: event.latLng.A},
                     dataType: 'json',
                     success: function (data) {
-                        deleteMarkers();
-                        data.forEach(function(marker) {
-                            addMarker(marker);
-                        });
-
+                        updateLists(data);
+                        updateMarkers(data.markers);
                     }
                 });
         });
+
+        function updateLists(lists) {
+            $('.ping_link').remove();
+            $('#newest').append(lists.newest);
+            $('#nearest').append(lists.nearest);
+            $('#soonest').append(lists.soonest);
+        }
+
+        function updateMarkers(markers) {
+            deleteMarkers();
+            markers.forEach(function(marker) {
+                addMarker(marker);
+            });
+        }
 
         function addMarker(marker) {
             var latLng = new google.maps.LatLng(marker.lat, marker.lng);

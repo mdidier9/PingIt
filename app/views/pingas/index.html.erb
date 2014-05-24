@@ -26,25 +26,19 @@
         <li><a href="#tabs-3">Starting Soonest</a></li>
       </ul>
       <div class="scroll" id="tabs-1">
-        <ul class="ping_list">
-                <% @pingas_by_distance.each do |pinga| %>
-                    <%= link_to (render partial: "list_item", locals: {pinga: pinga}), pinga %>
-                <% end %>
-            </ul>
+        <ul id="nearest" class="ping_list">
+            <%= render partial: "list", locals: {list: @pingas_by_distance } %>
+        </ul>
       </div>
       <div class="scroll" id="tabs-2">
-        <ul class="ping_list">
-                <% @pingas_by_received_time.each do |pinga| %>
-                    <%= link_to (render partial: "list_item", locals: {pinga: pinga}), pinga %>
-                <% end %>
-            </ul>
+        <ul id="newest" class="ping_list">
+            <%= render partial: "list", locals: {list: @pingas_by_received_time } %>
+        </ul>
       </div>
       <div class="scroll" id="tabs-3">
-        <ul class="ping_list">
-                <% @pingas_by_start_time.each do |pinga| %>
-                    <%= link_to (render partial: "list_item", locals: {pinga: pinga}), pinga %>
-                <% end %>
-            </ul>
+        <ul id="soonest" class="ping_list">
+            <%= render partial: "list", locals: {list: @pingas_by_start_time } %>
+        </ul>
       </div>
     </div>
 <%= link_to "Create Ping!", new_pinga_path, 'class' => 'button', 'data-no-turbolink' => true %>
