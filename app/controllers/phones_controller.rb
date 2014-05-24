@@ -2,7 +2,7 @@ class PhonesController < ApplicationController
 
 	def recieve
 		puts "THIS IS SOMETHING IN THE PHONESCONTROLLER **************************************************************"
-		p params[:data]
+		# p params[:data]
 
 	end
 
