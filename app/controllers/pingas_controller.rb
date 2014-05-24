@@ -60,6 +60,7 @@ class PingasController < ApplicationController
 
   def create
     valid_start_time = Time.now + 12.hours
+    p params
     puts "X"*50
     p valid_start_time
     p params
@@ -67,6 +68,7 @@ class PingasController < ApplicationController
     @user = User.find(session[:user_id])
     @pinga = Pinga.new(title: params["pinga"]["title"])
     @pinga.status = "pending" # this needs to be checked against the start time
+    @pinga.category_id = params["pinga"]["category_id"]
     @pinga.description = params["pinga"]["description"]
     @pinga.start_time = params["pinga"]["start_time"]
     @pinga.end_time = params["pinga"]["end_time"]
