@@ -5,10 +5,10 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
 
 	def recieve_request_get_events
 		p "THIS IS INSIDE GET EVENTS ACTION ********************"
-		p params #not sure there is even going to be params
-		all_pingas = Pinga.all
-		p all_pingas
-		return all_pingas.to_json
+		# p params #not sure there is even going to be params
+		@all_pingas = Pinga.all
+		p @all_pingas
+		respond_with @all_pingas
 	end
 
 
