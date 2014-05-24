@@ -1,8 +1,10 @@
 <div id="topnav">
-	<div id="logout">
-		<%= link_to "Logout", signout_path,  method: :delete, id: "sign_out" %>
-	</div>
-	<div id="home">
-		<%= link_to "Ping", root_path%>
-	</div>
+  <div id="inner_top_nav">
+    <div id="home">
+        <%= link_to "PingIt", root_path %>
+    </div>
+    <div id="logout">
+        <%= link_to "Logout", signout_path,  method: :delete, id: "sign_out" %>
+    </div>
+  </div>
 </div>
