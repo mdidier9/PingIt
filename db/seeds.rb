@@ -1,10 +1,9 @@
 # Categories
-Category.destroy_all
-food = Category.create!(title: "food")
-social = Category.create!(title: "social")
-sports = Category.create!(title: "sports")
-entertainment = Category.create!(title: "entertainment")
-deals = Category.create!(title: "deals")
+food = Category.find_by_title("Food")
+social = Category.find_by_title("Social")
+sports = Category.find_by_title("Sports")
+entertainment = Category.find_by_title("Entertainment")
+deals = Category.find_by_title("Deals")
 
 
 # Needs status
