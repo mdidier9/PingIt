@@ -25,3 +25,12 @@
 #   	attend_status 	 nil
 # 	end
 # end
+
+ # FactoryGirl.define do
+ #   factory :test_user_mark do
+ #     name 'Mark Ameiehbaakf Wisemanstein'
+ #     fbid '100005958231006'
+ #     email 'dqfaoxm_wisemanstein_13684123@tfbnw.net'
+ #     password 'XXXX'
+ #   end
+ # end

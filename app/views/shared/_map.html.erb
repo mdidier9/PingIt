@@ -1,16 +1,18 @@
-<div style='width: 500px;'>
-  <div id="map" style='width: 500px; height: 500px;'></div>
+<div style='width: 520px;'>
+  <div id="map" style='width: 520px; height: 550px;'></div>
 </div>
 
 <script>
     function initialize() {
         markers = <%=raw @pinga_markers.to_json %>;
         pingaMarkers = [];
+        infos = [];
 
         var map_style = [{featureType:"water",elementType:"geometry",stylers:[{color:"#a2daf2"}]},{featureType:"landscape.man_made",elementType:"geometry",stylers:[{color:"#f7f1df"}]},{featureType:"landscape.natural",elementType:"geometry",stylers:[{color:"#d0e3b4"}]},{featureType:"landscape.natural.terrain",elementType:"geometry",stylers:[{visibility:"off"}]},{featureType:"poi.park",elementType:"geometry",stylers:[{color:"#bde6ab"}]},{featureType:"poi",elementType:"labels",stylers:[{visibility:"off"}]},{featureType:"poi.medical",elementType:"geometry",stylers:[{color:"#fbd3da"}]},{featureType:"poi.business",stylers:[{visibility:"off"}]},{featureType:"road",elementType:"geometry.stroke",stylers:[{visibility:"off"}]},{featureType:"road",elementType:"labels",stylers:[{visibility:"off"}]},{featureType:"road.highway",elementType:"geometry.fill",stylers:[{color:"#ffe15f"}]},{featureType:"road.highway",elementType:"geometry.stroke",stylers:[{color:"#efd151"}]},{featureType:"road.arterial",elementType:"geometry.fill",stylers:[{color:"#ffffff"}]},{featureType:"road.local",elementType:"geometry.fill",stylers:[{color:"black"}]},{featureType:"transit.station.airport",elementType:"geometry.fill",stylers:[{color:"#cfb2db"}]}]
 
         var mapOptions = {
             zoom: 13,
+
             center: new google.maps.LatLng(<%= @user.latitude %>, <%= @user.longitude %>),
             styles:map_style
         };
@@ -27,6 +29,7 @@
         markers.forEach(function(marker) {
             addMarker(marker);
         });
+        console.log(pingaMarkers);
 
         var radiusOptions = {
             strokeColor:"#0000FF",strokeOpacity: 1, strokeWeight: 0, fillColor: '#007d53',
@@ -50,20 +53,49 @@
                         data.forEach(function(marker) {
                             addMarker(marker);
                         });
+
                     }
                 });
-
         });
 
         function addMarker(marker) {
-            var latLng = new google.maps.LatLng(marker.lat, marker.lng)
+            var latLng = new google.maps.LatLng(marker.lat, marker.lng);
             var marker = new google.maps.Marker({
                 position: latLng,
                 map: map,
                 title: marker.title,
-                icon: marker.picture.url
+                icon: marker.picture.url,
+                infowindow: marker.infowindow
             });
+
+            var content = marker.infowindow;
+            var infowindow = new google.maps.InfoWindow();
+            google.maps.event.addListener(marker,'click', (function(marker,content,infowindow){
+                return function() {
+                    closeInfos();
+                    infowindow.setContent(content);
+                    infowindow.open(map,marker);
+                    infos[0]=infowindow;
+                    map.panTo(marker.position)
+
+                };
+            })(marker,content,infowindow));
             pingaMarkers.push(marker);
+        }
+
+        function closeInfos(){
+
+            if(infos.length > 0){
+
+                /* detach the info-window from the marker ... undocumented in the API docs */
+                infos[0].set("marker", null);
+
+                /* and close it */
+                infos[0].close();
+
+                /* blank the array */
+                infos.length = 0;
+            }
         }
 
         // Sets the map on all markers in the array.
