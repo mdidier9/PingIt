@@ -1,12 +1,16 @@
 <div class="container" style='width: 1100px; height: 520px;'> 
 
-	<div class="map">
-		<%= render partial: "shared/map" %>
+	<div class="left_side">
+		<div id="slider" style='width: 500px;'></div>
+
+		<div class="map">
+			<%= render partial: "shared/map" %>
+		</div>
 	</div>
 	
 	<div class="index_list">
 		<div id="index header">
-			<h2>Discover Pings!</h2>
+			<h2>Discover Pings!</h2><span>Listening Radius = </span><span id="slider-value"></span><span> mile</span>
 		</div>
 
 		<div id="format">

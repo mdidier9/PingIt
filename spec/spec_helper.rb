@@ -28,6 +28,18 @@ RSpec.configure do |config|
     DatabaseCleaner.clean
   end
 
+  #facebook oauth
+  # config.include FacebookMacros
+
+  OmniAuth.config.test_mode = true
+  # OmniAuth.config.mock_auth[:facebook] = {
+  #   'provider'         => "facebook",
+  #   'uid'              => "999999",
+  #   'oauth_token'      => "token1234qwert",
+  #   'oauth_expires_at' => Time.now, 
+  #   'name'             => "name"
+  #   }
+
   #factory girl
   # config.include FactoryGirl::Syntax::Methods
   # config.before(:suite) do

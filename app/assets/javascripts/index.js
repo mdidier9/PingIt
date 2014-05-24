@@ -1,18 +1,8 @@
-
+$(function() {  
 // click
-$(document).ready(function() {
   $("#tabs").tabs();
-});
-
-// mouseover
-// $(function() {
-//   $( "#tabs" ).tabs({
-//     event: "mouseover"
-//   });
-// });
 
 // checkbox
-$(function() {
   $( "#check" ).button();
   $( "#format" ).buttonset();
 
@@ -26,5 +16,22 @@ $(function() {
       $("."+category).show();     
     }
 	});
+
+
+  $("#slider").slider(
+    {
+      value: 1.0,
+      min: 0.5,
+      max: 20,
+      step: .5,
+      slide: function( event, ui ) {
+          $( "#slider-value" ).html( ui.value );
+      }
+    }
+  );
+  $( "#slider-value" ).html(  $('#slider').slider('value') );
+
+
+
 });
 
