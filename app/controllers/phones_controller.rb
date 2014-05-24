@@ -1,7 +1,7 @@
 class PhonesController < ApplicationController
 
 	def recieve
-		puts "This is something"
+		puts "THIS IS SOMETHING IN THE PHONESCONTROLLER **************************************************************"
 
 	end
 
