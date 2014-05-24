@@ -4,13 +4,6 @@ class User < ActiveRecord::Base
 	has_many :pingas, through: :user_pingas
 
   geocoded_by :ip_address
-  before_create :geocode
-
-  # def override_ip_address
-  #   if self.ip_address == "127.0.0"
-  #     self.ip_address = "74.122.9.196"
-  #   end
-  # end
 
   def distance(pinga) ## returns the distance to current user
     self.distance_to(pinga).round(2)
@@ -33,6 +26,10 @@ class User < ActiveRecord::Base
       marker.lat user.latitude
       marker.lng user.longitude
     end
+  end
+
+  def pinga_markers
+    self.active_pinga_markers + self.pending_pinga_markers + self.grey_pinga_markers
   end
 
   def active_pinga_markers
