@@ -1,15 +1,17 @@
-<h2>create a new pingit</h2>
-
-<div style='width: 500px;'>
-  <div id="create-pinga-map" style='width: 500px; height: 500px;'></div>
+<div class="map">
+  <div style='width: 520px;'>
+    <div id="create-pinga-map" style='width: 520px; height: 550px;'></div>
+  </div>
 </div>
 
 <!-- error handling -->
-<div id="form">
-  <%= render partial: "form" %>
+<div class="content">
+  <h2>create a new pingit</h2>
+    <div id="form">
+      <%= render partial: "form" %>
+    </div>
 </div>
 
 <%= content_for :page_script do %>
   <%= javascript_include_tag "create-pingas" %>
 <% end %>
-
