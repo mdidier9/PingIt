@@ -10,5 +10,6 @@ Ping::Application.routes.draw do
 
 
   #connect to iphone
-  match 'phone', to: 'phones#recieve', via: [:get] 
+  match 'phone/get_events', to: 'phones#recieve_request_get_events', via: [:get]
+  match 'phone/create_event', to: 'phones#recieve_request_create_event', via: [:get] 
 end

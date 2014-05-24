@@ -1,9 +1,21 @@
 class PhonesController < ApplicationController
 
-	def recieve
-		p "THIS IS SOMETHING IN THE PHONESCONTROLLER ********************"
+	def recieve_request_get_events
+		p "THIS IS INSIDE GET EVENTS ACTION ********************"
+		p params #not sure there is even going to be params
+
+	end
+
+
+	def recieve_request_create_event
+		p "THIS IS INSIDE CREATE EVENT ACTION ********************"
 		p params[:data]
 
+
+
+
+		#TO DO
+		#---------------------------------------------------------------------------
 
 		#this is currently the format of the new_ping hash that we are getting from the phone
 		#----------------------------------------------------------------------------------------
@@ -27,8 +39,9 @@ class PhonesController < ApplicationController
 
 
 
-
-
+    #QUESTIONS
+    #---------------------------------------------------------------------------------
+    #How do we want to sanitize data? (trailing space?, newline? ) 
 	end
 
 end
