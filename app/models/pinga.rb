@@ -5,7 +5,8 @@ class Pinga < ActiveRecord::Base
 	has_many :users, through: :user_pingas
 
   validates :status, inclusion: { in: ["pending", "active", "inactive"] }
-  validates :title, :description, :address, presence: {message: " is a required field."}
+  validates :title, :description, :address, :category_id, presence: {message: " is a required field."}
+
 
   geocoded_by :address
   before_save :geocode # after_validation?
