@@ -4,8 +4,8 @@ class PhonesController < ApplicationController
 		p "THIS IS INSIDE GET EVENTS ACTION ********************"
 		p params #not sure there is even going to be params
 		all_pingas = Pinga.all
-		p all_pingas
-		return all_pingas
+		p all_pingas[0]
+		return all_pingas.to_json
 	end
 
 
