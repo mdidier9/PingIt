@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_filter :require_login
+  # before_filter :require_login #this is filtered so that the phone can access the web app 
   protect_from_forgery with: :exception
 
   private
