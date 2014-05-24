@@ -3,7 +3,8 @@ class PhonesController < ApplicationController
 	def recieve_request_get_events
 		p "THIS IS INSIDE GET EVENTS ACTION ********************"
 		p params #not sure there is even going to be params
-
+		all_pingas = Pinga.all
+		render json: all_pingas
 	end
 
 
