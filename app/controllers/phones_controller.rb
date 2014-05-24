@@ -15,11 +15,11 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
 
 		#geocode it with geocode gem (look for a method that can allow me to convert the address to the to the lat long)
 
-		create_event_data = params[:data]
+		@create_event_data = params[:data]
 
-		p create_event_data
+		p @create_event_data
 
-		return create_event_data.to_json
+		respond_with @create_event_data
 
 
 
