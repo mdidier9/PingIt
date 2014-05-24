@@ -1,7 +1,7 @@
 class PingasController < ApplicationController
 
   def index
-    @user = User.find_by_id(session[:user_id])
+    @user = User.find(session[:user_id])
     @user.geocode
     @user.update_user_pingas
     @user_marker = @user.marker
@@ -40,35 +40,36 @@ class PingasController < ApplicationController
   def show
     @pinga = Pinga.find(params[:id])
     if @pinga.status == "inactive"
-      # flash message saying that pinga has been deactivated?
+      flash[:notice] = "I'm sorry, that pingIt is no longer active!"
       redirect_to root_url
     end
   end
 
   def new
     @user = User.find(session[:user_id])
-    p request
     if request.remote_ip == '127.0.0.1'
-      @user.latitude = 41.8899109
-      @user.longitude = -87.6376566
+      @user.ip_address = '74.122.9.196'
     else
       @user.ip_address = request.remote_ip
     end
-    @user.save!
+    @user.save
     @user_marker = @user.marker
     @pinga = Pinga.new
   end
 
   def create
     valid_start_time = Time.now + 12.hours
+    puts "X"*50
     p valid_start_time
+    p params
+    puts "X"*50
     @user = User.find(session[:user_id])
     @pinga = Pinga.new(title: params["pinga"]["title"])
     @pinga.status = "pending" # this needs to be checked against the start time
     @pinga.description = params["pinga"]["description"]
     @pinga.start_time = params["pinga"]["start_time"]
     @pinga.end_time = params["pinga"]["end_time"]
-    @pinga.address = params[:address]
+    @pinga.address = params["pinga"]["address"]
     @pinga.creator = @user
 
     # if @pinga.start_time < Time.now # earlier than right now
