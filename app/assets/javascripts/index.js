@@ -2,6 +2,8 @@
 // click
 $(document).ready(function() {
   $("#tabs").tabs();
+
+
 });
 
 // mouseover

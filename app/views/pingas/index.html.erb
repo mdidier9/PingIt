@@ -4,11 +4,7 @@
 		<%= render partial: "shared/map" %>
 	</div>
 	
-	<div class="index_list">
-		<div id="index header">
-			<h2>Discover Pings!</h2>
-		</div>
-
+	<div class="index_list pingas">
 		<div id="format">
 		  <input type="checkbox" id="food"><label for="food">Food</label>
 		  <input type="checkbox" id="social"><label for="social">Social</label>
@@ -26,26 +22,26 @@
 		  <div class="scroll" id="tabs-1">
 		    <ul class="ping_list">
 					<% @pingas_by_distance.each do |pinga| %>
-						<%= render partial: "list_item", locals: {pinga: pinga} %>
+						<%= link_to (render partial: "list_item", locals: {pinga: pinga}), pinga %>
 					<% end %>
 				</ul>
 		  </div>
 		  <div class="scroll" id="tabs-2">
 		    <ul class="ping_list">
 					<% @pingas_by_received_time.each do |pinga| %>
-						<%= render partial: "list_item", locals: {pinga: pinga} %>
+                        <%= link_to (render partial: "list_item", locals: {pinga: pinga}), pinga %>
 					<% end %>
 				</ul>
 		  </div>
 		  <div class="scroll" id="tabs-3">
 		    <ul class="ping_list">
 					<% @pingas_by_start_time.each do |pinga| %>
-						<%= render partial: "list_item", locals: {pinga: pinga} %>
+                        <%= link_to (render partial: "list_item", locals: {pinga: pinga}), pinga %>
 					<% end %>
 				</ul>
 		  </div>
 		</div>
-  	<h3><%= link_to "Create a Ping!", new_pinga_path, 'data-no-turbolink' => true %></h3>
+  	<%= link_to "Create Ping!", new_pinga_path, 'class' => 'button', 'data-no-turbolink' => true %>
 	</div>	
 </div>
 
