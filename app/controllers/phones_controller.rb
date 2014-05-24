@@ -1,10 +1,11 @@
 class PhonesController < ApplicationController
+skip_before_filter :require_login, :only => [:recieve_request_get_events, :recieve_request_create_event] #add the phone controller pages in here
 
 	def recieve_request_get_events
 		p "THIS IS INSIDE GET EVENTS ACTION ********************"
 		p params #not sure there is even going to be params
 		all_pingas = Pinga.all
-		p all_pingas[0]
+		p all_pingas
 		return all_pingas.to_json
 	end
 
@@ -12,6 +13,8 @@ class PhonesController < ApplicationController
 	def recieve_request_create_event
 		p "THIS IS INSIDE CREATE EVENT ACTION ********************"
 		p params[:data]
+
+		#geocode it with geocode gem (look for a method that can allow me to convert the address to the to the lat long)
 
 
 
@@ -34,7 +37,7 @@ class PhonesController < ApplicationController
     #CHECK 	t.datetime 	:start_time
     #CHECK 	t.datetime 	:end_time
     #CHECK 	t.string		:address
-    #NO (get from the phone using bubblewraps's location obj)   t.float     :latitude
+    #NO (get from the the address)   t.float     :latitude
     #NO (get from the phone using bubblewraps's location obj)   t.float     :longitude
     #NO (need to somehow get the user information from the phone) 	t.integer 	:creator_id #user_id
     #CHECK   t.timestamps (this will be created when it is entered in the database)

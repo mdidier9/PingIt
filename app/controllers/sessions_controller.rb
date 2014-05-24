@@ -1,5 +1,5 @@
 class SessionsController < ActionController::Base
-  skip_before_filter :require_login, :only => [:new, :create]
+  skip_before_filter :require_login, :only => [:new, :create] #add the phone controller pages in here
 
   def new
   end
