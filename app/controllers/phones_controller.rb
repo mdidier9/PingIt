@@ -8,11 +8,12 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
 		# p params #not sure there is even going to be params
 		
 		@pinga_hash = {}
-		
+
 		# Pinga.all.each_with_index do |ping_obj, index|
 		# 	pinga_hash[index] = ping_obj
 		# end
-
+		@pinga_hash[1] = {1: "this", 2: "huh"}
+		@pinga_hash[2] = {2: "what"}
 
 		p @pinga_hash
 		respond_with @pinga_hash
