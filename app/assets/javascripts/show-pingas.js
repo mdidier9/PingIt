@@ -53,13 +53,13 @@ function initialize() {
     });
   };
 
-  google.maps.event.addListener(map, 'center_changed', function() {
-    // 3 seconds after the center of the map has changed, pan back to the
-    // marker.
-    window.setTimeout(function() {
-      map.panTo(userMarker.getPosition());
-    }, 3000);
-  });
+  // google.maps.event.addListener(map, 'center_changed', function() {
+  //   // 3 seconds after the center of the map has changed, pan back to the
+  //   // marker.
+  //   window.setTimeout(function() {
+  //     map.panTo(userMarker.getPosition());
+  //   }, 3000);
+  // });
 
   google.maps.event.addListener(userMarker, 'click', function() {
     map.setZoom(18);
