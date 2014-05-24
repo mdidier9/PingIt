@@ -1,6 +1,12 @@
 require 'spec_helper'
 
 describe User do
+  context "user associations" do
+    it { should have_many(:created_pingas) }
+    it { should have_many(:user_pingas) }
+    it { should have_many(:pingas).through(:user_pingas) }
+  end
+
   before :each do
     user = User.create!(listening_radius: 0.3, ip_address: "74.122.9.196")
     grey = Pinga.create!(title: "Sport town", description: "Play the game", status: "pending", start_time: Time.now, end_time: Time.now, address: "630 N Kingsbury St Chicago, IL 60654", creator_id: 2)
@@ -8,15 +14,9 @@ describe User do
     pending = Pinga.create!(title: "Drinkos", description: "We're at a bar", status: "pending", start_time: Time.now, end_time: Time.now, address: "155 W Kinzie St, Chicago, IL 60654", creator_id: 3)
   end
 
-  context "user associations" do
-    it { should have_many(:created_pingas) }
-    it { should have_many(:user_pingas) }
-    it { should have_many(:pingas).through(:user_pingas) }
-  end
-
   context "active_pingas_in_listening_radius" do
     it "should return active pingas in listening radius" do
-      expect (user.active_pingas_in_listening_radius).to eq([active])
+      expect (user.active_pingas_in_listening_radius.to_a).to eq([active])
     end
   end
 
@@ -49,9 +49,4 @@ describe User do
       expect(user.grey_pinga_markers).to be_a_kind_of(Gmaps4rails)
     end
   end
-
-
-
-
-
 end
