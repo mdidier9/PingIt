@@ -54,6 +54,7 @@ class PingasController < ApplicationController
     end
     @user.save
     @user_marker = @user.marker
+    @categories = Category.all
     @pinga = Pinga.new
   end
 

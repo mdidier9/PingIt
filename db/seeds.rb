@@ -4,7 +4,7 @@ social = Category.find_by_title("Social")
 sports = Category.find_by_title("Sports")
 entertainment = Category.find_by_title("Entertainment")
 deals = Category.find_by_title("Deals")
-
+other = Category.find_by_title("Other")
 
 # Needs status
 User.destroy_all
@@ -15,6 +15,7 @@ Pinga.create!(title: "Sport town", description: "Play the game", status: "pendin
 
 # in range
 Pinga.create!(title: "Food Truck", description: "There is food.", status: "active", start_time: Time.now-600, end_time: Time.now, address: "351 W Hubbard St, Chicago, IL 60654", creator_id: 1, category: food)
+
 Pinga.create!(title: "Chipotile $1 Burritos", description: "This is crazy", status: "pending", start_time: Time.now+6000, end_time: Time.now, address: "233 W Lake St Chicago, IL 60606", creator_id: 1, category: food)
 
 Pinga.create!(title: "Subway 20$ footlongs", description: "Which one is this again?", status: "active", start_time: Time.now-1000, end_time: Time.now, address: "304 W Hubbard St Chicago, IL 60654", creator_id: 1, category: deals)
@@ -27,3 +28,4 @@ Pinga.create!(title: "Rubies meets up", description: "'Grammin at a hotel", stat
 
 Pinga.create!(title: "Stake out", description: "Strange building - lets look at it", status: "pending", start_time: Time.now+300, end_time: Time.now, address: "182 W Lake St Chicago, IL 60601", creator_id: 1, category: social)
 
+Pinga.create!(title: "Other Title", description: "Other Description", status: "pending", start_time: Time.now+1000, end_time: Time.now, address: "1000 West Washington Ave, Chicago, IL", creator_id: 1, category: other)
