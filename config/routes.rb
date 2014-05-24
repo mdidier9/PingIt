@@ -10,5 +10,5 @@ Ping::Application.routes.draw do
 
 
   #connect to iphone
-  match 'phone', to: 'phone' 
+  match 'phone', to: 'phones#recieve', via: [:get] 
 end
