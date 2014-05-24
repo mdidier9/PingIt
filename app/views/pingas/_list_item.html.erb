@@ -1,5 +1,11 @@
-<li class="ping <%= pinga.category.title %>">
-	<h4><%= link_to pinga.title, pinga %></h4>
-	<p><%= pinga.description %> - <%= start_time(pinga) %></p>
-	<p><%= @user.distance(pinga) %> miles away</p>
+<li class="ping <%= pinga.category.title %> <%= pinga.status %>">
+  <div class="ping_title">
+    <%= image_tag pinga.status + '.png' %>
+	<p><%= pinga.title %></p>
+    <p><%= @user.distance(pinga) %> mi</p>
+    <% if pinga.status == "pending" %>
+        <p><%= start_time(pinga) %></p>
+    <% end %>
+  </div>
+
 </li>

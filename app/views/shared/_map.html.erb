@@ -1,5 +1,5 @@
-<div style='width: 500px;'>
-  <div id="map" style='width: 500px; height: 500px;'></div>
+<div style='width: 520px;'>
+  <div id="map" style='width: 520px; height: 550px;'></div>
 </div>
 
 <script>
@@ -11,6 +11,7 @@
 
         var mapOptions = {
             zoom: 13,
+
             center: new google.maps.LatLng(<%= @user.latitude %>, <%= @user.longitude %>),
             styles:map_style
         };
@@ -50,6 +51,7 @@
                         data.forEach(function(marker) {
                             addMarker(marker);
                         });
+
                     }
                 });
 
