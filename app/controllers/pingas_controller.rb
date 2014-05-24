@@ -13,6 +13,10 @@ class PingasController < ApplicationController
 
   def show
     @pinga = Pinga.find(params[:id])
+    if @pinga.status == "inactive"
+      # flash message saying that pinga has been deactivated?
+      redirect_to root_url
+    end
   end
 
   def new
@@ -30,6 +34,8 @@ class PingasController < ApplicationController
   end
 
   def create
+    valid_start_time = Time.now + 12.hours
+    p valid_start_time
     @user = User.find(session[:user_id])
     @pinga = Pinga.new(title: params["pinga"]["title"])
     @pinga.status = "pending" # this needs to be checked against the start time
@@ -38,10 +44,24 @@ class PingasController < ApplicationController
     @pinga.end_time = params["pinga"]["end_time"]
     @pinga.address = params[:address]
     @pinga.creator = @user
+
+    # if @pinga.start_time < Time.now # earlier than right now
+    #   @status = "active"
+    # elsif @pinga.start_time 
+    # else @pinga.start_time < Time.now
+    # end
+
     if @pinga.save
       redirect_to pinga_path(@pinga)
     else
       render :new
     end
+  end
+
+  def destroy
+    @pinga = Pinga.find(params[:id])
+    @pinga.status = "inactive"
+    @pinga.save
+    redirect_to root_url
   end
 end

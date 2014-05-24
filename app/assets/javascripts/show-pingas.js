@@ -1,16 +1,18 @@
 var placeSearch, autocomplete, geocoder;
 
 function initialize() {
-  
+  var pingItCoords = JSON.parse($('#pingit-coords').text());
+  var lat = pingItCoords.lat
+  var lng = pingItCoords.lng
   var map_style = [{featureType:"water",elementType:"geometry",stylers:[{color:"#a2daf2"}]},{featureType:"landscape.man_made",elementType:"geometry",stylers:[{color:"#f7f1df"}]},{featureType:"landscape.natural",elementType:"geometry",stylers:[{color:"#d0e3b4"}]},{featureType:"landscape.natural.terrain",elementType:"geometry",stylers:[{visibility:"off"}]},{featureType:"poi.park",elementType:"geometry",stylers:[{color:"#bde6ab"}]},{featureType:"poi",elementType:"labels",stylers:[{visibility:"off"}]},{featureType:"poi.medical",elementType:"geometry",stylers:[{color:"#fbd3da"}]},{featureType:"poi.business",stylers:[{visibility:"off"}]},{featureType:"road",elementType:"geometry.stroke",stylers:[{visibility:"off"}]},{featureType:"road",elementType:"labels",stylers:[{visibility:"off"}]},{featureType:"road.highway",elementType:"geometry.fill",stylers:[{color:"#ffe15f"}]},{featureType:"road.highway",elementType:"geometry.stroke",stylers:[{color:"#efd151"}]},{featureType:"road.arterial",elementType:"geometry.fill",stylers:[{color:"#ffffff"}]},{featureType:"road.local",elementType:"geometry.fill",stylers:[{color:"black"}]},{featureType:"transit.station.airport",elementType:"geometry.fill",stylers:[{color:"#cfb2db"}]}]
 
   var mapOptions = {
     zoom: 17,
-    center: new google.maps.LatLng(41.8899109, -87.6376566),
+    center: new google.maps.LatLng(lat, lng),
     styles: map_style // this needs to be the user's location, or the location of the last pinga in an incorrectly submitted form
   };
 
-  var map = new google.maps.Map(document.getElementById('create-pinga-map'),
+  var map = new google.maps.Map(document.getElementById('pingit-show-map'),
       mapOptions);
 
   var geocoder = new google.maps.Geocoder();
@@ -66,42 +68,3 @@ function initialize() {
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
-
-
-// var mapLogic = function() {
-
-//   // var map = new google.maps.Map(document.getElementById('create-pinga-map'));
-
-//   // var marker = new google.maps.Marker({
-//   //   map: map,
-//   //   anchorPoint: new google.maps.Point(0, -29)
-//   // });
-
-//   autocomplete = new google.maps.places.Autocomplete(
-//     (document.getElementById('autocomplete')),
-//     { types: ['geocode'] }
-//   );
-
-//   google.maps.event.addListener(autocomplete, 'place_changed', function() {
-//     marker.setVisible(false);
-//     var place = autocomplete.getPlace();
-//     map.setCenter(place.geometry.location);
-//     map.setZoom(17);
-//     marker.setPosition(place.geometry.location);
-//     marker.setVisible(true);
-//   });
-
-//   if (navigator.geolocation) {
-//     navigator.geolocation.getCurrentPosition(function(position) {
-//       var geolocation = new google.maps.LatLng(
-//           position.coords.latitude, position.coords.longitude);
-//       autocomplete.setBounds(new google.maps.LatLngBounds(geolocation,
-//           geolocation));
-//     });
-//   };
-
-// }
-
-// $(document).on("page:load", mapLogic);
-
-// $(document).ready(mapLogic);
