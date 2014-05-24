@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
 	has_many :created_pingas, class_name: "Pinga", foreign_key: :creator_id
 	has_many :user_pingas
 	has_many :pingas, through: :user_pingas
+  has_many :user_categories
+  has_many :categories, through: :user_categories
 
   geocoded_by :ip_address
   # after_validation :geocode
