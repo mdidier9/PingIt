@@ -15,7 +15,3 @@
   <%= link_to "Edit this PingIt", edit_pinga_path(@pinga) %>
   <%= link_to "Delete this PingIt", pinga_path(@pinga), method: :delete %>
 <% end %>
-
-<%= content_for :page_script do %>
-  <%= javascript_include_tag "show-pingas" %>
-<% end %>
