@@ -32,5 +32,4 @@ describe User do
       expect(user.pingas_outside_listening_radius).to eq([grey])
     end
   end
-
 end
