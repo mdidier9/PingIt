@@ -4,8 +4,9 @@ class User < ActiveRecord::Base
 	has_many :pingas, through: :user_pingas
 
   geocoded_by :ip_address
+  # after_validation :geocode
 
-  def distance(pinga) ## returns the distance to current user
+  def distance(pinga) # returns the distance to current user
     self.distance_to(pinga).round(2)
   end
 

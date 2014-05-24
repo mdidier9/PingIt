@@ -1,3 +1,9 @@
+<% if flash[:notice] %>
+	<div class="flash-notice">
+		<p class="flash-text"><%= flash[:notice] %></p>
+	</div>
+<% end %>
+
 <div class="map">
     <%= render partial: "shared/map" %>
 </div>
@@ -43,7 +49,3 @@
     </div>
 <%= link_to "Create Ping!", new_pinga_path, 'class' => 'button', 'data-no-turbolink' => true %>
 </div>
-
-<%= content_for :page_script do %>
-  <%= javascript_include_tag "index" %>
-<% end %>
