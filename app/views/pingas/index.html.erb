@@ -1,16 +1,4 @@
-<% if flash[:notice] %>
-	<div class="flash-notice">
-		<p class="flash-text"><%= flash[:notice] %></p>
-	</div>
-<% end %>
-
-<div class="map">
-    <%= render partial: "shared/map" %>
-</div>
-
-
-
-<div class="index_list content">
+<div class="index_list" id="index_list">
     <div id="format">
       <input type="checkbox" id="Food"><label for="Food">Food</label>
       <input type="checkbox" id="Social"><label for="Social">Social</label>
@@ -42,5 +30,13 @@
         </ul>
       </div>
     </div>
-<%= link_to "Create Ping!", new_pinga_path, 'class' => 'button', 'data-no-turbolink' => true %>
+  <%= link_to "Create Ping!", new_pinga_path, 'class' => 'button', 'id' => 'new_pinga' %>
+
+</div>
+<div class="content" id="show" style="display: none;">
+    <%= render partial: "show", locals: {pinga: @pinga} %>
+</div>
+
+<div class="content" id="new" style="display: none;">
+    <%= render partial: "new", locals: {pinga: @pinga} %>
 </div>
