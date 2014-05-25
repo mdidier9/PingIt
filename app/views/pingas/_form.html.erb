@@ -17,7 +17,7 @@
         <%= options_from_collection_for_select(Category.all, :id, :title) %>
         <%= collection_select(:pinga, :category_id, Category.all, :id, :title) %><br>
         <%= f.label :start_time %><br>
-        <%= time_field(:pinga, :start_time) %>
+        <%= time_field(:pinga, :start_time, max: 12.hours.from_now) %>
         <p id="which_day"></p><br>
         <%= time_field(:pinga, :end_time) %>
         <%= f.submit "Ping it!" %>
