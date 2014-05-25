@@ -1,4 +1,4 @@
-<li class="ping <%= pinga.category.title %> <%= pinga.status %>">
+<li class="ping ping_link <%= pinga.category.title %> <%= pinga.status %>" id="<%= pinga.id.to_s %>">
   <div class="ping_title">
     <%= image_tag pinga.status + '.png' %>
     <p><%= pinga.title %></p>

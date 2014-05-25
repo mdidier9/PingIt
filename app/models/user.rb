@@ -43,6 +43,10 @@ class User < ActiveRecord::Base
     Pinga.all - pending_pingas_in_listening_radius - active_pingas_in_listening_radius
   end
 
+  def pingas_in_listening_radius
+    active_pingas_in_listening_radius + pending_pingas_in_listening_radius
+  end
+
   def update_user_pingas
     Pinga.near(self, self.listening_radius).where(status: ["pending", "active"]).each do |pinga|
       self.pingas << pinga unless self.pingas.include?(pinga)

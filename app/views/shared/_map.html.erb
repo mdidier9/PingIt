@@ -4,8 +4,6 @@
   <div id="slider-value"></div>
 </div>
 
-
-
 <script>
     function initialize() {
         markers = <%=raw @pinga_markers.to_json %>;
@@ -71,27 +69,28 @@
             });
         }
 
-        function addMarker(marker) {
-            var latLng = new google.maps.LatLng(marker.lat, marker.lng);
+        function addMarker(marker_info) {
+            var latLng = new google.maps.LatLng(marker_info.latitude, marker_info.longitude);
             var marker = new google.maps.Marker({
                 position: latLng,
                 map: map,
-                title: marker.title,
-                icon: marker.picture.url,
-                infowindow: marker.infowindow
+                title: marker_info.title,
+                icon: marker_info.picture.url,
+                infowindow: marker_info.infowindow
             });
-            if (marker.icon == 'assets/active.png') { marker.setAnimation(google.maps.Animation.BOUNCE);}
+            marker.id = marker_info.id;
+//            if (marker.icon == 'assets/active.png') { marker.setAnimation(google.maps.Animation.BOUNCE);}
 
             var content = marker.infowindow;
             var infowindow = new google.maps.InfoWindow();
             google.maps.event.addListener(marker,'click', (function(marker,content,infowindow){
                 return function() {
+                    console.log(marker);
                     closeInfos();
                     infowindow.setContent(content);
                     infowindow.open(map,marker);
                     infos[0]=infowindow;
                     map.panTo(marker.position)
-
                 };
             })(marker,content,infowindow));
             pingaMarkers.push(marker);
@@ -166,6 +165,52 @@
             var radius_in_miles = $('#slider').slider('value')
             radiusCircle.setRadius(radius_in_miles * 1609.344);
         }, 50);
+
+
     }
-    google.maps.event.addDomListener(window, 'load', initialize);
+
+    $(document).on('click', '#home', function(event) {
+       event.preventDefault();
+       showList();
+    });
+
+    $(document).on('click', '.ping_link', function(event){
+        event.preventDefault();
+        showShow(this.id);
+    });
+
+    $(document).on('click', '#new_pinga', function(event){
+        event.preventDefault();
+        showNew();
+    });
+
+    function showNew() {
+        $('#show').css('display', 'none');
+        $('#index_list').css('display', 'none');
+        $('#new').css('display', 'block');
+    }
+
+    function showList() {
+        $('#show').css('display', 'none');
+        $('#new').css('display', 'none');
+        $('#index_list').css('display', 'block');
+    }
+
+    function showShow(id) {
+        $.ajax({
+            url: '/pingas/' + id,
+            type: 'GET',
+            success: function (data) {
+//                radiusCircle.setRadius(0);
+                console.log("ajax success");
+                console.log(data)
+//                $('#show').append(data.show);
+                $("#show").html(data.show);
+                $('#show').css('display', 'block');
+                $('#index_list').css('display', 'none');
+                $('#new').css('display', 'none');
+            }
+        });
+
+    }
 </script>
