@@ -1,8 +1,8 @@
-<div>
     <% options = [["1 hour", 1]] %>
     <% (2..12).each do |num| %>
         <% options << ["#{num} hours", num] %>
     <% end %>
+
   <%= form_for @pinga do |f| %>
     <%= f.text_field :title, placeholder: "Event Title" %><br>
     <%= f.text_area :description, placeholder: "Event Description" %><br>
@@ -15,4 +15,3 @@
     <%= select_tag(:duration, options_for_select(options)) %>
     <%= f.submit "Ping it!", class: "submit" %>
   <% end %>
-</div>
