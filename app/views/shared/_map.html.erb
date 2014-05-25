@@ -192,32 +192,6 @@
             showNew();
         });
 
-        $(document).on('click', '.submit', function(event){
-            event.preventDefault();
-            data = $('form').serializeObject();
-            console.log(data);
-            $.ajax({
-                url: '/pingas',
-                type: 'POST',
-                data: data,
-                dataType: 'json',
-                success: function (data) {
-                    console.log("ajax success");
-                    $.ajax({
-                        url: '/users/' + <%= @user.id %>,
-                        type: 'PUT',
-                        success: function (data) {
-                            updateLists(data);
-                            updateMarkers(data.markers);
-                            showList();
-                        }
-                    });
-
-                }
-            });
-        });
-
-
         $.fn.serializeObject = function()
         {
             var o = {};
@@ -302,14 +276,54 @@
         }
 
 
-//        NEW STUFF
+//        CREATE PINGA STUFF
 
+        $(document).on("click", ".submit", function(event){
+            event.preventDefault();
+            $("#errors").empty();
+            var title = $('input[name="pinga[title]"]').val();
+            var description = $('textarea[name="pinga[description]"]').val();
+            var address = $('input[name="pinga[address]"]').val();
+            var startTime = $('#pinga_start_time').val();
+            if (title === ""){
+                $('#errors').append("<li>Title is a mandatory field.</li>")
+            }
+            if (description === ""){
+                $('#errors').append("<li>Description is a mandatory field.</li>")
+            }
+            if (address === "") {
+                $('#errors').append("<li>Event address is a mandatory field.</li>")
+            }
+            if (startTime === ""){
+                $('#errors').append("<li>Please select a start time for your event.</li>")
+            }
 
+            if ($("#errors").children().size() === 0){
+                data = $('form').serializeObject();
+                console.log(data);
+                $.ajax({
+                    url: '/pingas',
+                    type: 'POST',
+                    data: data,
+                    dataType: 'json',
+                    success: function (data) {
+                        console.log("ajax success");
+                        $.ajax({
+                            url: '/users/' + <%= @user.id %>,
+                            type: 'PUT',
+                            success: function (data) {
+                                updateLists(data);
+                                updateMarkers(data.markers);
+                                showList();
+                            }
+                        });
 
+                    }
+                })
+            }
+        });
 
         var geocoder = new google.maps.Geocoder();
-
-
 
         google.maps.event.addListener(newPingaMarker, 'dragend', function() {
             var latLng = newPingaMarker.getPosition();
@@ -345,6 +359,5 @@
             map.setCenter(newPingaMarker.getPosition());
         });
     }
-
 
 </script>

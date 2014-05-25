@@ -1,15 +1,11 @@
-
-
-
 <% if pinga.errors.any? %>
-<p id="invalid-form-ping-coords" hidden><%= {lat: pinga.latitude, lng: pinga.longitude }.to_json %></p>
+  <p id="invalid-form-ping-coords" hidden><%= {lat: pinga.latitude, lng: pinga.longitude }.to_json %></p>
 
-<% pinga.errors.full_messages.each do |msg| %>
-  <p><%= msg %></p>
-<% end %>
-
+  <% pinga.errors.full_messages.each do |msg| %>
+    <p><%= msg %></p>
+  <% end %>
 <% else %>
-    <p id="user-coords" hidden><%= {lat: @user.latitude, lng: @user.longitude }.to_json %></p>
+  <p id="user-coords" hidden><%= {lat: @user.latitude, lng: @user.longitude }.to_json %></p>
 <% end %>
 
 <h2>create a new pingit</h2>
