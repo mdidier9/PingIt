@@ -35,12 +35,14 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
 
 		@pinga = Pinga.new
 		@pinga.title = @data[:title]
-		@pinga.status = "pending" #this needs to be checked agianst the start time 
+		@pinga.status = "pending" #THIS IS HARDCODED (this needs to be checked agianst the start time)
 		@pinga.category_id = Category.find_by_title(@data[:category]).id
 		@pinga.description = @data[:description]
 		@pinga.start_time = @data[:start_time]
 		@pinga.end_time = @data[:end_time]
 		@pinga.address = @data[:address]
+		@pinga.creator_id = 1 #THIS IS HARDCODED
+		@pinga.save
 		p @pinga
 
 		respond_with @data
