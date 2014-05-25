@@ -1,13 +1,17 @@
+    <% options = [["1 hour", 1]] %>
+    <% (2..12).each do |num| %>
+        <% options << ["#{num} hours", num] %>
+    <% end %>
 
   <%= form_for @pinga do |f| %>
     <%= f.text_field :title, placeholder: "Event Title" %><br>
     <%= f.text_area :description, placeholder: "Event Description" %><br>
     <%= f.text_field :address,  id: "autocomplete", placeholder: "Event Address" %><br>
     <%= options_from_collection_for_select(Category.all, :id, :title) %>
-    <%= collection_select(:pinga, :category_id, Category.all, :id, :title) %>
-    <%= f.label :start_time %><br>
-    <%= f.datetime_local_field :start_time %><br>
-    <%= f.label :end_time %><br>
-    <%= f.datetime_local_field :end_time %><br>
+    <%= collection_select(:pinga, :category_id, Category.all, :id, :title) %><br>
+    <%= f.label :start_time %>
+    <%= time_field(:pinga, :start_time) %><p id="today-tomorrow"></p><p id="start-time-validations"></p><br>
+    <%= label_tag(:pinga, "Duration")%><br>
+    <%= select_tag(:duration, options_for_select(options)) %>
     <%= f.submit "Ping it!", class: "submit" %>
   <% end %>
