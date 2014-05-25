@@ -27,12 +27,25 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
 		#geocode it with geocode gem (look for a method that can allow me to convert the address to the to the lat long)
 		@confirm_response = "YES: YOU CONTACTED THE CREATE_EVENT ACTION IN THE PHONESCONTROLLER"
 		
-		@create_event_data = params[:data]
+		@data = params[:data]
 
 
-		respond_with @create_event_data
 
-		#NOTE: THERE IS NO FOR CATEGORY ON THE PHONE AT PRESENT SO IT HAS TO BE HARDCODED
+
+
+		@pinga = Pinga.new
+		@pinga.title = @data[:title]
+		@pinga.status = "pending" #this needs to be checked agianst the start time 
+		@pinga.category_id = Category.find_by_title(@data[:category]).id
+		@pinga.description = @data[:description]
+		@pinga.start_time = @data[:start_time]
+		@pinga.end_time = @data[:end_time]
+		@pinga.address = @data[:address]
+		p @pinga
+
+		respond_with @data
+
+		#NOTE: USER MUST BE HARDCODED UNTIL AUTH IS ESTABLISHED
 
 
 		# valid_start_time = Time.now + 12.hours
