@@ -1,0 +1,7 @@
+language: ruby
+rvm:
+- 2.0.0
+before_script:
+- bundle exec rake db:create
+env:
+- DB=postgresql
