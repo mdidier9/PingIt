@@ -32,17 +32,21 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
 
 
 
-
+		p "THIS IS THE PINGA INFO"
 		@pinga = Pinga.new
 		@pinga.title = @data[:title]
+		p @data[:title]
 		@pinga.status = "pending" #THIS IS HARDCODED (this needs to be checked agianst the start time)
-		puts "THIS IS THE CATEGORY ID I SHOULD GET BASED ON THE CATEGORY I CHOOSE ON THE PHONE"
 		p Category.find_by_title(@data[:category]).id
 		@pinga.category_id = Category.find_by_title(@data[:category]).id
 		@pinga.description = @data[:description]
+		p @data[:description]
 		@pinga.start_time = @data[:start_time]
+		p @data[:start_time]
 		@pinga.end_time = @data[:end_time]
+		p @data[:end_time]
 		@pinga.address = @data[:address]
+		p @data[:address]
 		@pinga.creator_id = 1 #THIS IS HARDCODED
 		@pinga.save
 		p @pinga
