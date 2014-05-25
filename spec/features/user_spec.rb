@@ -8,11 +8,11 @@ feature 'User browsing the website' do
     expect(page).to have_content "Login with Facebook"
   end
 
-  scenario "logs in in with facebook" do
-    visit root_path
-    click_link "Login with Facebook"
-    expect(page).to have_content("test")
-  end
+  # scenario "logs in in with facebook" do
+  #   visit root_path
+  #   click_link "Login with Facebook"
+  #   expect(page).to have_content("test")
+  # end
 
     # it "logs in a test user" do
     #   # FactoryGirl.build(:test_user_mark)
