@@ -18,17 +18,6 @@ $(function() {
 	});
 
 // slider (not on html currently)
-  $("#slider").slider(
-    {
-      value: 1.0,
-      min: 0.5,
-      max: 20,
-      step: 0.5,
-      slide: function(event, ui) {
-          $("#slider-value").html(ui.value);
-      }
-    }
-  );
-  $("#slider-value").html($('#slider').slider('value'));
+
 });
 
