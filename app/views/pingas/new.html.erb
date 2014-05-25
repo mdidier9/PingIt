@@ -84,4 +84,22 @@
   }
 
   google.maps.event.addDomListener(window, 'load', initialize);
+
+  $(document).ready(function(){
+    var today = new Date();
+    var currentHour = today.getHours();
+    var todaysLastHour = currentHour - 12
+
+    $('#pinga_start_time').on('change', function() {
+      var time = parseFloat($('#pinga_start_time').val());
+      console.log(time);
+      var currentHour = (new Date()).getHours();
+      // selectedHour = parseFloat($('#date_hour').val());
+      // if(selectedHour <= todaysLastHour) {
+      //   $('#which_day').text("tomorrow");
+      // } else {
+      //   $('#which_day').text("today");
+      // }
+    });
+  });
 </script>

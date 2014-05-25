@@ -42,6 +42,7 @@
         google.maps.event.addListener(user_marker, "dragend", function(event) {
 
             var point = user_marker.getPosition();
+            console.log(point.k);
             map.panTo(point);
                 $.ajax({
                     url: '/users/' + <%= @user.id %>,
