@@ -67,6 +67,9 @@ gem 'rails_12factor'
 # Use unicorn as the app server
 gem 'unicorn', '~> 4.8.3'
 
+# coveralls
+gem 'coveralls', require: false
+
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development
 
