@@ -1,7 +1,7 @@
 <div id="topnav">
   <div id="inner_top_nav">
     <div id="home">
-        <%= link_to "PingIt", root_path %>
+        <%= link_to "PingIt", root_path, 'data-no-turbolink' => true%>
     </div>
     <div id="logout">
         <%= link_to "Logout", signout_path,  method: :delete, id: "sign_out" %>

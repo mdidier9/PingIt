@@ -1,6 +1,10 @@
 <div style='width: 520px;'>
   <div id="map" style='width: 520px; height: 550px;'></div>
+  <div id="slider" style='width: 500px;'></div>
+  <div id="slider-value"></div>
 </div>
+
+
 
 <script>
     function initialize() {
@@ -29,7 +33,6 @@
         markers.forEach(function(marker) {
             addMarker(marker);
         });
-        console.log(pingaMarkers);
 
         var radiusOptions = {
             strokeColor:"#0000FF",strokeOpacity: 1, strokeWeight: 0, fillColor: '#007d53',
@@ -40,7 +43,6 @@
         radiusCircle = new google.maps.Circle(radiusOptions);
 
         google.maps.event.addListener(user_marker, "dragend", function(event) {
-
             var point = user_marker.getPosition();
             map.panTo(point);
                 $.ajax({
@@ -49,14 +51,25 @@
                     data: {latitude: event.latLng.k, longitude: event.latLng.A},
                     dataType: 'json',
                     success: function (data) {
-                        deleteMarkers();
-                        data.forEach(function(marker) {
-                            addMarker(marker);
-                        });
-
+                        updateLists(data);
+                        updateMarkers(data.markers);
                     }
                 });
         });
+
+        function updateLists(lists) {
+            $('.ping_link').remove();
+            $('#newest').append(lists.newest);
+            $('#nearest').append(lists.nearest);
+            $('#soonest').append(lists.soonest);
+        }
+
+        function updateMarkers(markers) {
+            deleteMarkers();
+            markers.forEach(function(marker) {
+                addMarker(marker);
+            });
+        }
 
         function addMarker(marker) {
             var latLng = new google.maps.LatLng(marker.lat, marker.lng);
@@ -67,6 +80,7 @@
                 icon: marker.picture.url,
                 infowindow: marker.infowindow
             });
+            if (marker.icon == 'assets/active.png') { marker.setAnimation(google.maps.Animation.BOUNCE);}
 
             var content = marker.infowindow;
             var infowindow = new google.maps.InfoWindow();
@@ -121,10 +135,37 @@
             pingaMarkers = [];
         }
 
+        $("#slider").slider(
+                {
+                    value: 1.0,
+                    min: 0.25,
+                    max: 10,
+                    step: 0.25,
+                    slide: function(event, ui) {
+                        $("#slider-value").html(ui.value);
+                    }
+                }
+        );
+        $("#slider-value").html($('#slider').slider('value'));
+        $( "#slider" ).on( "slidestop", function( event, ui ) {
+            $.ajax({
+                url: '/users/' + <%= @user.id %>,
+                type: 'PUT',
+                data: {listening_radius: ui.value},
+                dataType: 'json',
+                success: function (data) {
+                    updateLists(data);
+                    updateMarkers(data.markers);
+                }
+            });
+        } );
+
         window.setInterval(function(){
             var p = user_marker.position;
             radiusCircle.setCenter(new google.maps.LatLng(p.lat(),p.lng()));
-        }, 20);
+            var radius_in_miles = $('#slider').slider('value')
+            radiusCircle.setRadius(radius_in_miles * 1609.344);
+        }, 50);
     }
     google.maps.event.addDomListener(window, 'load', initialize);
 </script>
