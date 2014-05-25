@@ -30,7 +30,7 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
 		@create_event_data = params[:data]
 
 
-		respond_with @confirm_response
+		respond_with @create_event_data
 
 		#NOTE: THERE IS NO FOR CATEGORY ON THE PHONE AT PRESENT SO IT HAS TO BE HARDCODED
 
@@ -50,10 +50,6 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
   #   @pinga.end_time = params["pinga"]["end_time"]
   #   @pinga.address = params["pinga"]["address"]
   #   @pinga.creator = @user
-
-
-
-
 
 
 
