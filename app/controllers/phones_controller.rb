@@ -25,12 +25,37 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
 		p "THIS IS INSIDE CREATE EVENT ACTION ********************"
 
 		#geocode it with geocode gem (look for a method that can allow me to convert the address to the to the lat long)
-
+		@confirm_response = "YES: YOU CONTACTED THE CREATE_EVENT ACTION IN THE PHONESCONTROLLER"
+		
 		@create_event_data = params[:data]
 
-		p @create_event_data
 
-		respond_with @create_event_data
+		respond_with @confirm_response
+
+		#NOTE: THERE IS NO FOR CATEGORY ON THE PHONE AT PRESENT SO IT HAS TO BE HARDCODED
+
+
+		# valid_start_time = Time.now + 12.hours
+  #   p params
+  #   puts "X"*50
+  #   p valid_start_time
+  #   p params
+  #   puts "X"*50
+  #   @user = User.find(session[:user_id])
+  #   @pinga = Pinga.new(title: params["pinga"]["title"])
+  #   @pinga.status = "pending" # this needs to be checked against the start time
+  #   @pinga.category_id = params["pinga"]["category_id"]
+  #   @pinga.description = params["pinga"]["description"]
+  #   @pinga.start_time = params["pinga"]["start_time"]
+  #   @pinga.end_time = params["pinga"]["end_time"]
+  #   @pinga.address = params["pinga"]["address"]
+  #   @pinga.creator = @user
+
+
+
+
+
+
 
 
 
@@ -53,10 +78,9 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
     #CHECK 	t.datetime 	:end_time
     #CHECK 	t.string		:address
     #NO (get from the the address)   t.float     :latitude
-    #NO (get from the phone using bubblewraps's location obj)   t.float     :longitude
-    #NO (need to somehow get the user information from the phone) 	t.integer 	:creator_id #user_id
+    #NO (get from the the address)   t.float     :longitude
+    #NO (need to somehow get the user information from the phone; maybe whenever someone logs in on the phone app there needs to be a way to send the registration information so that the user ends up in the dabatabse connected to the web app) 	t.integer 	:creator_id #user_id
     #CHECK   t.timestamps (this will be created when it is entered in the database)
-
 
 
     #QUESTIONS
