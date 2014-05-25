@@ -7,8 +7,6 @@ $(function() {
   $( "#format" ).buttonset();
 
 	$('#format :checkbox').click(function() {
-        console.log(this.id);
-    console.log(findPingasWithCategory(this.id));
     var $this = $(this);
     if ($this.is(':checked')) {
         var category = this.id;
@@ -27,6 +25,22 @@ $(function() {
 	});
 
 // slider (not on html currently)
+
+    $(document).on('click', '#settings', function(event){
+        event.preventDefault();
+        showSettings();
+    });
+
+    function showSettings() {
+        newPingaMarker.setMap(null);
+//        closeInfos();
+        $('#show').css('display', 'none');
+        $('#new').css('display', 'none');
+        $('#index_list').css('display', 'none');
+        $('#show_user').css('display', 'block');
+        user_marker.setDraggable (true);
+        map.panTo(user_marker.getPosition());
+    }
 
 });
 
