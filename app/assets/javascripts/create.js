@@ -6,7 +6,6 @@ $(function() {
     var description = $('textarea[name="pinga[description]"]').val();
     var address = $('input[name="pinga[address]"]').val();
 		validate_form(title, description, address);
-		$("#form").unbind("submit");
 		error_check();
 	})
 });
@@ -25,6 +24,11 @@ function validate_form(title, description, address) {
 
 function error_check(){
 	if ($("#errors").children().size() === 0){
-		$("#form").submit();
+		$("#form").unbind("submit");
+		submit();
 	}
+}
+		
+function submit() {
+	$("#form").submit();
 }

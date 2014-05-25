@@ -1,8 +1,13 @@
 class UsersController < ApplicationController
   def update
     @user = User.find_by_id(session[:user_id])
-    @user.latitude = params[:latitude].to_f
-    @user.longitude = params[:longitude].to_f
+    if params[:latitude] && params[:longitude]
+      @user.latitude = params[:latitude].to_f
+      @user.longitude = params[:longitude].to_f
+    end
+    if params[:listening_radius]
+      @user.listening_radius = params[:listening_radius]
+    end
     @user.update_user_pingas
     @user_marker = @user.marker
     active_markers = Gmaps4rails.build_markers(@user.active_pingas_in_listening_radius) do |pinga, marker|
