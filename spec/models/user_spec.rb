@@ -15,6 +15,10 @@ describe User do
   end
 
   # context "distance" do
+  #   it "should return the distance from a user to a pinga" do
+  #     expect(user.distance(active)).to eq(1)
+  #   end
+  # end
 
   context "active_pingas_in_listening_radius" do
     it "should return active pingas in listening radius" do
