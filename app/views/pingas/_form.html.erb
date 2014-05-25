@@ -1,25 +1,14 @@
 <div>
-    <!-- <% current_hour = Time.now.hour %> -->
-<!--     <% valid_hours = (current_hour..current_hour+12).map {|hr| hr = hr%24}%>
-    <% valid_hours.map! do |hr| %>
-        <% if hr > 12 %>
-            <% hr = "#{hr%12} pm" %>
-        <% else %>
-            <% hr = "#{hr} am" %>
-        <% end %>
-    <% end %> -->
-    <% minutes = ["00", "15", "30", "45"]%>
-    <% valid_hours = (1..12) %>
-    <%= form_for @pinga do |f| %>
-        <%= f.text_field :title, placeholder: "Event Title" %><br>
-        <%= f.text_area :description, placeholder: "Event Description" %><br>
-        <%= f.text_field :address, id: "autocomplete", placeholder: "Event Address" %><br>
-        <%= options_from_collection_for_select(Category.all, :id, :title) %>
-        <%= collection_select(:pinga, :category_id, Category.all, :id, :title) %><br>
-        <%= f.label :start_time %><br>
-        <%= time_field(:pinga, :start_time, max: 12.hours.from_now) %>
-        <p id="which_day"></p><br>
-        <%= time_field(:pinga, :end_time) %>
-        <%= f.submit "Ping it!" %>
-    <% end %>
+  <%= form_for @pinga do |f| %>
+    <%= f.text_field :title, placeholder: "Event Title" %><br>
+    <%= f.text_area :description, placeholder: "Event Description" %><br>
+    <%= f.text_field :address,  id: "autocomplete", placeholder: "Event Address" %><br>
+    <%= options_from_collection_for_select(Category.all, :id, :title) %>
+    <%= collection_select(:pinga, :category_id, Category.all, :id, :title) %>
+    <%= f.label :start_time %><br>
+    <%= f.datetime_local_field :start_time %><br>
+    <%= f.label :end_time %><br>
+    <%= f.datetime_local_field :end_time %><br>
+    <%= f.submit "Ping it!", class: "submit" %>
+  <% end %>
 </div>
