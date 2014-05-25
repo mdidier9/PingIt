@@ -1,11 +1,10 @@
-<li class="ping <%= pinga.status %> <%= pinga.status %>">
+<li class="ping <%= pinga.category.title %> <%= pinga.status %>">
   <div class="ping_title">
     <%= image_tag pinga.status + '.png' %>
-	<p><%= pinga.title %></p>
+    <p><%= pinga.title %></p>
     <p><%= @user.distance(pinga) %> mi</p>
     <% if pinga.status == "pending" %>
         <p><%= start_time(pinga) %></p>
     <% end %>
   </div>
-
 </li>
