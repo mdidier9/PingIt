@@ -2,6 +2,11 @@ class PingasController < ApplicationController
 
   def index
     @user = User.find(session[:user_id])
+    if request.remote_ip == '127.0.0.1'
+      @user.ip_address = '74.122.9.196'
+    else
+      @user.ip_address = request.remote_ip
+    end
     @user.geocode
     @user.update_user_pingas
     @user_marker = @user.marker
