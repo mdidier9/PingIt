@@ -48,6 +48,8 @@
             center: map.getCenter(),
             radius: <%= @user.listening_radius * 1609.344 %>
         };
+        console.log(<%= @user.listening_radius%>);
+        console.log(radiusOptions.radius);
         radiusCircle = new google.maps.Circle(radiusOptions);
 
         google.maps.event.addListener(user_marker, "dragend", function(event) {
@@ -89,6 +91,7 @@
                 infowindow: marker_info.infowindow
             });
             marker.id = marker_info.id;
+            marker.category = marker_info.category;
 //            if (marker.icon == 'assets/active.png') { marker.setAnimation(google.maps.Animation.BOUNCE);}
 
             var content = marker.infowindow;
@@ -103,6 +106,9 @@
                     map.panTo(marker.position)
                 };
             })(marker,content,infowindow));
+            google.maps.event.addListener(infowindow,'closeclick',function(){
+                showList(); //removes the marker
+            });
             pingaMarkers.push(marker);
         }
 
@@ -146,7 +152,7 @@
 
         $("#slider").slider(
                 {
-                    value: 1.0,
+                    value: <%= @user.listening_radius %>,
                     min: 0.25,
                     max: 10,
                     step: 0.25,
@@ -172,7 +178,7 @@
         window.setInterval(function(){
             var p = user_marker.position;
             radiusCircle.setCenter(new google.maps.LatLng(p.lat(),p.lng()));
-            var radius_in_miles = $('#slider').slider('value')
+            var radius_in_miles = $('#slider').slider('value');
             radiusCircle.setRadius(radius_in_miles * 1609.344);
         }, 50);
 
@@ -275,6 +281,9 @@
             infowindow.setContent(content);
             infowindow.open(map,marker);
             infos[0]=infowindow;
+            google.maps.event.addListener(infowindow,'closeclick',function(){
+                showList();
+            });
             map.panTo(marker.position);
             $.ajax({
                 url: '/pingas/' + id,
@@ -299,7 +308,6 @@
                 }
             }
         }
-
 
 //        NEW STUFF
 
@@ -344,6 +352,4 @@
             map.setCenter(newPingaMarker.getPosition());
         });
     }
-
-
 </script>

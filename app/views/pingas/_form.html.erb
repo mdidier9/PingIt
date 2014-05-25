@@ -1,4 +1,4 @@
-<div>
+
   <%= form_for @pinga do |f| %>
     <%= f.text_field :title, placeholder: "Event Title" %><br>
     <%= f.text_area :description, placeholder: "Event Description" %><br>
@@ -11,4 +11,3 @@
     <%= f.datetime_local_field :end_time %><br>
     <%= f.submit "Ping it!", class: "submit" %>
   <% end %>
-</div>
