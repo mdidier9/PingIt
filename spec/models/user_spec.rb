@@ -20,24 +20,24 @@ describe User do
   #   end
   # end
 
-  context "active_pingas_in_listening_radius" do
-    it "should return active pingas in listening radius" do
-      user.geocode
-      expect(user.active_pingas_in_listening_radius).to eq([active])
-    end
-  end
+  # context "active_pingas_in_listening_radius" do
+  #   it "should return active pingas in listening radius" do
+  #     user.geocode
+  #     expect(user.active_pingas_in_listening_radius).to eq([active])
+  #   end
+  # end
 
-  context "pending_pingas_in_listening_radius" do
-    it "should return pending pingas in listening radius" do
-      user.geocode
-      expect(user.pending_pingas_in_listening_radius).to eq([pending])
-    end
-  end
+  # context "pending_pingas_in_listening_radius" do
+  #   it "should return pending pingas in listening radius" do
+  #     user.geocode
+  #     expect(user.pending_pingas_in_listening_radius).to eq([pending])
+  #   end
+  # end
 
-  context "pingas_outside_listening_radius" do
-    it "should return pingas outside of user listening radius" do
-      user.geocode
-      expect(user.pingas_outside_listening_radius).to eq([grey])
-    end
-  end
+  # context "pingas_outside_listening_radius" do
+  #   it "should return pingas outside of user listening radius" do
+  #     user.geocode
+  #     expect(user.pingas_outside_listening_radius).to eq([grey])
+  #   end
+  # end
 end
