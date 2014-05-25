@@ -83,6 +83,7 @@ body {
 
 .active:hover {
   background-color: $brightgreen;
+  cursor:pointer;
 }
 
 .pending {
@@ -91,6 +92,7 @@ body {
 
 .pending:hover {
   background-color: $brightyellow;
+  cursor:pointer;
 }
 
 

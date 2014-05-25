@@ -32,25 +32,17 @@ class PingasController < ApplicationController
   end
 
   def new
-    # @user = User.find(session[:user_id])
-    # if request.remote_ip == '127.0.0.1'
-    #   @user.ip_address = '74.122.9.196'
-    # else
-    #   @user.ip_address = request.remote_ip
-    # end
-    # @user.save
-    # @user_marker = @user.marker
-    # @categories = Category.all
-    # @pinga = Pinga.new
   end
 
   def create
-    valid_start_time = Time.now + 12.hours
-    p params
-    puts "X"*50
-    p valid_start_time
-    p params
-    puts "X"*50
+    # valid_start_time = Time.now + 12.hours
+    puts params
+    # puts "X"*50
+    # p valid_start_time
+    # p params
+    # puts "X"*50
+
+
     @user = User.find(session[:user_id])
     @pinga = Pinga.new(title: params["pinga"]["title"])
     @pinga.status = "pending" # this needs to be checked against the start time
@@ -63,14 +55,14 @@ class PingasController < ApplicationController
 
     # if @pinga.start_time < Time.now # earlier than right now
     #   @status = "active"
-    # elsif @pinga.start_time 
+    # elsif @pinga.start_time
     # else @pinga.start_time < Time.now
     # end
 
     if @pinga.save
-      redirect_to pinga_path(@pinga)
+      render :json => true
     else
-      render :new
+      render :json => false
     end
   end
 

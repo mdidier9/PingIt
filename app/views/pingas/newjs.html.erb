@@ -22,17 +22,19 @@
         var map = new google.maps.Map(document.getElementById('create-pinga-map'),
                 mapOptions);
 
-        var geocoder = new google.maps.Geocoder();
-
-        var userMarker = new google.maps.Marker({
+        var newPingaMarker = new google.maps.Marker({
             position: map.getCenter(), // this should be the user's location
             map: map,
             title: 'Your current location',
             draggable: true
         });
 
-        google.maps.event.addListener(userMarker, 'dragend', function() {
-            var latLng = userMarker.getPosition();
+        var geocoder = new google.maps.Geocoder();
+
+
+
+        google.maps.event.addListener(newPingaMarker, 'dragend', function() {
+            var latLng = newPingaMarker.getPosition();
             geocoder.geocode({'latLng': latLng}, function(results, status) {
                 $('#autocomplete').val(results[0].formatted_address);
             });
@@ -47,8 +49,8 @@
             var place = autocomplete.getPlace();
             map.panTo(place.geometry.location);
             map.setZoom(17);
-            userMarker.setPosition(place.geometry.location);
-            userMarker.setVisible(true);
+            newPingaMarker.setPosition(place.geometry.location);
+            newPingaMarker.setVisible(true);
         });
 
         if (navigator.geolocation) {
@@ -60,9 +62,9 @@
             });
         };
 
-        google.maps.event.addListener(userMarker, 'click', function() {
+        google.maps.event.addListener(newPingaMarker, 'click', function() {
             map.setZoom(18);
-            map.setCenter(userMarker.getPosition());
+            map.setCenter(newPingaMarker.getPosition());
         });
     }
 
