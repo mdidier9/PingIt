@@ -32,15 +32,15 @@ RSpec.configure do |config|
 
   #facebook oauth
   # config.include FacebookMacros
-
   OmniAuth.config.test_mode = true
-  # OmniAuth.config.mock_auth[:facebook] = {
-  #   'provider'         => "facebook",
-  #   'uid'              => "999999",
-  #   'oauth_token'      => "token1234qwert",
-  #   'oauth_expires_at' => Time.now, 
-  #   'name'             => "name"
-  #   }
+    
+  omniauth_hash = { 'uid' => '12345', 'nickname' => 'testuser', 'credentials' => { 'token' => 'umad', 'secret' => 'bro?' } }
+    
+  OmniAuth.config.add_mock(:twitter, omniauth_hash)
+  OmniAuth.config.add_mock(:foursquare, omniauth_hash)
+  OmniAuth.config.add_mock(:facebook, omniauth_hash.merge({'nickname' => 'Mr Herpy Derpy Pants'})) # Facebook has 'real-user' attributes, add them here if need be
+
+  config.include OauthMocking
 
   #factory girl
   # config.include FactoryGirl::Syntax::Methods

@@ -5,25 +5,40 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
 
 	def recieve_request_get_events
 		p "THIS IS INSIDE GET EVENTS ACTION ********************"
-		# p params #not sure there is even going to be params
-		@all_pingas = Pinga.all
-		p @all_pingas
-		respond_with @all_pingas
+		@pinga_array = []
+
+		Pinga.all.each_with_index do |ping_obj, index|
+			@pinga_array.push(ping_obj.attributes)
+		end
+		# p @pinga_array
+		respond_with @pinga_array
 	end
 
 
 	def recieve_request_create_event
 		p "THIS IS INSIDE CREATE EVENT ACTION ********************"
+		
+		@data = params[:data]
+		# p "THIS IS THE PINGA INFO"
+		@pinga = Pinga.new
+		@pinga.title = @data[:title]
+		# p @data[:title]
+		@pinga.status = "pending" #THIS IS HARDCODED (this needs to be checked agianst the start time)
+		p Category.find_by_title(@data[:category]).id
+		@pinga.category_id = Category.find_by_title(@data[:category]).id
+		@pinga.description = @data[:description]
+		# p @data[:description]
+		@pinga.start_time = @data[:start_time]
+		# p @data[:start_time]
+		@pinga.end_time = @data[:end_time]
+		# p @data[:end_time]
+		@pinga.address = @data[:address] #WHAT IF THE ADDRESS IS INCORRECT (do we need validations on the phone?)
+		# p @data[:address]
+		@pinga.creator_id = 1 #THIS IS HARDCODED (need have some information about the user somewhere at login)
+		@pinga.save
+		p @pinga
 
-		#geocode it with geocode gem (look for a method that can allow me to convert the address to the to the lat long)
-
-		@create_event_data = params[:data]
-
-		p @create_event_data
-
-		respond_with @create_event_data
-
-
+		respond_with @data
 
 		#TO DO
 		#---------------------------------------------------------------------------
@@ -31,8 +46,6 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
 		#this is currently the format of the new_ping hash that we are getting from the phone
 		#----------------------------------------------------------------------------------------
 		# {"title"=>"", "description"=>"", "category"=>"Social", "start_time"=>"6:00 PM", "end_time"=>"8:00 PM", "address"=>""}  
-
-
 
 		#this is currently the format of the new_ping properties that is defined in our migrations
 		#----------------------------------------------------------------------------------------
@@ -44,11 +57,9 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
     #CHECK 	t.datetime 	:end_time
     #CHECK 	t.string		:address
     #NO (get from the the address)   t.float     :latitude
-    #NO (get from the phone using bubblewraps's location obj)   t.float     :longitude
-    #NO (need to somehow get the user information from the phone) 	t.integer 	:creator_id #user_id
+    #NO (get from the the address)   t.float     :longitude
+    #NO (need to somehow get the user information from the phone; maybe whenever someone logs in on the phone app there needs to be a way to send the registration information so that the user ends up in the dabatabse connected to the web app) 	t.integer 	:creator_id #user_id
     #CHECK   t.timestamps (this will be created when it is entered in the database)
-
-
 
     #QUESTIONS
     #---------------------------------------------------------------------------------
