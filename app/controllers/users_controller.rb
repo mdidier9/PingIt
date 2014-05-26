@@ -25,7 +25,7 @@ end
 def pinga_markers
   pingas = []
   @user.pingas_in_listening_radius.each do |pinga|
-    if pinga.status != "inactive"
+    if pinga.status != "expired" && pinga.status != "cancelled"
       marker = { :id         => pinga.id,
                  :latitude   => pinga.latitude,
                  :longitude  => pinga.longitude,
@@ -40,7 +40,7 @@ def pinga_markers
 
   end
   @user.pingas_outside_listening_radius.each do |pinga|
-    if pinga.status != "inactive"
+    if pinga.status != "expired" && pinga.status != "cancelled"
       marker = { :id         => pinga.id,
                  :latitude   => pinga.latitude,
                  :longitude  => pinga.longitude,

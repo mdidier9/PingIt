@@ -45,9 +45,15 @@ class PingasController < ApplicationController
 
   def destroy
     @pinga = Pinga.find(params[:id])
-    @pinga.status = "inactive"
-    if @pinga.save(validate: false)
-      render :json => true
+    @pinga.status = "cancelled"
+    if @pinga.save
+      # render :json => {markers: pinga_markers,
+      #                  newest: render_to_string(:partial => "/pingas/list", :locals => { list: @pingas_by_received_time }),
+      #                  nearest: render_to_string(:partial => "/pingas/list", :locals => { list: @pingas_by_distance }),
+      #                  soonest: render_to_string(:partial => "/pingas/list", :locals => { list: @pingas_by_start_time })
+      #
+      # }
+      render :json => @pinga.id
     else
       render :json => false
     end
@@ -64,7 +70,7 @@ end
 def pinga_markers
   pingas = []
   @user.pingas_in_listening_radius.each do |pinga|
-    if pinga.status != "inactive"
+    if pinga.status != "expired" && pinga.status != "cancelled"
       marker = { :id         => pinga.id,
                  :latitude   => pinga.latitude,
                  :longitude  => pinga.longitude,
@@ -79,7 +85,7 @@ def pinga_markers
 
   end
   @user.pingas_outside_listening_radius.each do |pinga|
-    if pinga.status != "inactive"
+    if pinga.status != "expired" && pinga.status != "cancelled"
       marker = { :id         => pinga.id,
                  :latitude   => pinga.latitude,
                  :longitude  => pinga.longitude,
