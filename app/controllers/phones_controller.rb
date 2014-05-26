@@ -9,7 +9,7 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
 		Pinga.all.each_with_index do |ping_obj, index|
 			@pinga_array.push(ping_obj.attributes)
 		end
-		# p @pinga_array
+		p @pinga_array
 		respond_with @pinga_array
 	end
 
