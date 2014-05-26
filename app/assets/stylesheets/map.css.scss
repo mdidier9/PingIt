@@ -1,0 +1,61 @@
+$pulsecolor: #0c7d5e;
+
+/* your custom CSS \*/
+@-moz-keyframes pulsate {
+  from {
+    -moz-transform: scale(0.25);
+    opacity: 1.0;
+  }
+  95% {
+    -moz-transform: scale(1.3);
+    opacity: 0;
+  }
+  to {
+    -moz-transform: scale(0.3);
+    opacity: 0;
+  }
+}
+@-webkit-keyframes pulsate {
+  from {
+    -webkit-transform: scale(0.25);
+    opacity: 1.0;
+  }
+  95% {
+    -webkit-transform: scale(1.3);
+    opacity: 0;
+  }
+  to {
+    -webkit-transform: scale(0.3);
+    opacity: 0;
+  }
+}
+/* get the container that's just outside the marker image,
+    which just happens to have our Marker title in it */
+#map div.gmnoprint[title="user"] {
+  -moz-animation: pulsate 1.5s ease-in-out infinite;
+  -webkit-animation: pulsate 1.5s ease-in-out infinite;
+  border:1pt solid #fff;
+  /* make a circle */
+  -moz-border-radius:200px;
+  -webkit-border-radius:200px;
+  border-radius:200px;
+  /* multiply the shadows, inside and outside the circle */
+  -moz-box-shadow:inset 0 0 5px $pulsecolor, inset 0 0 5px $pulsecolor, inset 0 0 5px $pulsecolor, 0 0 5px $pulsecolor, 0 0 5px $pulsecolor, 0 0 5px $pulsecolor;
+  -webkit-box-shadow:inset 0 0 5px $pulsecolor, inset 0 0 5px $pulsecolor, inset 0 0 5px $pulsecolor, 0 0 5px $pulsecolor, 0 0 5px $pulsecolor, 0 0 5px $pulsecolor;
+  box-shadow:inset 0 0 5px $pulsecolor, inset 0 0 5px $pulsecolor, inset 0 0 5px $pulsecolor, 0 0 5px $pulsecolor, 0 0 5px $pulsecolor, 0 0 5px $pulsecolor;
+  /* set the ring's new dimension and re-center it */
+  height:220px!important;
+  margin:-103px 0 0 -103px;
+  width:220px!important;
+}
+/* hide the superfluous marker image since it would expand and shrink with its containing element */
+/*	#map div[style*="987654"][title] img {*/
+#map div.gmnoprint[title="user"] img {
+  display:none;
+}
+/* compensate for iPhone and Android devices with high DPI, add iPad media query */
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (device-width: 768px) {
+  #map div.gmnoprint[title="user"] {
+    margin:-103px 0 0 -103px;
+  }
+}
