@@ -73,7 +73,7 @@ class User < ActiveRecord::Base
   end
 
   def pingas_rsvpd_to
-    Pinga.all
+    pingas = self.user_pingas.where(rsvp_status: "attending").map{|user_pinga|user_pinga.pinga}.sort_by { |pinga| pinga.start_time }
   end
 
   def your_created_pingas
