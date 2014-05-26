@@ -1,4 +1,4 @@
-
+<% if pinga %>
 <h2><%= pinga.title%></h2>
 <p>Description <%= pinga.description%></p>
 <p>Address <%= pinga.address%></p>
@@ -9,4 +9,5 @@
 
 <% if pinga.creator_id == session[:user_id] %>
     <%= link_to "Delete this PingIt", pinga_path(pinga), method: :delete %>
+<% end %>
 <% end %>
