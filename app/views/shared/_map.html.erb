@@ -45,7 +45,6 @@
             title: 'Your current location',
             draggable: true
         });
-        newPingaMarker.setAnimation(google.maps.Animation.BOUNCE);
 
         markers.forEach(function(marker) {
             addMarker(marker);
@@ -255,7 +254,6 @@
             newPingaMarker.setMap(map);
             console.log("create new pinga")
             newPingaMarker.setPosition(user_marker.position);
-            newPingaMarker.setAnimation(google.maps.Animation.BOUNCE);
             closeInfos();
             $('#show').css('display', 'none');
             $('#index_list').css('display', 'none');
@@ -367,12 +365,17 @@
             if (address === "") {
                 $('#errors').append("<li>Event address is a mandatory field.</li>")
             }
-            if (startTime === ""){
+            if (startTime === "" && $('#pinga_start_time').css("display") != "none"){
                 $('#errors').append("<li>Please select a start time for your event.</li>")
             }
 
             if ($("#errors").children().size() === 0 && $('#start-time-validations').text() == ""){
-                var today = /\w{2,3} \w* \d{1,2}/.exec($('#today-tomorrow').text())[0];
+                var day = $('#today-tomorrow').text();
+                if (day == "") {
+                    var today = new Date();
+                } else {
+                    var today = /\w{2,3} \w* \d{1,2}/.exec(day)[0];
+                }
                 data = $('form').serializeObject();
                 $.ajax({
                     url: '/pingas',
