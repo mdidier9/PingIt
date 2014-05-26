@@ -39,6 +39,13 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
 		p @pinga
 
 		respond_with @data
+	end
+
+	def recieve_request_register_rsvp_info
+		p "THIS IS INSIDE REGISTER RSVP ACTION"
+		p params
+
+	end
 
 		#TO DO
 		#---------------------------------------------------------------------------
@@ -64,6 +71,6 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
     #QUESTIONS
     #---------------------------------------------------------------------------------
     #How do we want to sanitize data? (trailing space?, newline? ) 
-	end
+	
 
 end
