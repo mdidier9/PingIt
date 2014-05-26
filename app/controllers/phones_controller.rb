@@ -1,5 +1,5 @@
 class PhonesController < ApplicationController
-skip_before_filter :require_login, :only => [:recieve_request_get_events, :recieve_request_create_event] #add the phone controller pages in here
+skip_before_filter :require_login, :only => [:recieve_request_get_events, :recieve_request_create_event, :recieve_request_register_rsvp_info] #add the phone controller pages in here
 
 	respond_to :json
 
