@@ -36,21 +36,16 @@ class PingasController < ApplicationController
 
   def create
     today = params[:today]
-    p params
     pinga_params = params[:data]
     params = pinga_params
-    p params
     @user = User.find(session[:user_id])
     @pinga = Pinga.new
-    @pinga.status = "pending" # this needs to be checked against the start time
     @pinga.title = params["pinga"]["title"]
     @pinga.category_id = params["pinga"]["category_id"]
     @pinga.description = params["pinga"]["description"]
     @pinga.address = params["pinga"]["address"]
     @pinga.duration = params["duration"].to_i
     @pinga.start_time = Time.parse("#{today} #{params["pinga"]["start_time"]}")
-    puts "#{@pinga.start_time} *******XXXXX START TIME *****XXX"
-    puts "#{today} #{params["pinga"]["start_time"]}"
     @pinga.creator = @user
 
     if @pinga.save
