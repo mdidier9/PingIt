@@ -5,6 +5,7 @@
 <% if pinga.start_time %>
   <p>Start Time <%= pinga.start_time.localtime.strftime("%a, %b %d %Y %l:%M %p") %></p>
 <% end %>
+<p>Duration: <%= pluralize(pinga.duration, "hour") %></p>
 <% if pinga.end_time %>
   <p>End Time <%= pinga.end_time.localtime.strftime("%a, %b %d %Y %l:%M %p") %></p>
 <% end %>
