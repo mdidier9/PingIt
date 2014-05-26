@@ -42,7 +42,9 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
 
 	def recieve_request_register_rsvp_info
 		p "THIS IS INSIDE REGISTER RSVP ACTION"
-		p params
+		@rsvp_array = params[:data]
+		p @rsvp_array
+		respond_with @rsvp_array
 	end
 
 		#TO DO
