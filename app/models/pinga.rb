@@ -5,7 +5,7 @@ class Pinga < ActiveRecord::Base
 	has_many :users, through: :user_pingas
 
   validates :status, inclusion: { in: ["pending", "active", "inactive"] }
-  validates :title, :description, :address, :category_id, :start_time, :end_time, :duration, presence: true
+  validates :title, :description, :address, :category_id, :start_time, :duration, presence: true
 
 
   geocoded_by :address
