@@ -9,8 +9,11 @@
     <%= f.text_field :address,  id: "autocomplete", placeholder: "Event Address" %><br>
     <%= options_from_collection_for_select(Category.all, :id, :title) %>
     <%= collection_select(:pinga, :category_id, Category.all, :id, :title) %><br>
-    <%= f.label :start_time %>
-    <%= time_field(:pinga, :start_time) %><p id="today-tomorrow"></p><p id="start-time-validations"></p><br>
+    <%= f.label :start_time%>
+    <span id="now-default-msg">:  defaults to now (<%= Time.now.localtime.strftime("%a, %b %d %l:%M %p")%>)</span><br>
+    <%= link_to("change start time", pinga_path(@pinga), :id =>"change-start") %>
+    <%= link_to("make now", pinga_path(@pinga), :id =>"now-start", hidden:true) %>
+    <%= time_field(:pinga, :start_time, hidden: true) %><p id="today-tomorrow"></p><p id="start-time-validations"></p><br>
     <%= label_tag(:pinga, "Duration")%><br>
     <%= select_tag(:duration, options_for_select(options)) %>
     <%= f.submit "Ping it!", class: "submit" %>
