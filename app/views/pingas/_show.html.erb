@@ -3,10 +3,10 @@
 <p>Address <%= pinga.address%></p>
 <p>Category <%= pinga.category.title if pinga.category %></p>
 <% if pinga.start_time %>
-  <p>Start Time <%= pinga.start_time.localtime %></p>
+  <p>Start Time <%= pinga.start_time.localtime.strftime("%a, %b %d %Y %l:%M %p") %></p>
 <% end %>
 <% if pinga.end_time %>
-  <p>End Time <%= pinga.end_time.localtime %></p>
+  <p>End Time <%= pinga.end_time.localtime.strftime("%a, %b %d %Y %l:%M %p") %></p>
 <% end %>
 <p>PingIt Creator <%= pinga.creator.name if pinga.creator %></p>
 
