@@ -1,3 +1,6 @@
+<link href="http://code.google.com/apis/maps/documentation/javascript/examples/default.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+
 <div style='width: 520px;'>
   <div id="map" style='width: 520px; height: 550px;'></div>
   <div id="slider" style='width: 500px;'></div>
@@ -10,8 +13,8 @@
         pingaMarkers = [];
         infos = [];
 
-
-        var map_style = [{featureType:"water",elementType:"geometry",stylers:[{color:"#a2daf2"}]},{featureType:"landscape.man_made",elementType:"geometry",stylers:[{color:"#f7f1df"}]},{featureType:"landscape.natural",elementType:"geometry",stylers:[{color:"#d0e3b4"}]},{featureType:"landscape.natural.terrain",elementType:"geometry",stylers:[{visibility:"off"}]},{featureType:"poi.park",elementType:"geometry",stylers:[{color:"#bde6ab"}]},{featureType:"poi",elementType:"labels",stylers:[{visibility:"off"}]},{featureType:"poi.medical",elementType:"geometry",stylers:[{color:"#fbd3da"}]},{featureType:"poi.business",stylers:[{visibility:"off"}]},{featureType:"road",elementType:"geometry.stroke",stylers:[{visibility:"off"}]},{featureType:"road",elementType:"labels",stylers:[{visibility:"off"}]},{featureType:"road.highway",elementType:"geometry.fill",stylers:[{color:"#ffe15f"}]},{featureType:"road.highway",elementType:"geometry.stroke",stylers:[{color:"#efd151"}]},{featureType:"road.arterial",elementType:"geometry.fill",stylers:[{color:"#ffffff"}]},{featureType:"road.local",elementType:"geometry.fill",stylers:[{color:"black"}]},{featureType:"transit.station.airport",elementType:"geometry.fill",stylers:[{color:"#cfb2db"}]}]
+        var map_style = [{featureType:"administrative",stylers:[{visibility:"off"}]},{featureType:"administrative.locality",elementType:"labels",stylers:[{visibility:"simplified"},{saturation:100},{color:"#ff4702"}]},{featureType:"road",stylers:[{saturation:-100},{visibility:"simplified"},{lightness:-25}]},{featureType:"water",stylers:[{color:"#5f1bff"},{saturation:100},{visibility:"on"},{lightness:-38}]},{featureType:"landscape.natural.terrain",stylers:[{visibility:"off"}]},{featureType:"poi",stylers:[{visibility:"off"}]},{featureType:"poi.park",stylers:[{visibility:"simplified"},{color:"#d3ff44"},{lightness:-32},{saturation:30}]},{featureType:"landscape.natural",elementType:"geometry.fill",stylers:[{visibility:"on"},{color:"#797679"},{gamma:4.92},{lightness:-47}]},{}]
+//        var map_style = [{featureType:"water",elementType:"geometry",stylers:[{color:"#a2daf2"}]},{featureType:"landscape.man_made",elementType:"geometry",stylers:[{color:"#f7f1df"}]},{featureType:"landscape.natural",elementType:"geometry",stylers:[{color:"#d0e3b4"}]},{featureType:"landscape.natural.terrain",elementType:"geometry",stylers:[{visibility:"off"}]},{featureType:"poi.park",elementType:"geometry",stylers:[{color:"#bde6ab"}]},{featureType:"poi",elementType:"labels",stylers:[{visibility:"off"}]},{featureType:"poi.medical",elementType:"geometry",stylers:[{color:"#fbd3da"}]},{featureType:"poi.business",stylers:[{visibility:"off"}]},{featureType:"road",elementType:"geometry.stroke",stylers:[{visibility:"off"}]},{featureType:"road",elementType:"labels",stylers:[{visibility:"off"}]},{featureType:"road.highway",elementType:"geometry.fill",stylers:[{color:"#ffe15f"}]},{featureType:"road.highway",elementType:"geometry.stroke",stylers:[{color:"#efd151"}]},{featureType:"road.arterial",elementType:"geometry.fill",stylers:[{color:"#ffffff"}]},{featureType:"road.local",elementType:"geometry.fill",stylers:[{color:"black"}]},{featureType:"transit.station.airport",elementType:"geometry.fill",stylers:[{color:"#cfb2db"}]}]
 
         var mapOptions = {
             zoom: 13,
@@ -23,10 +26,18 @@
         map = new google.maps.Map(document.getElementById('map'),
                 mapOptions);
 
+        var image = new google.maps.MarkerImage(
+                'http://plebeosaur.us/etc/map/bluedot_retina.png',
+                null, // size
+                null, // origin
+                new google.maps.Point( 8, 8 ), // anchor (move to center of marker)
+                new google.maps.Size( 17, 17 ) // scaled size (required for Retina display icon)
+        );
         user_marker = new google.maps.Marker({
             position: map.getCenter(),
             map: map,
-            icon: 'assets/user.png'
+            icon: image,
+            title: "user"
         });
         user_marker.setDraggable (true);
 
