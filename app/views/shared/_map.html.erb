@@ -354,6 +354,9 @@
                                 updateLists(data);
                                 updateMarkers(data.markers);
                                 showShow(new_pinga_id);
+                                $('form')[0].reset();
+                                $('#today-tomorrow').html('');
+                                $('#start-time-validations').html('');
                             }
                         });
 
