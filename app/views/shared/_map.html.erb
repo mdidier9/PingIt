@@ -336,14 +336,10 @@
                 data: {id: this.id},
                 dataType: 'json',
                 success: function (id) {
-//                    updateLists(data);
-//                    updateMarkers(data.markers);
-//                    findMarkerById(id).setMap(null);
-                    $('#' + id).remove();
+                    console.log(id);
+                    $('.' + id).remove();
                     showList();
-
                     var markerIndex = findMarkerIndex(id);
-                    console.log(markerIndex);
                     pingaMarkers[markerIndex].setMap(null);
                     if (markerIndex > -1) {
                         pingaMarkers.splice(markerIndex, 1);
