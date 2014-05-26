@@ -28,8 +28,9 @@ def pinga_markers
     marker = { :id         => pinga.id,
                :latitude   => pinga.latitude,
                :longitude  => pinga.longitude,
+               :category   => pinga.category.title,
                :infowindow => render_to_string(:partial => "/shared/infowindow", :locals => { pinga: pinga }),
-               :picture => {  "url" => "assets/#{pinga.status}.png",
+               :picture => {  "url" => "assets/#{pinga.status}/#{pinga.category.title}.png",
                               "width" => 20,
                               "height" => 34}
     }
@@ -39,6 +40,7 @@ def pinga_markers
     marker = { :id         => pinga.id,
                :latitude   => pinga.latitude,
                :longitude  => pinga.longitude,
+               :category   => pinga.category.title,
                :infowindow => render_to_string(:partial => "/shared/infowindow", :locals => { pinga: pinga }),
                :picture => {  "url" => "assets/grey.png",
                               "width" => 20,
