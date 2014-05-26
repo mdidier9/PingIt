@@ -19,8 +19,10 @@ class Pinga < ActiveRecord::Base
   end
 
   def check_status
-    if self.end_time <= Time.now
-      self.status = "inactive"
+    if self.status == "cancelled"
+      # do nothing
+    elsif self.end_time <= Time.now
+      self.status = "expired"
     elsif self.start_time <= Time.now
       self.status = "active"
     elsif self.start_time  >= Time.now

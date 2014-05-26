@@ -1,5 +1,21 @@
 $(function() { 
 
+	$('#change-start').on("click", function(event){
+		event.preventDefault();
+		$(this).hide();
+		$('#now-default-msg').hide();
+		$('#pinga_start_time').show();
+		$('#now-start').show();
+	});
+
+	$('#now-start').on("click", function(event){
+		event.preventDefault();
+		$(this).hide();
+		$('#pinga_start_time').hide();
+		$('#now-default-msg').show();
+		$('#change-start').show();
+	});
+	
 	$('#pinga_start_time').on("change", function(){
 		var selectedHour = parseFloat($('#pinga_start_time').val());
 		var currentHour = (new Date()).getHours();
