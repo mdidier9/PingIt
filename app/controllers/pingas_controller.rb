@@ -35,29 +35,23 @@ class PingasController < ApplicationController
   end
 
   def create
-    # valid_start_time = Time.now + 12.hours
-    puts params
-    # puts "X"*50
-    # p valid_start_time
-    # p params
-    # puts "X"*50
-
-
+    today = params[:today]
+    p params
+    pinga_params = params[:data]
+    params = pinga_params
+    p params
     @user = User.find(session[:user_id])
-    @pinga = Pinga.new(title: params["pinga"]["title"])
+    @pinga = Pinga.new
     @pinga.status = "pending" # this needs to be checked against the start time
+    @pinga.title = params["pinga"]["title"]
     @pinga.category_id = params["pinga"]["category_id"]
     @pinga.description = params["pinga"]["description"]
-    @pinga.start_time = params["pinga"]["start_time"]
-    @pinga.end_time = params["pinga"]["end_time"]
     @pinga.address = params["pinga"]["address"]
+    @pinga.duration = params["duration"].to_i
+    @pinga.start_time = Time.parse("#{today} #{params["pinga"]["start_time"]}")
+    puts "#{@pinga.start_time} *******XXXXX START TIME *****XXX"
+    puts "#{today} #{params["pinga"]["start_time"]}"
     @pinga.creator = @user
-
-    # if @pinga.start_time < Time.now # earlier than right now
-    #   @status = "active"
-    # elsif @pinga.start_time
-    # else @pinga.start_time < Time.now
-    # end
 
     if @pinga.save
       render :json => true
@@ -66,11 +60,24 @@ class PingasController < ApplicationController
     end
   end
 
+  # def edit
+  #   render :json => { edit: render_to_string(partial: "pingas/edit", locals: { pinga: Pinga.find(params[:id].to_i) }) }
+  # end
+
+  # def update
+  # end
+
   def destroy
     @pinga = Pinga.find(params[:id])
     @pinga.status = "inactive"
-    @pinga.save
+    @pinga.save(validate: false)
     redirect_to root_url
+  end
+
+  private
+  
+  def pinga_params
+    params.require(:pinga).permit(:title, :description, :start_time, :duration, :address, :category_id)
   end
 end
 
