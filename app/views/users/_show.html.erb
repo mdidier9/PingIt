@@ -1,8 +1,45 @@
-<%= @user.name %>
+<div class="user_name">
+	<span>
+		<h2 style="text-align:left;float:left;"><%= @user.name %></h2> 
+		<h2 style="text-align:right;float:right;">
+ 		  	<%= link_to "Logout", signout_path,  method: :delete, id: "sign_out" %>
+		</h2> 
+	</span>
+</div>
+<br>
 
-<div id="slider" style='width: 500px;'></div>
-<div id="slider-value"></div>
+<div id="my_tabs">
+  <ul>
+    <li class="tab_width"><a href="#tabs_created_pings">My Created Pings</a></li>
+    <li class="tab_width"><a href="#tabs_rsvp_pings">My RSVP's</a></li>
+  </ul>
+  <div class="my_scroll" id="tabs_created_pings">
+    <ul id="created" class="ping_list">
+        <%= render partial: "list", locals: {list: @user.your_created_pingas } %>
+    </ul>
+  </div>
+		<div class="my_scroll" id="tabs_rsvp_pings">
+    <ul id="rsvp" class="ping_list">
+        <%= render partial: "list", locals: {list: @user.pingas_rsvpd_to } %>
+    </ul>
+  </div>
+</div>
 
-<div id="logout">
-  <%= link_to "Logout", signout_path,  method: :delete, id: "sign_out" %>
+<div class="my_listen">
+  <h4>My Listening Preferences #click to update listening prefs.</h4>
+  <div id="my_format">
+    <input type="checkbox" id="my_Food"><label for="my_Food">Food</label>
+    <input type="checkbox" id="my_Social"><label for="my_Social">Social</label>
+    <input type="checkbox" id="my_Sports"><label for="my_Sports">Sports</label>
+    <input type="checkbox" id="my_Entertainment"><label for="my_Entertainment">Entertainment</label>
+    <input type="checkbox" id="my_Deals"><label for="my_Deals">Deals</label>
+    <input type="checkbox" id="my_Other"><label for="my_Other">Other</label>  
+  </div>
+</div>
+
+<br>
+<div class="slider">
+	<h4>My Listening Radius #this slider resets db's listen rad.</h4>
+	<div id="slider" style='width: 400px;'></div><br>
+	<div id="slider-value"></div>
 </div>

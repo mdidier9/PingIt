@@ -1,10 +1,12 @@
 $(function() {  
 // click
   $("#tabs").tabs();
-
+  $("#my_tabs").tabs();
+  
 // checkbox
   $( "#check" ).button();
   $( "#format" ).buttonset();
+  $( "#my_format" ).buttonset();
 
 	$('#format :checkbox').click(function() {
     var $this = $(this);
@@ -25,7 +27,7 @@ $(function() {
     }
 	});
 
-// slider (not on html currently)
+// slider
 
     $(document).on('click', '#settings', function(event){
         event.preventDefault();
