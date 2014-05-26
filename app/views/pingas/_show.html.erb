@@ -12,5 +12,5 @@
 <p>PingIt Creator <%= pinga.creator.name if pinga.creator %></p>
 
 <% if pinga.creator_id == session[:user_id] %>
-    <%= link_to "Delete this PingIt", pinga_path(pinga), method: :delete %>
+    <%= link_to "Delete this PingIt", pinga_path(pinga), id: pinga.id, class: "delete_pinga_button" %>
 <% end %>

@@ -315,6 +315,44 @@
             }
         }
 
+        function findMarkerIndex(id) {
+            for(var index = 0; index < pingaMarkers.length; index++)
+            {
+                if (pingaMarkers[index].id == id)
+                {
+                    return index;
+                }
+            }
+        }
+
+//        DELETE PINGA
+
+        $(document).on('click', '.delete_pinga_button', function(event){
+            event.preventDefault();
+            console.log(this.id);
+            $.ajax({
+                url: '/pingas/' + this.id,
+                type: 'DELETE',
+                data: {id: this.id},
+                dataType: 'json',
+                success: function (id) {
+//                    updateLists(data);
+//                    updateMarkers(data.markers);
+//                    findMarkerById(id).setMap(null);
+                    $('#' + id).remove();
+                    showList();
+
+                    var markerIndex = findMarkerIndex(id);
+                    console.log(markerIndex);
+                    pingaMarkers[markerIndex].setMap(null);
+                    if (markerIndex > -1) {
+                        pingaMarkers.splice(markerIndex, 1);
+                    }
+                    closeInfos();
+                }
+            })
+        });
+
 //        CREATE PINGA STUFF
 
         $(document).on("click", ".submit", function(event){
@@ -354,6 +392,9 @@
                                 updateLists(data);
                                 updateMarkers(data.markers);
                                 showShow(new_pinga_id);
+                                $('form')[0].reset();
+                                $('#today-tomorrow').html('');
+                                $('#start-time-validations').html('');
                             }
                         });
 

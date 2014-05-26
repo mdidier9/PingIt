@@ -25,28 +25,33 @@ end
 def pinga_markers
   pingas = []
   @user.pingas_in_listening_radius.each do |pinga|
-    marker = { :id         => pinga.id,
-               :latitude   => pinga.latitude,
-               :longitude  => pinga.longitude,
-               :category   => pinga.category.title,
-               :infowindow => render_to_string(:partial => "/shared/infowindow", :locals => { pinga: pinga }),
-               :picture => {  "url" => "assets/#{pinga.status}/#{pinga.category.title}.png",
-                              "width" => 20,
-                              "height" => 34}
-    }
-    pingas.push(marker)
+    if pinga.status != "expired" && pinga.status != "cancelled"
+      marker = { :id         => pinga.id,
+                 :latitude   => pinga.latitude,
+                 :longitude  => pinga.longitude,
+                 :category   => pinga.category.title,
+                 :infowindow => render_to_string(:partial => "/shared/infowindow", :locals => { pinga: pinga }),
+                 :picture => {  "url" => "assets/#{pinga.status}/#{pinga.category.title}.png",
+                                "width" => 20,
+                                "height" => 34}
+      }
+      pingas.push(marker)
+    end
+
   end
   @user.pingas_outside_listening_radius.each do |pinga|
-    marker = { :id         => pinga.id,
-               :latitude   => pinga.latitude,
-               :longitude  => pinga.longitude,
-               :category   => pinga.category.title,
-               :infowindow => render_to_string(:partial => "/shared/infowindow", :locals => { pinga: pinga }),
-               :picture => {  "url" => "assets/grey.png",
-                              "width" => 20,
-                              "height" => 34}
-    }
-    pingas.push(marker)
+    if pinga.status != "expired" && pinga.status != "cancelled"
+      marker = { :id         => pinga.id,
+                 :latitude   => pinga.latitude,
+                 :longitude  => pinga.longitude,
+                 :category   => pinga.category.title,
+                 :infowindow => render_to_string(:partial => "/shared/infowindow", :locals => { pinga: pinga }),
+                 :picture => {  "url" => "assets/grey.png",
+                                "width" => 20,
+                                "height" => 34}
+      }
+      pingas.push(marker)
+    end
   end
   pingas
 end

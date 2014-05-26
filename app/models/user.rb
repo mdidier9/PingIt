@@ -40,7 +40,7 @@ class User < ActiveRecord::Base
   end
 
   def pingas_outside_listening_radius
-    Pinga.all - pending_pingas_in_listening_radius - active_pingas_in_listening_radius
+    Pinga.where(status: ["pending", "active"]) - pending_pingas_in_listening_radius - active_pingas_in_listening_radius
   end
 
   def pingas_in_listening_radius
@@ -55,15 +55,21 @@ class User < ActiveRecord::Base
   end
 
   def pingas_ordered_by_received_in_listening_radius
-    Pinga.near(self, self.listening_radius).sort_by { |pinga| UserPinga.where(user_id: self.id, pinga_id: pinga.id)[0].created_at }.reverse
+    Pinga.where(status: ["pending", "active"]).near(self, self.listening_radius).sort_by do |pinga|
+      UserPinga.where(user_id: self.id, pinga_id: pinga.id)[0].created_at
+    end.reverse
   end
 
   def pingas_ordered_by_distance_in_listening_radius
-    Pinga.near(self, self.listening_radius).sort_by { |pinga| pinga.distance_to(self) }
+    Pinga.where(status: ["pending", "active"]).near(self, self.listening_radius).sort_by do |pinga|
+      pinga.distance_to(self)
+    end
   end
 
   def pingas_ordered_by_start_time_in_listening_radius
-    Pinga.near(self, self.listening_radius).sort_by { |pinga| pinga.start_time }
+    Pinga.where(status: ["pending", "active"]).near(self, self.listening_radius).sort_by do |pinga|
+      pinga.start_time
+    end
   end
 
   def pingas_rsvpd_to

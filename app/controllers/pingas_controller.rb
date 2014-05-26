@@ -45,9 +45,18 @@ class PingasController < ApplicationController
 
   def destroy
     @pinga = Pinga.find(params[:id])
-    @pinga.status = "inactive"
-    @pinga.save(validate: false)
-    redirect_to root_url
+    @pinga.status = "cancelled"
+    if @pinga.save
+      # render :json => {markers: pinga_markers,
+      #                  newest: render_to_string(:partial => "/pingas/list", :locals => { list: @pingas_by_received_time }),
+      #                  nearest: render_to_string(:partial => "/pingas/list", :locals => { list: @pingas_by_distance }),
+      #                  soonest: render_to_string(:partial => "/pingas/list", :locals => { list: @pingas_by_start_time })
+      #
+      # }
+      render :json => @pinga.id
+    else
+      render :json => false
+    end
   end
 
   private
@@ -56,31 +65,38 @@ class PingasController < ApplicationController
     params.require(:pinga).permit(:title, :description, :start_time, :duration, :address, :category_id)
   end
 end
+
+
 def pinga_markers
   pingas = []
   @user.pingas_in_listening_radius.each do |pinga|
-    marker = { :id         => pinga.id,
-              :latitude   => pinga.latitude,
-              :longitude  => pinga.longitude,
-              :category   => pinga.category.title,
-              :infowindow => render_to_string(:partial => "/shared/infowindow", :locals => { pinga: pinga }),
-              :picture => {  "url" => "assets/#{pinga.status}/#{pinga.category.title}.png",
-                             "width" => 20,
-                             "height" => 34}
-    }
-    pingas.push(marker)
+    if pinga.status != "expired" && pinga.status != "cancelled"
+      marker = { :id         => pinga.id,
+                 :latitude   => pinga.latitude,
+                 :longitude  => pinga.longitude,
+                 :category   => pinga.category.title,
+                 :infowindow => render_to_string(:partial => "/shared/infowindow", :locals => { pinga: pinga }),
+                 :picture => {  "url" => "assets/#{pinga.status}/#{pinga.category.title}.png",
+                                "width" => 20,
+                                "height" => 34}
+      }
+      pingas.push(marker)
+    end
+
   end
   @user.pingas_outside_listening_radius.each do |pinga|
-    marker = { :id         => pinga.id,
-               :latitude   => pinga.latitude,
-               :longitude  => pinga.longitude,
-               :category   => pinga.category.title,
-               :infowindow => render_to_string(:partial => "/shared/infowindow", :locals => { pinga: pinga }),
-               :picture => {  "url" => "assets/grey.png",
-                              "width" => 20,
-                              "height" => 34}
-    }
-    pingas.push(marker)
+    if pinga.status != "expired" && pinga.status != "cancelled"
+      marker = { :id         => pinga.id,
+                 :latitude   => pinga.latitude,
+                 :longitude  => pinga.longitude,
+                 :category   => pinga.category.title,
+                 :infowindow => render_to_string(:partial => "/shared/infowindow", :locals => { pinga: pinga }),
+                 :picture => {  "url" => "assets/grey.png",
+                                "width" => 20,
+                                "height" => 34}
+      }
+      pingas.push(marker)
+    end
   end
   pingas
 end
