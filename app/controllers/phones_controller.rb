@@ -2,7 +2,6 @@ class PhonesController < ApplicationController
 skip_before_filter :require_login, :only => [:recieve_request_get_events, :recieve_request_create_event] #add the phone controller pages in here
 
 	respond_to :json
-
 	def recieve_request_get_events
 		p "THIS IS INSIDE GET EVENTS ACTION ********************"
 		@pinga_array = []
@@ -37,7 +36,6 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
 		@pinga.creator_id = 1 #THIS IS HARDCODED (need have some information about the user somewhere at login)
 		@pinga.save
 		p @pinga
-
 		respond_with @data
 	end
 
