@@ -32,4 +32,4 @@ nbproject
 .idea
 .dat*.*
 /config/initializers/omniauth.rb
-.coveralls.yml
+.coveralls.yml 
