@@ -3,6 +3,8 @@
 
 <div style='width: 520px;'>
   <div id="map" style='width: 520px; height: 550px;'></div>
+  <div id="slider" style='width: 500px;'></div>
+  <div id="slider-value"></div>
 </div>
 
 <script>
@@ -259,7 +261,6 @@
             closeInfos();
             $('#show').css('display', 'none');
             $('#index_list').css('display', 'none');
-            $('#show_user').css('display', 'none');
             $('#new').css('display', 'block');
             user_marker.setDraggable (false);
 
@@ -270,11 +271,9 @@
             closeInfos();
             $('#show').css('display', 'none');
             $('#new').css('display', 'none');
-            $('#show_user').css('display', 'none');
             $('#index_list').css('display', 'block');
             user_marker.setDraggable (true);
             map.panTo(user_marker.getPosition());
-
         }
 
         function showShow(id) {
@@ -299,7 +298,6 @@
                     $('#show').css('display', 'block');
                     $('#index_list').css('display', 'none');
                     $('#new').css('display', 'none');
-                    $('#show_user').css('display', 'none');
 
                 }
             });
@@ -338,13 +336,13 @@
                 $('#errors').append("<li>Please select a start time for your event.</li>")
             }
 
-            if ($("#errors").children().size() === 0){
+            if ($("#errors").children().size() === 0 && $('#start-time-validations').text() == ""){
+                var today = /\w{2,3} \w* \d{1,2}/.exec($('#today-tomorrow').text())[0];
                 data = $('form').serializeObject();
-                console.log(data);
                 $.ajax({
                     url: '/pingas',
                     type: 'POST',
-                    data: data,
+                    data: {data: data, today: today},
                     dataType: 'json',
                     success: function (data) {
                         console.log("ajax success");
