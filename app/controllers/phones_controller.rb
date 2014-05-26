@@ -24,7 +24,7 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
 		@pinga.title = @data[:title]
 		# p @data[:title]
 		@pinga.status = "pending" #THIS IS HARDCODED (this needs to be checked agianst the start time)
-		p Category.find_by_title(@data[:category]).id
+		# p Category.find_by_title(@data[:category]).id
 		@pinga.category_id = Category.find_by_title(@data[:category]).id
 		@pinga.description = @data[:description]
 		# p @data[:description]
