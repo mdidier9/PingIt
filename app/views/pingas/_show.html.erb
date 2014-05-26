@@ -3,8 +3,8 @@
 <p>Description <%= pinga.description%></p>
 <p>Address <%= pinga.address%></p>
 <p>Category <%= pinga.category.title if pinga.category %></p>
-<p>Start Time <%= pinga.start_time.getlocal %></p>
-<p>End Time <%= pinga.end_time.getlocal %></p>
+<p>Start Time <%= pinga.start_time %></p>
+<p>End Time <%= pinga.end_time %></p>
 <p>PingIt Creator <%= pinga.creator.name if pinga.creator %></p>
 
 <% if pinga.creator_id == session[:user_id] %>
