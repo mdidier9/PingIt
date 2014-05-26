@@ -18,6 +18,7 @@ $(function() {
     } else {
         var category = this.id;
         $("."+category).show();
+        console.log(findPingasWithCategory(this.id));
         findPingasWithCategory(this.id).forEach (function(pinga) {
             pinga.setMap(map);
         })
