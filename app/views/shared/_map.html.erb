@@ -79,27 +79,54 @@
 
         function updateLists(lists) {
             $('.ping_link').remove();
+            var inactiveCategories = getInactiveCategories();
+            console.log(inactiveCategories);
             $('#newest').append(lists.newest);
             $('#nearest').append(lists.nearest);
             $('#soonest').append(lists.soonest);
+            for(var index = 0; index < inactiveCategories.length; index++)
+            {
+                $("."+inactiveCategories[index]).css('display', 'none');
+            }
         }
 
         function updateMarkers(markers) {
             deleteMarkers();
+
+
             markers.forEach(function(marker) {
                 addMarker(marker);
             });
+        }
+
+        function getInactiveCategories() {
+            var categories = $('#format :checkbox');
+            var activeCategories = [];
+            for(var index = 0; index < categories.length; index++)
+            {
+                if (categories[index].checked)
+                {
+                    activeCategories.push(categories[index].id)
+                }
+            }
+            return activeCategories;
         }
 
         function addMarker(marker_info) {
             var latLng = new google.maps.LatLng(marker_info.latitude, marker_info.longitude);
             var marker = new google.maps.Marker({
                 position: latLng,
-                map: map,
+                map: null,
                 title: marker_info.title,
                 icon: marker_info.picture.url,
                 infowindow: marker_info.infowindow
             });
+            var inactiveCategories = getInactiveCategories();
+            if (!_.contains(inactiveCategories,marker_info.category))
+            {
+                marker.setMap(map);
+            }
+
             marker.id = marker_info.id;
             marker.category = marker_info.category;
 //            if (marker.icon == 'assets/active.png') { marker.setAnimation(google.maps.Animation.BOUNCE);}
@@ -202,7 +229,7 @@
             showShow(this.id);
         });
 
-        $(document).on('click', '#new_pinga', function(event){
+        $(document).on('click', '#new_pinga_button', function(event){
             event.preventDefault();
             showNew();
         });
@@ -224,15 +251,9 @@
             return o;
         };
 
-
-
-
-
-
-
-
-
         function showNew() {
+            newPingaMarker.setMap(map);
+            console.log("create new pinga")
             newPingaMarker.setPosition(user_marker.position);
             newPingaMarker.setAnimation(google.maps.Animation.BOUNCE);
             closeInfos();
@@ -241,7 +262,7 @@
             $('#show_user').css('display', 'none');
             $('#new').css('display', 'block');
             user_marker.setDraggable (false);
-            newPingaMarker.setMap(map);
+
         }
 
         function showList() {
@@ -259,7 +280,6 @@
         function showShow(id) {
             newPingaMarker.setMap(null);
             user_marker.setDraggable (true);
-            console.log(findMarkerById(id));
             var marker = findMarkerById(id);
             var infowindow = new google.maps.InfoWindow();
             var content = marker.infowindow;
