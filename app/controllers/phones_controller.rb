@@ -1,5 +1,5 @@
 class PhonesController < ApplicationController
-skip_before_filter :require_login, :only => [:recieve_request_get_events, :recieve_request_create_event, :recieve_request_register_rsvp_info] #add the phone controller pages in here
+skip_before_filter :require_login, :only => [:recieve_request_get_events, :recieve_request_create_event, :recieve_request_register_rsvp_info] 
 
 	respond_to :json
 
@@ -8,7 +8,7 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
 		@pinga_array = []
 
 		Pinga.all.each_with_index do |ping_obj, index|
-			@pinga_array.push(ping_obj.attributes)
+			@pinga_array.push(ping_obj.attributes.merge('start_time' => ping_obj.start_time.strftime('%Y-%m-%d %H:%M:%S %z'))) #add more keys and values for time paramters
 		end
 		p @pinga_array
 		respond_with @pinga_array
