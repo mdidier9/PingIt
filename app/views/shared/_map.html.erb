@@ -3,8 +3,6 @@
 
 <div style='width: 520px;'>
   <div id="map" style='width: 520px; height: 550px;'></div>
-  <div id="slider" style='width: 500px;'></div>
-  <div id="slider-value"></div>
 </div>
 
 <script>
@@ -262,6 +260,7 @@
             $('#show').css('display', 'none');
             $('#index_list').css('display', 'none');
             $('#new').css('display', 'block');
+            $('#show_user').css('display', 'none');
             user_marker.setDraggable (false);
 
         }
@@ -271,6 +270,7 @@
             closeInfos();
             $('#show').css('display', 'none');
             $('#new').css('display', 'none');
+            $('#show_user').css('display', 'none');
             $('#index_list').css('display', 'block');
             user_marker.setDraggable (true);
             map.panTo(user_marker.getPosition());
@@ -296,6 +296,7 @@
                 success: function (data) {
                     $("#show").html(data.show);
                     $('#show').css('display', 'block');
+                    $('#show_user').css('display', 'none');
                     $('#index_list').css('display', 'none');
                     $('#new').css('display', 'none');
 
