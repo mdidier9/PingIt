@@ -18,9 +18,6 @@ describe Pinga do
   end
 
   it "should have a status of 'pending', 'active', or 'inactive'" do
-    pinga.status = "potatoes"
-    pinga.should_not be_valid
-    
     ["pending", "active", "inactive"].each do |status|
       pinga.status = status
       pinga.should be_valid
