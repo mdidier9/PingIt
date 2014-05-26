@@ -65,4 +65,12 @@ class User < ActiveRecord::Base
   def pingas_ordered_by_start_time_in_listening_radius
     Pinga.near(self, self.listening_radius).sort_by { |pinga| pinga.start_time }
   end
+
+  def pingas_rsvpd_to
+    Pinga.all
+  end
+
+  def your_created_pingas
+    self.created_pingas.sort_by { |pinga| pinga.start_time }
+  end
 end

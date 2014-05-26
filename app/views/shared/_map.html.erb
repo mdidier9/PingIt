@@ -345,7 +345,7 @@
                     type: 'POST',
                     data: {data: data, today: today},
                     dataType: 'json',
-                    success: function (data) {
+                    success: function (new_pinga_id) {
                         console.log("ajax success");
                         $.ajax({
                             url: '/users/' + <%= @user.id %>,
@@ -353,7 +353,7 @@
                             success: function (data) {
                                 updateLists(data);
                                 updateMarkers(data.markers);
-                                showList();
+                                showShow(new_pinga_id);
                             }
                         });
 
