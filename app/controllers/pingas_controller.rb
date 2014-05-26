@@ -36,9 +36,10 @@ class PingasController < ApplicationController
 
   def create
     today = params[:today]
+    p params
     pinga_params = params[:data]
     params = pinga_params
-
+    p params
     @user = User.find(session[:user_id])
     @pinga = Pinga.new
     @pinga.status = "pending" # this needs to be checked against the start time
@@ -59,10 +60,17 @@ class PingasController < ApplicationController
     end
   end
 
+  # def edit
+  #   render :json => { edit: render_to_string(partial: "pingas/edit", locals: { pinga: Pinga.find(params[:id].to_i) }) }
+  # end
+
+  # def update
+  # end
+
   def destroy
     @pinga = Pinga.find(params[:id])
     @pinga.status = "inactive"
-    @pinga.save
+    @pinga.save(validate: false)
     redirect_to root_url
   end
 

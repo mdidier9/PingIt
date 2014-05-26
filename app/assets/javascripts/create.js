@@ -5,7 +5,7 @@ $(function() {
 		var currentHour = (new Date()).getHours();
 		var lastValidHour = currentHour - 11;
 		if (selectedHour > lastValidHour && selectedHour < currentHour) {
-			$('#start-time-validations').html("invalid start time!");
+			$('#start-time-validations').html("The start time of your event must be within 12 hours.");
 		} else {
 			$('#start-time-validations').html("");
 		}

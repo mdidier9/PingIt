@@ -10,7 +10,7 @@ class Pinga < ActiveRecord::Base
 
   geocoded_by :address
   before_validation :calculate_end_time
-  before_save :geocode # after_validation?
+  before_save :geocode
 
   private
 
