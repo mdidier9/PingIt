@@ -307,12 +307,12 @@
             }
 
             if ($("#errors").children().size() === 0){
+                var today = /\w{2,3} \w* \d{1,2}/.exec($('#today-tomorrow').text())[0];
                 data = $('form').serializeObject();
-                console.log(data);
                 $.ajax({
                     url: '/pingas',
                     type: 'POST',
-                    data: data,
+                    data: {data: data, today: today},
                     dataType: 'json',
                     success: function (data) {
                         console.log("ajax success");
