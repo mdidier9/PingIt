@@ -19,19 +19,7 @@ class PingasController < ApplicationController
   end
 
   def show
-    # @user = User.find(session[:user_id])
-    # @pinga_markers = pinga_markers
-    # @pinga = Pinga.find(params[:id].to_i)
-    # if @pinga.status == "inactive"
-    #   flash[:notice] = "I'm sorry, that pingIt is no longer active!"
-    #   redirect_to root_url
-    # end
-    # render partial: "show", locals: {pinga: @pinga}
-    # render :json => true
     render :json => { show: render_to_string(partial: "pingas/show", locals: { pinga: Pinga.find(params[:id].to_i) }) }
-  end
-
-  def new
   end
 
   def create
@@ -54,18 +42,11 @@ class PingasController < ApplicationController
     @pinga.creator = @user
 
     if @pinga.save
-      render :json => true
+      render :json => @pinga.id
     else
       render :json => false
     end
   end
-
-  # def edit
-  #   render :json => { edit: render_to_string(partial: "pingas/edit", locals: { pinga: Pinga.find(params[:id].to_i) }) }
-  # end
-
-  # def update
-  # end
 
   def destroy
     @pinga = Pinga.find(params[:id])
@@ -80,40 +61,6 @@ class PingasController < ApplicationController
     params.require(:pinga).permit(:title, :description, :start_time, :duration, :address, :category_id)
   end
 end
-
-# def pinga_markers
-#   active_markers = Gmaps4rails.build_markers(@user.active_pingas_in_listening_radius) do |pinga, marker|
-#     # marker.id pinga.id
-#     marker.lat pinga.latitude
-#     marker.lng pinga.longitude
-#     marker.infowindow render_to_string(:partial => "/shared/infowindow", :locals => { pinga: pinga })
-#     marker.picture({ "url" => "assets/active.png",
-#                      "width" => 20,
-#                      "height" => 34})
-#   end
-#
-#   pending_markers = Gmaps4rails.build_markers(@user.pending_pingas_in_listening_radius) do |pinga, marker|
-#     # marker.id pinga.id
-#     marker.lat pinga.latitude
-#     marker.lng pinga.longitude
-#     marker.infowindow render_to_string(:partial => "/shared/infowindow", :locals => { pinga: pinga })
-#     marker.picture({"url" => "assets/pending.png",
-#                     "width" => 20,
-#                     "height" => 34})
-#   end
-#
-#   grey_markers = Gmaps4rails.build_markers(@user.pingas_outside_listening_radius) do |pinga, marker|
-#     # marker.id pinga.id
-#     marker.lat pinga.latitude
-#     marker.lng pinga.longitude
-#     marker.infowindow render_to_string(:partial => "/shared/infowindow", :locals => { pinga: pinga })
-#     marker.picture({  "url" => "assets/grey.png",
-#                       "width" => 20,
-#                       "height" => 34})
-#   end
-#   active_markers + pending_markers + grey_markers
-# end
-
 def pinga_markers
   pingas = []
   @user.pingas_in_listening_radius.each do |pinga|
