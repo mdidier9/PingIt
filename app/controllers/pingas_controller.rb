@@ -53,7 +53,7 @@ class PingasController < ApplicationController
       #                  soonest: render_to_string(:partial => "/pingas/list", :locals => { list: @pingas_by_start_time })
       #
       # }
-      render :json => @pinga.id
+      render :json => params[:id]
     else
       render :json => false
     end
