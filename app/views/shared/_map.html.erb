@@ -1,10 +1,7 @@
 <link href="http://code.google.com/apis/maps/documentation/javascript/examples/default.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
 
 <div style='width: 520px;'>
   <div id="map" style='width: 520px; height: 550px;'></div>
-  <div id="slider" style='width: 500px;'></div>
-  <div id="slider-value"></div>
 </div>
 
 <script>
@@ -47,7 +44,6 @@
             title: 'Your current location',
             draggable: true
         });
-        newPingaMarker.setAnimation(google.maps.Animation.BOUNCE);
 
         markers.forEach(function(marker) {
             addMarker(marker);
@@ -80,28 +76,67 @@
         });
 
         function updateLists(lists) {
-            $('.ping_link').remove();
+            $('.main_list').remove();
+            var inactiveCategories = getInactiveCategories();
             $('#newest').append(lists.newest);
             $('#nearest').append(lists.nearest);
             $('#soonest').append(lists.soonest);
+//            $('#created').append(lists.created);
+//            $('#rsvp').append(lists.rsvp)
+            for(var index = 0; index < inactiveCategories.length; index++)
+            {
+                $("."+inactiveCategories[index]).css('display', 'none');
+            }
         }
 
         function updateMarkers(markers) {
             deleteMarkers();
+
+
             markers.forEach(function(marker) {
                 addMarker(marker);
             });
+        }
+
+        function getInactiveCategories() {
+            var categories = $('#format :checkbox');
+            var activeCategories = [];
+            for(var index = 0; index < categories.length; index++)
+            {
+                if (categories[index].checked)
+                {
+                    activeCategories.push(categories[index].id)
+                }
+            }
+            return activeCategories;
         }
 
         function addMarker(marker_info) {
             var latLng = new google.maps.LatLng(marker_info.latitude, marker_info.longitude);
             var marker = new google.maps.Marker({
                 position: latLng,
-                map: map,
+                map: null,
                 title: marker_info.title,
                 icon: marker_info.picture.url,
                 infowindow: marker_info.infowindow
             });
+//            console.log(marker_info.picture.url)
+//            if (marker_info.picture.url == "assets/active/Deals.png")
+//            {
+//                console.log("title set")
+//                marker.title = "active"
+//            }
+//            console.log(marker);
+            if (marker_info.drop) {
+                marker.setAnimation(google.maps.Animation.DROP);
+            }
+
+            var inactiveCategories = getInactiveCategories();
+            if (!_.contains(inactiveCategories,marker_info.category))
+            {
+                marker.setMap(map);
+            }
+
             marker.id = marker_info.id;
             marker.category = marker_info.category;
 //            if (marker.icon == 'assets/active.png') { marker.setAnimation(google.maps.Animation.BOUNCE);}
@@ -199,12 +234,12 @@
             showList();
         });
 
-        $(document).on('click', '.ping_link', function(event){
+        $(document).on('click', '.ping_title', function(event){ // .ping_link
             event.preventDefault();
             showShow(this.id);
         });
 
-        $(document).on('click', '#new_pinga', function(event){
+        $(document).on('click', '#new_pinga_button', function(event){
             event.preventDefault();
             showNew();
         });
@@ -226,23 +261,17 @@
             return o;
         };
 
-
-
-
-
-
-
-
-
         function showNew() {
+            newPingaMarker.setMap(map);
+            console.log("create new pinga")
             newPingaMarker.setPosition(user_marker.position);
-            newPingaMarker.setAnimation(google.maps.Animation.BOUNCE);
             closeInfos();
             $('#show').css('display', 'none');
             $('#index_list').css('display', 'none');
             $('#new').css('display', 'block');
+            $('#show_user').css('display', 'none');
             user_marker.setDraggable (false);
-            newPingaMarker.setMap(map);
+
         }
 
         function showList() {
@@ -250,6 +279,7 @@
             closeInfos();
             $('#show').css('display', 'none');
             $('#new').css('display', 'none');
+            $('#show_user').css('display', 'none');
             $('#index_list').css('display', 'block');
             user_marker.setDraggable (true);
             map.panTo(user_marker.getPosition());
@@ -258,7 +288,6 @@
         function showShow(id) {
             newPingaMarker.setMap(null);
             user_marker.setDraggable (true);
-            console.log(findMarkerById(id));
             var marker = findMarkerById(id);
             var infowindow = new google.maps.InfoWindow();
             var content = marker.infowindow;
@@ -276,6 +305,7 @@
                 success: function (data) {
                     $("#show").html(data.show);
                     $('#show').css('display', 'block');
+                    $('#show_user').css('display', 'none');
                     $('#index_list').css('display', 'none');
                     $('#new').css('display', 'none');
 
@@ -293,6 +323,35 @@
                 }
             }
         }
+
+        function findMarkerIndex(id) {
+            for(var index = 0; index < pingaMarkers.length; index++)
+            {
+                if (pingaMarkers[index].id == id)
+                {
+                    return index;
+                }
+            }
+        }
+
+//        DELETE PINGA
+
+        $(document).on('click', '.delete_pinga_button', function(event){
+            event.preventDefault();
+            console.log(this.id);
+            deleteToSocket(this.id);
+//            $.ajax({
+//                url: '/pingas/' + this.id,
+//                type: 'DELETE',
+//                data: {id: this.id},
+//                dataType: 'json',
+//                success: function (id) {
+//                    console.log(id);
+                    showList();
+                    closeInfos();
+//                }
+//            })
+        });
 
 //        CREATE PINGA STUFF
 
@@ -312,32 +371,46 @@
             if (address === "") {
                 $('#errors').append("<li>Event address is a mandatory field.</li>")
             }
-            if (startTime === ""){
+            if (startTime === "" && $('#pinga_start_time').css("display") != "none"){
                 $('#errors').append("<li>Please select a start time for your event.</li>")
             }
 
             if ($("#errors").children().size() === 0 && $('#start-time-validations').text() == ""){
-                var today = /\w{2,3} \w* \d{1,2}/.exec($('#today-tomorrow').text())[0];
+                var day = $('#today-tomorrow').text();
+                if (day == "") {
+                    var today = new Date();
+                } else {
+                    var today = /\w{2,3} \w* \d{1,2}/.exec(day)[0];
+                }
                 data = $('form').serializeObject();
-                $.ajax({
-                    url: '/pingas',
-                    type: 'POST',
-                    data: {data: data, today: today},
-                    dataType: 'json',
-                    success: function (data) {
-                        console.log("ajax success");
-                        $.ajax({
-                            url: '/users/' + <%= @user.id %>,
-                            type: 'PUT',
-                            success: function (data) {
-                                updateLists(data);
-                                updateMarkers(data.markers);
-                                showList();
-                            }
-                        });
-
-                    }
-                })
+                data.today = today;
+                submitToSocket(data);
+                showList();
+                $('form')[0].reset();
+                $('#today-tomorrow').html('');
+                $('#start-time-validations').html('');
+//                $.ajax({
+//                    url: '/pingas',
+//                    type: 'POST',
+//                    data: {data: data, today: today},
+//                    dataType: 'json',
+//                    success: function (new_pinga_id) {
+//                        console.log("ajax success");
+//                        $.ajax({
+//                            url: '/users/' + <%= @user.id %>,
+//                            type: 'PUT',
+//                            success: function (data) {
+//                                updateLists(data);
+//                                updateMarkers(data.markers);
+//                                showShow(new_pinga_id);
+//                                $('form')[0].reset();
+//                                $('#today-tomorrow').html('');
+//                                $('#start-time-validations').html('');
+//                            }
+//                        });
+//
+//                    }
+//                })
             }
         });
 
@@ -376,5 +449,46 @@
             map.setZoom(13);
             map.setCenter(newPingaMarker.getPosition());
         });
+
+
+
+
+
+
+
+//    SOCKET STUFF
+
+        dispatcher.bind('pingas.new', function(pinga) {
+            addMarker(pinga.marker);
+            console.log("PINGA CREATED")
+            $.ajax({
+                url: '/users/' + <%= @user.id %>,
+                type: 'PUT',
+                success: function (data) {
+                    updateLists(data);
+                }
+            });
+        });
+
+        dispatcher.bind('pingas.destroy', function(pingaId) {
+            console.log("PINGA DELETED")
+            var markerIndex = findMarkerIndex(pingaId);
+            pingaMarkers[markerIndex].setMap(null);
+            if (markerIndex > -1) {
+                pingaMarkers.splice(markerIndex, 1);
+            }
+            $('.' + pingaId).remove();
+            $.ajax({
+                url: '/users/' + <%= @user.id %>,
+                type: 'PUT',
+                success: function (data) {
+                    updateLists(data);
+                }
+            });
+        });
     }
+
+
+
+
 </script>

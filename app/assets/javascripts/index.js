@@ -1,10 +1,12 @@
 $(function() {  
 // click
   $("#tabs").tabs();
-
+  $("#my_tabs").tabs();
+  
 // checkbox
   $( "#check" ).button();
   $( "#format" ).buttonset();
+  $( "#my_format" ).buttonset();
 
 	$('#format :checkbox').click(function() {
     var $this = $(this);
@@ -18,13 +20,14 @@ $(function() {
     } else {
         var category = this.id;
         $("."+category).show();
+        console.log(findPingasWithCategory(this.id));
         findPingasWithCategory(this.id).forEach (function(pinga) {
             pinga.setMap(map);
         })
     }
 	});
 
-// slider (not on html currently)
+// slider
 
     $(document).on('click', '#settings', function(event){
         event.preventDefault();

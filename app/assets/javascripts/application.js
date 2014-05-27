@@ -17,4 +17,6 @@
 //= require jquery.turbolinks
 //= require underscore
 //= require gmaps/google
+//= require websocket_rails/main
 //= require_tree .
+
