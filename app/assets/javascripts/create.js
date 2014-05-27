@@ -14,6 +14,9 @@ $(function() {
 		$('#pinga_start_time').hide();
 		$('#now-default-msg').show();
 		$('#change-start').show();
+		$('#pinga_start_time').val("");
+		$('#today-tomorrow').html("");
+		$('#start-time-validations').html("");
 	});
 	
 	$('#pinga_start_time').on("change", function(){

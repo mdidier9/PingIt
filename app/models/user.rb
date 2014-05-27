@@ -73,10 +73,14 @@ class User < ActiveRecord::Base
   end
 
   def pingas_rsvpd_to
-    Pinga.all
+    pingas = self.user_pingas.where(rsvp_status: "attending").map{|user_pinga|user_pinga.pinga}.sort_by { |pinga| pinga.start_time }
   end
 
   def your_created_pingas
     self.created_pingas.sort_by { |pinga| pinga.start_time }
+  end
+
+  def in_listening_radius_of(pinga)
+    self.distance_to(pinga) < self.listening_radius
   end
 end

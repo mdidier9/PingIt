@@ -49,6 +49,21 @@ body {
 //  background-color:$green;
 }
 
+#my_tabs  {
+//  float:right;
+  margin-left:6px;
+  height: 290px;
+  width:530px;
+}
+
+.tab_width {
+  width: 48.5%;
+}
+
+li a {
+  outline: none;
+}
+
 .scroll {
   height:370px;
   overflow:auto;
@@ -56,6 +71,12 @@ body {
 //  list-style-type: none;
 }
 
+.my_scroll {
+  height:200px;
+  overflow:auto;
+  background-color:$green;
+//  list-style-type: none;
+}
 
 //A PING
 .ping {
