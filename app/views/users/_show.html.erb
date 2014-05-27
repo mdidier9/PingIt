@@ -28,12 +28,18 @@
 <div class="my_listen">
   <h4>My Listening Preferences #click to update listening prefs.</h4>
   <div id="my_format">
-    <input type="checkbox" id="my_Food"><label for="my_Food">Food</label>
+    <% @user.user_categories.each do |uc| %>
+      <%= label_tag(uc.category.title, uc.category.title, class:"styled-label") do %>
+        <%= check_box_tag(uc.category.title, "1", !(uc.listening_status), {id: "my_#{uc.category.title}"}) %>
+        <span><%= uc.category.title %></span>
+      <% end %>
+    <% end %>
+    <!-- <input type="checkbox" id="my_Food"><label for="my_Food">Food</label>
     <input type="checkbox" id="my_Social"><label for="my_Social">Social</label>
     <input type="checkbox" id="my_Sports"><label for="my_Sports">Sports</label>
     <input type="checkbox" id="my_Entertainment"><label for="my_Entertainment">Entertainment</label>
     <input type="checkbox" id="my_Deals"><label for="my_Deals">Deals</label>
-    <input type="checkbox" id="my_Other"><label for="my_Other">Other</label>  
+    <input type="checkbox" id="my_Other"><label for="my_Other">Other</label>   -->
   </div>
 </div>
 
