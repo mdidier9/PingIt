@@ -75,7 +75,7 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
 		@bool = "nothing"
 		if user
 			puts "USER FOUND:"
-			p user.name 
+			p user 
 			@bool = "true"
 		else
 			@user = User.new
@@ -87,7 +87,7 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
 			@user.listening_radius = 1
 			@user.save
 
-			puts "FUCKING USER"
+			puts "NEW USER"
 			p @user
 			@bool = "new user created"
 		end
