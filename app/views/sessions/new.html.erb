@@ -2,13 +2,19 @@
 	<link rel="stylesheet" href="/assets/landing.css">
 </head>
 
-<body style="background-image:url('/assets/skyline.jpg')">
-	<div class="container" style='width: 1100px; height: 520px;'>
+
+<div id="wrapper">
+	<body >
+		<div class="blurb">
+			<h4>Find and Plan Events where and when it matters most...</h4>
+			<h4>HERE and NOW!</h4>
+		</div>
+		<div class="container">
 	    <div id="login">
 	    	<h1>PingIt</h1>
-
-	      <h4><%= link_to "Login with Facebook", "/auth/facebook", id: "sign_in" %></h4>
+	      <h4 id="fb"><%= link_to image_tag("/assets/facebook.png", :border => 0, :width => 250), "/auth/facebook", id: "sign_in" %></h4>
 	    </div>
-	</div>
-	<%= render "layouts/footer" %>
-</body>
+		</div>
+		<%= render "layouts/footer" %>
+	</body>
+</div>
