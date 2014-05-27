@@ -1,5 +1,4 @@
 <link href="http://code.google.com/apis/maps/documentation/javascript/examples/default.css" rel="stylesheet" type="text/css" />
-<!-- <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script> -->
 
 <div style='width: 520px;'>
   <div id="map" style='width: 520px; height: 550px;'></div>
@@ -77,12 +76,13 @@
         });
 
         function updateLists(lists) {
-            $('.ping_link').remove();
+            $('.main_list').remove();
             var inactiveCategories = getInactiveCategories();
-            console.log(inactiveCategories);
             $('#newest').append(lists.newest);
             $('#nearest').append(lists.nearest);
             $('#soonest').append(lists.soonest);
+//            $('#created').append(lists.created);
+//            $('#rsvp').append(lists.rsvp)
             for(var index = 0; index < inactiveCategories.length; index++)
             {
                 $("."+inactiveCategories[index]).css('display', 'none');
@@ -120,6 +120,17 @@
                 icon: marker_info.picture.url,
                 infowindow: marker_info.infowindow
             });
+//            console.log(marker_info.picture.url)
+//            if (marker_info.picture.url == "assets/active/Deals.png")
+//            {
+//                console.log("title set")
+//                marker.title = "active"
+//            }
+//            console.log(marker);
+            if (marker_info.drop) {
+                marker.setAnimation(google.maps.Animation.DROP);
+            }
+
             var inactiveCategories = getInactiveCategories();
             if (!_.contains(inactiveCategories,marker_info.category))
             {
@@ -223,7 +234,7 @@
             showList();
         });
 
-        $(document).on('click', '.ping_link', function(event){
+        $(document).on('click', '.ping_title', function(event){ // .ping_link
             event.preventDefault();
             showShow(this.id);
         });
@@ -328,23 +339,18 @@
         $(document).on('click', '.delete_pinga_button', function(event){
             event.preventDefault();
             console.log(this.id);
-            $.ajax({
-                url: '/pingas/' + this.id,
-                type: 'DELETE',
-                data: {id: this.id},
-                dataType: 'json',
-                success: function (id) {
-                    console.log(id);
-                    $('.' + id).remove();
+            deleteToSocket(this.id);
+//            $.ajax({
+//                url: '/pingas/' + this.id,
+//                type: 'DELETE',
+//                data: {id: this.id},
+//                dataType: 'json',
+//                success: function (id) {
+//                    console.log(id);
                     showList();
-                    var markerIndex = findMarkerIndex(id);
-                    pingaMarkers[markerIndex].setMap(null);
-                    if (markerIndex > -1) {
-                        pingaMarkers.splice(markerIndex, 1);
-                    }
                     closeInfos();
-                }
-            })
+//                }
+//            })
         });
 
 //        CREATE PINGA STUFF
@@ -377,28 +383,34 @@
                     var today = /\w{2,3} \w* \d{1,2}/.exec(day)[0];
                 }
                 data = $('form').serializeObject();
-                $.ajax({
-                    url: '/pingas',
-                    type: 'POST',
-                    data: {data: data, today: today},
-                    dataType: 'json',
-                    success: function (new_pinga_id) {
-                        console.log("ajax success");
-                        $.ajax({
-                            url: '/users/' + <%= @user.id %>,
-                            type: 'PUT',
-                            success: function (data) {
-                                updateLists(data);
-                                updateMarkers(data.markers);
-                                showShow(new_pinga_id);
-                                $('form')[0].reset();
-                                $('#today-tomorrow').html('');
-                                $('#start-time-validations').html('');
-                            }
-                        });
-
-                    }
-                })
+                data.today = today;
+                submitToSocket(data);
+                showList();
+                $('form')[0].reset();
+                $('#today-tomorrow').html('');
+                $('#start-time-validations').html('');
+//                $.ajax({
+//                    url: '/pingas',
+//                    type: 'POST',
+//                    data: {data: data, today: today},
+//                    dataType: 'json',
+//                    success: function (new_pinga_id) {
+//                        console.log("ajax success");
+//                        $.ajax({
+//                            url: '/users/' + <%= @user.id %>,
+//                            type: 'PUT',
+//                            success: function (data) {
+//                                updateLists(data);
+//                                updateMarkers(data.markers);
+//                                showShow(new_pinga_id);
+//                                $('form')[0].reset();
+//                                $('#today-tomorrow').html('');
+//                                $('#start-time-validations').html('');
+//                            }
+//                        });
+//
+//                    }
+//                })
             }
         });
 
@@ -437,5 +449,46 @@
             map.setZoom(13);
             map.setCenter(newPingaMarker.getPosition());
         });
+
+
+
+
+
+
+
+//    SOCKET STUFF
+
+        dispatcher.bind('pingas.new', function(pinga) {
+            addMarker(pinga.marker);
+            console.log("PINGA CREATED")
+            $.ajax({
+                url: '/users/' + <%= @user.id %>,
+                type: 'PUT',
+                success: function (data) {
+                    updateLists(data);
+                }
+            });
+        });
+
+        dispatcher.bind('pingas.destroy', function(pingaId) {
+            console.log("PINGA DELETED")
+            var markerIndex = findMarkerIndex(pingaId);
+            pingaMarkers[markerIndex].setMap(null);
+            if (markerIndex > -1) {
+                pingaMarkers.splice(markerIndex, 1);
+            }
+            $('.' + pingaId).remove();
+            $.ajax({
+                url: '/users/' + <%= @user.id %>,
+                type: 'PUT',
+                success: function (data) {
+                    updateLists(data);
+                }
+            });
+        });
     }
+
+
+
+
 </script>

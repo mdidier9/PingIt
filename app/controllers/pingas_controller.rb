@@ -23,12 +23,12 @@ class PingasController < ApplicationController
   end
 
   def create
-    p params
     today = params[:today]
-    p today
     pinga_params = params[:data]
-    params = pinga_params
+    100.times puts"="
     p params
+    100.times puts"="
+    params = pinga_params
     @user = User.find(session[:user_id])
     @pinga = Pinga.new
     @pinga.title = params["pinga"]["title"]

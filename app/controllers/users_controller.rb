@@ -14,10 +14,9 @@ class UsersController < ApplicationController
     @pingas_by_distance = @user.pingas_ordered_by_distance_in_listening_radius
     @pingas_by_start_time = @user.pingas_ordered_by_start_time_in_listening_radius
     render :json => {markers: pinga_markers,
-                     newest: render_to_string(:partial => "/pingas/list", :locals => { list: @pingas_by_received_time }),
-                     nearest: render_to_string(:partial => "/pingas/list", :locals => { list: @pingas_by_distance }),
-                     soonest: render_to_string(:partial => "/pingas/list", :locals => { list: @pingas_by_start_time })
-
+                     newest: render_to_string(:partial => "/pingas/list", :locals => { list: @pingas_by_received_time, main_list: true }),
+                     nearest: render_to_string(:partial => "/pingas/list", :locals => { list: @pingas_by_distance, main_list: true }),
+                     soonest: render_to_string(:partial => "/pingas/list", :locals => { list: @pingas_by_start_time, main_list: true })
     }
   end
 end

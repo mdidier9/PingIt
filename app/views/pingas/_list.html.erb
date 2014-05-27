@@ -1,6 +1,6 @@
 <% if list && list.count > 0 %>
     <% list.each do |pinga| %>
-        <%= render partial: "pingas/list_item", locals: {pinga: pinga} %>
+        <%= render partial: "pingas/list_item", locals: {pinga: pinga, main_list: main_list} %>
     <% end %>
 <% end %>
 

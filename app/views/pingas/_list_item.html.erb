@@ -1,5 +1,6 @@
-<li class="ping ping_link <%= pinga.category.title %> <%= pinga.status %> <%= pinga.id.to_s %>" id="<%= pinga.id.to_s %>">
-  <div class="ping_title">
+<li class="ping ping_link <%= "main_list" if main_list %> <%= pinga.category.title %> <%= pinga.status %> <%= pinga.id.to_s %>">
+
+  <div class="ping_title" id="<%= pinga.id.to_s %>" >
     <%= image_tag pinga.status + '.png' %>
     <p><%= pinga.title %></p>
     <p><%= @user.distance(pinga) %> mi</p>
@@ -7,4 +8,19 @@
         <p><%= start_time(pinga) %></p>
     <% end %>
   </div>
+  <% current_user_pinga = @user.user_pingas.find_by_pinga_id(pinga.id)%>
+  <% if current_user_pinga %>
+    <div class="rsvp" id="rsvp-id-<%=current_user_pinga.id%>">
+      <% if current_user_pinga.rsvp_status == "attending" %>
+        <p>You are going!</p>
+      <% elsif current_user_pinga.rsvp_status.nil? %>
+        <p>You are not going!</p>
+      <% elsif current_user_pinga.rsvp_status == "creator" %>
+        <p>You are the creator of this event.</p>
+      <% else %>
+        <p>Error: Check the rsvp_status of userpinga id <%= current_user_pinga.id %></p>
+      <% end %>
+    </div>
+  <% end %>
+
 </li>
