@@ -79,4 +79,8 @@ class User < ActiveRecord::Base
   def your_created_pingas
     self.created_pingas.sort_by { |pinga| pinga.start_time }
   end
+
+  def in_listening_radius_of(pinga)
+    self.distance_to(pinga) < self.listening_radius
+  end
 end

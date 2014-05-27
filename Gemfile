@@ -75,3 +75,7 @@ gem 'coveralls', require: false
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+gem 'redis', '~> 3.0.7'
+# gem 'thin'
+gem 'websocket-rails', '~> 0.7.0'

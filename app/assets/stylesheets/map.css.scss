@@ -59,3 +59,32 @@ $pulsecolor: #0c7d5e;
     margin:-103px 0 0 -103px;
   }
 }
+
+//#map div.gmnoprint[title="active"] {
+//  -moz-animation: pulsate 1.5s ease-in-out infinite;
+//  -webkit-animation: pulsate 1.5s ease-in-out infinite;
+//  border:1pt solid #fff;
+//  /* make a circle */
+//  -moz-border-radius:20px;
+//  -webkit-border-radius:20px;
+//  border-radius:20px;
+//  /* multiply the shadows, inside and outside the circle */
+//  -moz-box-shadow:inset 0 0 5px $pulsecolor, inset 0 0 5px $pulsecolor, inset 0 0 5px $pulsecolor, 0 0 5px $pulsecolor, 0 0 5px $pulsecolor, 0 0 5px $pulsecolor;
+//  -webkit-box-shadow:inset 0 0 5px $pulsecolor, inset 0 0 5px $pulsecolor, inset 0 0 5px $pulsecolor, 0 0 5px $pulsecolor, 0 0 5px $pulsecolor, 0 0 5px $pulsecolor;
+//  box-shadow:inset 0 0 5px $pulsecolor, inset 0 0 5px $pulsecolor, inset 0 0 5px $pulsecolor, 0 0 5px $pulsecolor, 0 0 5px $pulsecolor, 0 0 5px $pulsecolor;
+//  /* set the ring's new dimension and re-center it */
+//  height:20px!important;
+//  margin:-10px 0 0 -10px;
+//  width:20px!important;
+//}
+///* hide the superfluous marker image since it would expand and shrink with its containing element */
+///*	#map div[style*="987654"][title] img {*/
+//#map div.gmnoprint[title="active"] img {
+//  display:none;
+//}
+///* compensate for iPhone and Android devices with high DPI, add iPad media query */
+//@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (device-width: 768px) {
+//  #map div.gmnoprint[title="active"] {
+//    margin:-10px 0 0 -10px;
+//  }
+//}
