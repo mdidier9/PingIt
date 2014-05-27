@@ -79,7 +79,6 @@
         function updateLists(lists) {
             $('.ping_link').remove();
             var inactiveCategories = getInactiveCategories();
-            console.log(inactiveCategories);
             $('#newest').append(lists.newest);
             $('#nearest').append(lists.nearest);
             $('#soonest').append(lists.soonest);
@@ -377,28 +376,34 @@
                     var today = /\w{2,3} \w* \d{1,2}/.exec(day)[0];
                 }
                 data = $('form').serializeObject();
-                $.ajax({
-                    url: '/pingas',
-                    type: 'POST',
-                    data: {data: data, today: today},
-                    dataType: 'json',
-                    success: function (new_pinga_id) {
-                        console.log("ajax success");
-                        $.ajax({
-                            url: '/users/' + <%= @user.id %>,
-                            type: 'PUT',
-                            success: function (data) {
-                                updateLists(data);
-                                updateMarkers(data.markers);
-                                showShow(new_pinga_id);
-                                $('form')[0].reset();
-                                $('#today-tomorrow').html('');
-                                $('#start-time-validations').html('');
-                            }
-                        });
-
-                    }
-                })
+                data.today = today;
+                submitToSocket(data);
+                showList();
+                $('form')[0].reset();
+                $('#today-tomorrow').html('');
+                $('#start-time-validations').html('');
+//                $.ajax({
+//                    url: '/pingas',
+//                    type: 'POST',
+//                    data: {data: data, today: today},
+//                    dataType: 'json',
+//                    success: function (new_pinga_id) {
+//                        console.log("ajax success");
+//                        $.ajax({
+//                            url: '/users/' + <%= @user.id %>,
+//                            type: 'PUT',
+//                            success: function (data) {
+//                                updateLists(data);
+//                                updateMarkers(data.markers);
+//                                showShow(new_pinga_id);
+//                                $('form')[0].reset();
+//                                $('#today-tomorrow').html('');
+//                                $('#start-time-validations').html('');
+//                            }
+//                        });
+//
+//                    }
+//                })
             }
         });
 
@@ -437,5 +442,28 @@
             map.setZoom(13);
             map.setCenter(newPingaMarker.getPosition());
         });
+
+
+        dispatcher.bind('pingas.new', function(pinga) {
+            console.log("marker gotten");
+            console.log(pinga.marker);
+            addMarker(pinga.marker);
+            $.ajax({
+                url: '/users/' + <%= @user.id %>,
+                type: 'PUT',
+                success: function (data) {
+                    updateLists(data);
+                }
+            });
+        });
     }
+
+
+
+
+//    SOCKET STUFF
+
+
+
+
 </script>
