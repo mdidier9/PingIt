@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 20140527173016) do
     t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "listening_status"
   end
 
   create_table "user_pingas", force: true do |t|

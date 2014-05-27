@@ -1,16 +1,28 @@
 $(function() {  
+
+    var allBoxes = $('input[type="checkbox"]:not([id^="my_"])');
+    for (var i = 0; i < allBoxes.length; i++) {
+        var category = allBoxes[i].id;
+        if (allBoxes[i].checked) {
+            $("."+category).hide();
+        } else {
+            $("."+category).show();
+        }
+    }
+
 // click
-  $("#tabs").tabs();
-  $("#my_tabs").tabs();
+    $("#tabs").tabs();
+    $("#my_tabs").tabs();
   
 // checkbox
-  $( "#check" ).button();
-  $( "#format" ).buttonset();
-  $( "#my_format" ).buttonset();
+  // $( "#check" ).button();
+  // $( "#format" ).buttonset();
+  // $( "#my_format" ).buttonset();
 
 	$('#format :checkbox').click(function() {
     var $this = $(this);
     if ($this.is(':checked')) {
+        console.log(this.id);
         var category = this.id;
         $("."+category).hide();
         findPingasWithCategory(this.id).forEach (function(pinga) {
