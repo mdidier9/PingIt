@@ -1,5 +1,5 @@
 class PhonesController < ApplicationController
-skip_before_filter :require_login, :only => [:recieve_request_get_events, :recieve_request_create_event] #add the phone controller pages in here
+skip_before_filter :require_login, :only => [:recieve_request_get_events, :recieve_request_create_event, :recieve_request_register_rsvp_info] 
 
 	respond_to :json
 
@@ -8,9 +8,9 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
 		@pinga_array = []
 
 		Pinga.all.each_with_index do |ping_obj, index|
-			@pinga_array.push(ping_obj.attributes)
+			@pinga_array.push(ping_obj.attributes.merge('start_time' => ping_obj.start_time.strftime('%Y-%m-%d %H:%M:%S %z'), 'end_time' => ping_obj.end_time.strftime('%Y-%m-%d %H:%M:%S %z'))) #add more keys and values for time paramters
 		end
-		# p @pinga_array
+		p @pinga_array
 		respond_with @pinga_array
 	end
 
@@ -24,21 +24,93 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
 		@pinga.title = @data[:title]
 		# p @data[:title]
 		@pinga.status = "pending" #THIS IS HARDCODED (this needs to be checked agianst the start time)
-		p Category.find_by_title(@data[:category]).id
+		# p Category.find_by_title(@data[:category]).id
 		@pinga.category_id = Category.find_by_title(@data[:category]).id
 		@pinga.description = @data[:description]
 		# p @data[:description]
-		@pinga.start_time = @data[:start_time]
-		# p @data[:start_time]
-		@pinga.end_time = @data[:end_time]
-		# p @data[:end_time]
 		@pinga.address = @data[:address] #WHAT IF THE ADDRESS IS INCORRECT (do we need validations on the phone?)
 		# p @data[:address]
+		@pinga.duration = @data[:duration]
+
+		# @pinga.start_time = @data[:start_time]
+
+		
+		selected_hour = ((/^\d+/.match(@data[:start_time]))[0]).to_i
+		# if (/[P|p]/.match(@data[:start_time])) != nil
+		selected_hour += 12 if (/[P|p]/.match(@data[:start_time]))
+		current_hour = Time.now.hour
+		last_valid_hour = current_hour - 11
+
+		p "TIME NOW: #{Time.now}"
+		p "THIS IS CURRENT HOUR #{current_hour}"
+		p "THIS IS SELECTED HOUR #{selected_hour}" 
+		p "THE LAST VALID HOUR: #{last_valid_hour}"
+
+		if selected_hour > last_valid_hour && selected_hour < current_hour
+			puts "THIS IS NOT A VALID TIME"
+		end
+
+		if selected_hour < current_hour
+		 tomorrow = Date.today + 1
+		 tomorrow_string = tomorrow.strftime("%a %b %d %Y") + " #{@data[:start_time]}"
+		 @pinga.start_time = Time.parse(tomorrow_string)
+		else
+		 today_string = Date.today.strftime("%a %b %d %Y") + " #{@data[:start_time]}"
+		 @pinga.start_time = Time.parse(today_string)
+		end
+
+
 		@pinga.creator_id = 1 #THIS IS HARDCODED (need have some information about the user somewhere at login)
 		@pinga.save
+		puts "THIS IS THIS THE CREATED EVENT"
 		p @pinga
-
 		respond_with @data
+	end
+end
+
+=begin
+
+# validate user has chosen a valid start time
+	- convert selected_hour to military time # 17
+		if /pm/.match(selectedhour)
+			add 12 to the integer hour of the string (regex)
+		else
+			just grab the integer
+	- (now selected_hour is an integer corresponding to military hour)
+	- current_hour = Time.now.hour # already in military time # 18
+	- last_valid_hour = current_hour - 11 # 7
+	- if (selected_hour > last_valid_hour && selected_hour < current_hour)
+			# INVALID
+	- end
+
+
+# send params to controller in correct format (so it can properly be parsed & saved to db)
+	start_time => "6:00PM"
+	if start_time.hour < current_time.hour
+		date_string = tomorrow's date (in form of 'Mon Mar 26')
+	else
+		date_string = today's date (in form of 'Mon Mar 26')
+	end
+
+	params[:start_time] => "6:00PM"
+	time_string = date_string + params[:start_time]
+	Time.parse(time_string) # this will return the format you need to save to db
+
+
+selected_hr = starttime.hr
+
+
+if selected_hr <= now.hr 
+	then we create a string with tomorrow's date ()
+else
+
+=end		
+
+
+#start_time
+
+#duration
+
 
 		#TO DO
 		#---------------------------------------------------------------------------
@@ -64,6 +136,5 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
     #QUESTIONS
     #---------------------------------------------------------------------------------
     #How do we want to sanitize data? (trailing space?, newline? ) 
-	end
+	
 
-end
