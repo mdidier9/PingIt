@@ -19,17 +19,17 @@ describe UserPinga do
     pinga.rsvp_status = "potatoes"
     pinga.should_not be_valid
 
-    ["attending", "not attending", nil].each do |status|
+    ["attending", nil].each do |status|
       pinga.rsvp_status = status
       pinga.should be_valid
     end
   end
 
-  it "should have an attend_status of 'attended', 'did not attent', or nil" do
+  it "should have an attend_status of 'attended', or nil" do
     pinga.attend_status = "potatoes"
     pinga.should_not be_valid
 
-    ["attended", "did not attend", nil].each do |status|
+    ["attended", nil].each do |status|
       pinga.attend_status = status
       pinga.should be_valid
     end
