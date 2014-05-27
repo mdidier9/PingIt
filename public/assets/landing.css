@@ -16,12 +16,10 @@
 	color: #F2E9E1;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
-/*
+
 body {
-	background-size: 50% auto;
-}*/
-body {
-  background: url('/assets/skyline.jpg') no-repeat center center fixed;
+  /*background: url('/assets/skyline.jpg') no-repeat center center fixed;*/
+  background: url('/assets/skyline.jpg') no-repeat center center;
   background-size: 100% auto;
   min-width: 1000px;
   overflow: hidden;
@@ -69,4 +67,32 @@ a {
 
 #fb {
   padding-bottom: 10px;
+}
+
+#event_title {
+  font-size: 150%;
+}
+
+#landing_ping_1 {
+  position: fixed; 
+  top: -50px; 
+  left: 150px;
+}
+
+#landing_ping_2 {
+  position: fixed; 
+  top: -50px; 
+  left: 1100px;
+}
+
+#landing_ping_3 {
+  position: fixed; 
+  top: -50px; 
+  left: 300px;
+}
+
+#landing_ping_4 {
+  position: fixed; 
+  top: -50px; 
+  left: 950px;
 }
