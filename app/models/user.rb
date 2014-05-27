@@ -6,7 +6,18 @@ class User < ActiveRecord::Base
   has_many :categories, through: :user_categories
 
   geocoded_by :ip_address
+  after_create :give_categories
   # after_validation :geocode
+
+  def give_categories
+    unless self.categories.any?
+      self.categories << Category.all
+      self.user_categories.each do |uc|
+        uc.listening_status = true
+        uc.save
+      end
+    end
+  end
 
   def distance(pinga) # returns the distance to current user
     self.distance_to(pinga).round(2)
@@ -19,13 +30,6 @@ class User < ActiveRecord::Base
       user.name = auth.info.name
       user.oauth_token = auth.credentials.token
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)
-      unless user.categories.any?
-        user.categories << Category.all
-        user.user_categories.each do |uc|
-          uc.listening_status = true
-          uc.save
-        end
-      end
       user.save!
       p auth
     end
