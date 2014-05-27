@@ -26,7 +26,7 @@
 </div>
 
 <div class="my_listen">
-  <h4>My Listening Preferences #click to update listening prefs.</h4>
+  <h4>Adjust your listening preferences:</h4>
   <div id="my_format">
     <% @user.user_categories.each do |uc| %>
       <%= label_tag("my_#{uc.category.title}", uc.category.title, class:"styled-label") do %>
