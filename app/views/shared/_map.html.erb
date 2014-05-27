@@ -119,6 +119,11 @@
                 icon: marker_info.picture.url,
                 infowindow: marker_info.infowindow
             });
+            console.log(marker_info.drop);
+            if (marker_info.drop == "true")
+            {
+                marker.setAnimation(google.maps.Animation.DROP);
+            }
             var inactiveCategories = getInactiveCategories();
             if (!_.contains(inactiveCategories,marker_info.category))
             {

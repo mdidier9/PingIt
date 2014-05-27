@@ -34,6 +34,7 @@ def create_marker(pinga, user)
              :infowindow => render_to_string(:partial => "/shared/infowindow", :locals => { pinga: pinga }),
              :picture => {  "url" => "assets/#{user.in_listening_radius_of(pinga) ? pinga.status : "grey" }/#{pinga.category.title}.png",
                             "width" => 20,
-                            "height" => 34}
+                            "height" => 34},
+             :drop => true
             }
 end
