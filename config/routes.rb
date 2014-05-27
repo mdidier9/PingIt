@@ -14,4 +14,5 @@ Ping::Application.routes.draw do
   match 'phone/get_events', to: 'phones#recieve_request_get_events', via: [:get]
   match 'phone/create_event', to: 'phones#recieve_request_create_event', via: [:get] 
   match 'phone/register_rsvp_info', to: 'phones#recieve_request_register_rsvp_info', via: [:get]
+  match 'phone/checkforuser', to: 'phones#check_for_user', via: [:get]
 end
