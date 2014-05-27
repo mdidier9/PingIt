@@ -15,12 +15,12 @@
   </ul>
   <div class="my_scroll" id="tabs_created_pings">
     <ul id="created" class="ping_list">
-        <%= render partial: "list", locals: {list: @user.your_created_pingas } %>
+        <%= render partial: "list", locals: {list: @user.your_created_pingas, main_list: false } %>
     </ul>
   </div>
 		<div class="my_scroll" id="tabs_rsvp_pings">
     <ul id="rsvp" class="ping_list">
-        <%= render partial: "list", locals: {list: @user.pingas_rsvpd_to } %>
+        <%= render partial: "list", locals: {list: @user.pingas_rsvpd_to, main_list: false } %>
     </ul>
   </div>
 </div>
