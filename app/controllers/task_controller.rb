@@ -20,20 +20,20 @@ class TaskController < WebsocketRails::BaseController
     pinga.creator = user
     pinga.save
 
-    pinga_marker = create_marker(pinga)
+    pinga_marker = create_marker(pinga, user)
     pinga_list_item = "woo"
     broadcast_message :new, {marker: pinga_marker, list_item: pinga_list_item}, :namespace => 'pingas'
   end
 end
 
-def create_marker(pinga)
+def create_marker(pinga, user)
            { :id         => pinga.id,
              :latitude   => pinga.latitude,
              :longitude  => pinga.longitude,
              :category   => pinga.category.title,
              :infowindow => render_to_string(:partial => "/shared/infowindow", :locals => { pinga: pinga }),
-             :picture => {  "url" => "assets/#{pinga.status}/#{pinga.category.title}.png",
+             :picture => {  "url" => "assets/#{user.in_listening_radius_of(pinga) ? pinga.status : "grey" }/#{pinga.category.title}.png",
                             "width" => 20,
                             "height" => 34}
-  }
+            }
 end
