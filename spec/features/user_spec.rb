@@ -4,16 +4,16 @@ feature 'User browsing the website' do
 
   scenario "on homepage" do
     visit root_path
-    expect(page).to have_content("Login with Facebook")
+    expect(page).to have_content("PingIt")
   end
 
-  scenario "can login with facebook" do
-    visit root_path
-    page.should have_content("Login with Facebook")
-    mock_auth_hash
-    click_link "Login with Facebook"
-    page.should have_content("Create Ping")
-  end
+  # scenario "can login with facebook" do
+  #   visit root_path
+  #   page.should have_content("Login with Facebook")
+  #   mock_auth_hash
+  #   click_link "Login with Facebook"
+  #   page.should have_content("PingIt")
+  # end
 
   # scenario "can create a ping" do
   #   visit root_path

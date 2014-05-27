@@ -1,23 +1,40 @@
 .container {
-  margin: 30px auto;
-  width: 10%;
+  margin: 50px auto;
   height: 10%;
+  width: 1000px; 
+  height: 200px;
 }
 
 #login {
 	text-align: center;
 	font-size: 250%;
 	background-color:rgba(0,0,0,0.5);
+  border-radius: 25px;
 	margin:0 auto;
-	margin-top: 40px;
+	/*margin-top: 40px;*/
 	width: 50%;
-	color: white;
+	color: #F2E9E1;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
-
+/*
 body {
-	background-size: 100%;
-	height: 700px;
+	background-size: 50% auto;
+}*/
+body {
+  background: url('/assets/skyline.jpg') no-repeat center center fixed;
+  background-size: 100% auto;
+  min-width: 1000px;
+  overflow: hidden;
+}
+
+#wrapper {
+  margin: 0 auto;
+  position: relative;
+  width: 1000px;
+}
+
+html {
+  overflow: auto;
 }
 
 a {
@@ -30,15 +47,26 @@ a {
 .footer {
   margin: 20px auto;
   width: 960px;
-  height:160px;
-  padding: 0px 20px 20px 20px;
+  height:180px;
+  padding: 10px 20px 20px 20px;
   text-align:center;
   column-count:3;
   -moz-column-count:3; /* Firefox */
   -webkit-column-count:3; /* Safari and Chrome */
   background-color:rgba(0,0,0,0.5);
 
-  color: white;
+  color: #F2E9E1;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  border-radius: 25px;
+}
+
+.blurb {
+  text-align:center;
+  font-size: 30px;
+  color: #CBE86B;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
+#fb {
+  padding-bottom: 10px;
+}
