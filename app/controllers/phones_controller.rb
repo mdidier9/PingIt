@@ -32,6 +32,9 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
 
 		@pinga.address = @data[:address] #WHAT IF THE ADDRESS IS INCORRECT (do we need validations on the phone?)
 		# p @data[:address]
+
+		@pinga.duration = @data[:duration]
+		
 		@pinga.creator_id = 1 #THIS IS HARDCODED (need have some information about the user somewhere at login)
 		@pinga.save
 		respond_with @data
