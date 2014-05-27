@@ -1,3 +1,8 @@
+brew install redis
+redis-server /usr/local/etc/redis.conf
+rake jobs:work
+
+
 
 #####Schema
 ![resize icon][2]
