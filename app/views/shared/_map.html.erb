@@ -480,12 +480,9 @@
         });
 
         channel.bind('update', function(message) {
-//            console.log("Pinga changed id: " + message);
             var pinga = JSON.parse( message );
-            console.log(pinga);
             var markerIndex = findMarkerIndex(pinga.id);
             pingaMarkers[markerIndex].setIcon('assets/' + pinga.status + '/' + pinga.category + '.png');
-            console.log(pingaMarkers[markerIndex].icon);
             $.ajax({
                 url: '/users/' + <%= @user.id %>,
                 type: 'PUT',

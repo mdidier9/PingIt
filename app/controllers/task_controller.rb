@@ -1,9 +1,5 @@
 class TaskController < WebsocketRails::BaseController
   def initialize_session
-    # 20.times {puts "************************"}
-    # 100.times { puts self.connection }
-    # 20.times {puts "************************"}
-    # puts self.connection_store.push(self.connection)
     controller_store[:message_count] = 0
   end
 
