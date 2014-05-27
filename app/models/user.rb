@@ -19,6 +19,13 @@ class User < ActiveRecord::Base
       user.name = auth.info.name
       user.oauth_token = auth.credentials.token
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+      unless user.categories.any?
+        user.categories << Category.all
+        user.user_categories.each do |uc|
+          uc.listening_status = true
+          uc.save
+        end
+      end
       user.save!
       p auth
     end
