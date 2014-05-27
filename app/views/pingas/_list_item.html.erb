@@ -8,3 +8,11 @@
     <% end %>
   </div>
 </li>
+<% current_user_pinga = @user.user_pingas.find_by_pinga_id(pinga.id)%>
+<div class="rsvp" id="rsvp-id-<%=current_user_pinga.id%>">
+  <% if current_user_pinga.rsvp_status == "attending" %>
+    <p>You are going!</p>
+  <% else %>
+    <p>You are not going!</p>
+  <% end %>
+</div>
