@@ -16,6 +16,13 @@ class TaskController < WebsocketRails::BaseController
     pinga.creator = user
     pinga.save
 
+    user_pinga = UserPinga.new
+    user_pinga.user = user
+    user_pinga.pinga = pinga
+    user_pinga.rsvp_status = "creator"
+    user_pinga.attend_status = "creator"
+    user_pinga.save
+
     pinga_marker = create_marker(pinga, user)
     broadcast_message :new, {marker: pinga_marker}, :namespace => 'pingas'
   end
