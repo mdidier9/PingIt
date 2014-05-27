@@ -1,12 +1,13 @@
 $(function() {  
 
+    // viewing preferences default on homepage load
     var allBoxes = $('input[type="checkbox"]:not([id^="my_"])');
     for (var i = 0; i < allBoxes.length; i++) {
         var category = allBoxes[i].id;
         if (allBoxes[i].checked) {
-            $("."+category).hide();
+            $(".main_list."+category).hide();
         } else {
-            $("."+category).show();
+            $(".main_list."+category).show();
         }
     }
 
@@ -14,30 +15,42 @@ $(function() {
     $("#tabs").tabs();
     $("#my_tabs").tabs();
   
-// checkbox
+// checkbox viewing changes but not persisted
   // $( "#check" ).button();
   // $( "#format" ).buttonset();
   // $( "#my_format" ).buttonset();
 
-	$('#format :checkbox').click(function() {
-    var $this = $(this);
-    if ($this.is(':checked')) {
-        console.log(this.id);
-        var category = this.id;
-        $("."+category).hide();
-        findPingasWithCategory(this.id).forEach (function(pinga) {
-            pinga.setMap(null);
-        })
+	$('#format :checkbox').click(function(event) {
+        var $this = $(this);
+        if ($this.is(':checked')) {
+            console.log(this.id);
+            var category = this.id;
+            $("."+category).hide();
+            findPingasWithCategory(this.id).forEach (function(pinga) {
+                pinga.setMap(null);
+            })
 
-    } else {
-        var category = this.id;
-        $("."+category).show();
-        console.log(findPingasWithCategory(this.id));
-        findPingasWithCategory(this.id).forEach (function(pinga) {
-            pinga.setMap(map);
-        })
-    }
+        } else {
+            var category = this.id;
+            $("."+category).show();
+            console.log(findPingasWithCategory(this.id));
+            findPingasWithCategory(this.id).forEach (function(pinga) {
+                pinga.setMap(map);
+            })
+        }
 	});
+
+    $('input[id^="my_"]').on('click', function(event){
+        console.log("correct item clicked yo");
+        console.log(event.target.checked); // if true : DONT WANT TO LISTEN
+        // console.log
+        // check to see if they are listening or un-listening.
+        // unlistening: check is true
+        // listening: check is false
+        // send ajax call to user_categories controller and update listening_status to true or false accordingly
+        // success:
+        // check/uncheck corresponding listening button on front page
+    });
 
 // slider
 
