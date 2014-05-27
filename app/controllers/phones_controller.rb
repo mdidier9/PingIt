@@ -28,18 +28,44 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
 		@pinga.category_id = Category.find_by_title(@data[:category]).id
 		@pinga.description = @data[:description]
 		# p @data[:description]
-		@pinga.start_time = @data[:start_time]
-
 		@pinga.address = @data[:address] #WHAT IF THE ADDRESS IS INCORRECT (do we need validations on the phone?)
 		# p @data[:address]
-
 		@pinga.duration = @data[:duration]
+
+		# @pinga.start_time = @data[:start_time]
+
 		
+		selected_hour = ((/^\d+/.match(@data[:start_time]))[0]).to_i
+		# if (/[P|p]/.match(@data[:start_time])) != nil
+		selected_hour += 12 if (/[P|p]/.match(@data[:start_time]))
+		current_hour = Time.now.hour
+		last_valid_hour = current_hour - 11
+
+		p "TIME NOW: #{Time.now}"
+		p "THIS IS CURRENT HOUR #{current_hour}"
+		p "THIS IS SELECTED HOUR #{selected_hour}" 
+		p "THE LAST VALID HOUR: #{last_valid_hour}"
+
+		if selected_hour > last_valid_hour && selected_hour < current_hour
+			puts "THIS IS NOT A VALID TIME"
+		end
+
+		if selected_hour < current_hour
+		 tomorrow = Date.today + 1
+		 tomorrow_string = tomorrow.strftime("%a %b %d %Y") + " #{@data[:start_time]}"
+		 @pinga.start_time = Time.parse(tomorrow_string)
+		else
+		 today_string = Date.today.strftime("%a %b %d %Y") + " #{@data[:start_time]}"
+		 @pinga.start_time = Time.parse(today_string)
+		end
+
+
 		@pinga.creator_id = 1 #THIS IS HARDCODED (need have some information about the user somewhere at login)
 		@pinga.save
+		puts "THIS IS THIS THE CREATED EVENT"
+		p @pinga
 		respond_with @data
 	end
-
 end
 
 =begin
