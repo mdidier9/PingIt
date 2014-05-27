@@ -2,6 +2,7 @@ Ping::Application.routes.draw do
   root 'pingas#index'
   resources :pingas
   resources :users
+  resources :user_pingas, only:[:update]
 
   match 'sessions/new', to: 'sessions#new', via: [:get]
   match 'auth/:provider/callback', to: 'sessions#create', via: [:get, :post]
