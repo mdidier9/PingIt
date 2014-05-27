@@ -1,13 +1,29 @@
 <head>
 	<link rel="stylesheet" href="/assets/landing.css">
+	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 </head>
 
+<div id="landing_ping_1">
+	<img src="/assets/pending-dbd37421bd6acf8c45c8ab2137cb904d.png">
+</div>
+
+<div id="landing_ping_2">
+	<img src="/assets/pending-dbd37421bd6acf8c45c8ab2137cb904d.png">
+</div>
+
+<div id="landing_ping_3">
+	<img src="/assets/pending-dbd37421bd6acf8c45c8ab2137cb904d.png">
+</div>
+
+<div id="landing_ping_4">
+	<img src="/assets/pending-dbd37421bd6acf8c45c8ab2137cb904d.png">
+</div>
 
 <div id="wrapper">
 	<body >
 		<div class="blurb">
-			<h4>Find and Plan Events where and when it matters most...</h4>
-			<h4>HERE and NOW!</h4>
+			<h4><span id="event_title">Events</span> - When and Where they matter most</h4>
 		</div>
 		<div class="container">
 	    <div id="login">
@@ -18,3 +34,16 @@
 		<%= render "layouts/footer" %>
 	</body>
 </div>
+
+<script>
+	$(function() {
+		var ping1 = $("#landing_ping_1")
+		var ping2 = $("#landing_ping_2")
+		var ping3 = $("#landing_ping_3")
+		var ping4 = $("#landing_ping_4")
+		ping1.delay(2000).animate({top:"240px"}, 1000);
+		ping2.delay(4100).animate({top:"130px"}, 1000);
+		ping3.delay(6500).animate({top:"120px"}, 1000);
+		ping4.delay(9000).animate({top:"220px"}, 1000);
+	});
+</script>
