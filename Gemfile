@@ -79,3 +79,6 @@ gem 'coveralls', require: false
 gem 'redis', '~> 3.0.7'
 # gem 'thin'
 gem 'websocket-rails', '~> 0.7.0'
+
+
+gem 'delayed_job_active_record'
