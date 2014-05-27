@@ -1,15 +1,16 @@
 <h2><%= pinga.title%></h2>
-<p>Description <%= pinga.description%></p>
-<p>Address <%= pinga.address%></p>
-<p>Category <%= pinga.category.title if pinga.category %></p>
+<p>Description: <%= pinga.description%></p>
+<p>Address: <%= pinga.address%></p>
+<p>Category: <%= pinga.category.title if pinga.category %></p>
 <% if pinga.start_time %>
-  <p>Start Time <%= pinga.start_time.localtime.strftime("%a, %b %d %Y %l:%M %p") %></p>
+  <p>Start Time: <%= pinga.start_time.localtime.strftime("%a, %b %d %Y %l:%M %p") %></p>
 <% end %>
 <p>Duration: <%= pluralize(pinga.duration, "hour") %></p>
 <% if pinga.end_time %>
-  <p>End Time <%= pinga.end_time.localtime.strftime("%a, %b %d %Y %l:%M %p") %></p>
+  <p>End Time: <%= pinga.end_time.localtime.strftime("%a, %b %d %Y %l:%M %p") %></p>
 <% end %>
-<p>PingIt Creator <%= pinga.creator.name if pinga.creator %></p>
+<p>RSVP Count: <%= pinga.user_pingas.where(rsvp_status: "attending").count %></p>
+<p>PingIt Creator: <%= pinga.creator.name if pinga.creator %></p>
 
 <% if pinga.creator_id == session[:user_id] %>
     <%= link_to "Delete this PingIt", pinga_path(pinga), id: pinga.id, class: "delete_pinga_button" %>

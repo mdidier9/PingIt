@@ -1,12 +1,18 @@
 <div class="index_list" id="index_list">
     <div id="format">
-      <input type="checkbox" id="Food"><label for="Food">Food</label>
+      <% @user.user_categories.each do |uc| %>
+          <%= label_tag(uc.category.title, uc.category.title, class:"styled-label") do %>
+            <%= check_box_tag(uc.category.title, "1", !(uc.listening_status), {id: uc.category.title}) %>
+            <span><%= uc.category.title %></span>
+          <% end %>
+      <% end %>
+<!--       <input type="checkbox" id="Food"><label for="Food">Food</label>
       <input type="checkbox" id="Social"><label for="Social">Social</label>
       <input type="checkbox" id="Sports"><label for="Sports">Sports</label>
       <input type="checkbox" id="Entertainment"><label for="Entertainment">Entertainment</label>
       <input type="checkbox" id="Deals"><label for="Deals">Deals</label>
       <input type="checkbox" id="Other"><label for="Other">Other</label>  
-    </div>
+ -->    </div>
 
     <div id="tabs">
       <ul>

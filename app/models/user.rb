@@ -6,7 +6,18 @@ class User < ActiveRecord::Base
   has_many :categories, through: :user_categories
 
   geocoded_by :ip_address
+  after_create :give_categories
   # after_validation :geocode
+
+  def give_categories
+    unless self.categories.any?
+      self.categories << Category.all
+      self.user_categories.each do |uc|
+        uc.listening_status = true
+        uc.save
+      end
+    end
+  end
 
   def distance(pinga) # returns the distance to current user
     self.distance_to(pinga).round(2)
