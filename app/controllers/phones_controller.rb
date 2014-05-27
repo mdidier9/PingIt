@@ -34,7 +34,7 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
 
 		# @pinga.start_time = @data[:start_time]
 
-		
+
 		selected_hour = ((/^\d+/.match(@data[:start_time]))[0]).to_i
 		# if (/[P|p]/.match(@data[:start_time])) != nil
 		selected_hour += 12 if (/[P|p]/.match(@data[:start_time]))
@@ -66,6 +66,11 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
 		p @pinga
 		respond_with @data
 	end
+
+	def check_for_user
+	p params[:data] 
+	end
+	
 end
 
 =begin
