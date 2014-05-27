@@ -5,6 +5,9 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
 
 	def recieve_request_get_events
 		p "THIS IS INSIDE GET EVENTS ACTION ********************"
+
+		p params
+
 		@pinga_array = []
 
 		Pinga.all.each_with_index do |ping_obj, index|
