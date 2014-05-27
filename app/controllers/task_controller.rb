@@ -17,8 +17,7 @@ class TaskController < WebsocketRails::BaseController
     pinga.save
 
     pinga_marker = create_marker(pinga, user)
-    pinga_list_item = "woo"
-    broadcast_message :new, {marker: pinga_marker, list_item: pinga_list_item}, :namespace => 'pingas'
+    broadcast_message :new, {marker: pinga_marker}, :namespace => 'pingas'
   end
 
   def destroy
