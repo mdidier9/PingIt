@@ -77,11 +77,13 @@
         });
 
         function updateLists(lists) {
-            $('.ping_link').remove();
+            $('.main_list').remove();
             var inactiveCategories = getInactiveCategories();
             $('#newest').append(lists.newest);
             $('#nearest').append(lists.nearest);
             $('#soonest').append(lists.soonest);
+//            $('#created').append(lists.created);
+//            $('#rsvp').append(lists.rsvp)
             for(var index = 0; index < inactiveCategories.length; index++)
             {
                 $("."+inactiveCategories[index]).css('display', 'none');
@@ -119,6 +121,13 @@
                 icon: marker_info.picture.url,
                 infowindow: marker_info.infowindow
             });
+//            console.log(marker_info.picture.url)
+//            if (marker_info.picture.url == "assets/active/Deals.png")
+//            {
+//                console.log("title set")
+//                marker.title = "active"
+//            }
+//            console.log(marker);
             if (marker_info.drop) {
                 marker.setAnimation(google.maps.Animation.DROP);
             }
@@ -331,23 +340,18 @@
         $(document).on('click', '.delete_pinga_button', function(event){
             event.preventDefault();
             console.log(this.id);
-            $.ajax({
-                url: '/pingas/' + this.id,
-                type: 'DELETE',
-                data: {id: this.id},
-                dataType: 'json',
-                success: function (id) {
-                    console.log(id);
-                    $('.' + id).remove();
+            deleteToSocket(this.id);
+//            $.ajax({
+//                url: '/pingas/' + this.id,
+//                type: 'DELETE',
+//                data: {id: this.id},
+//                dataType: 'json',
+//                success: function (id) {
+//                    console.log(id);
                     showList();
-                    var markerIndex = findMarkerIndex(id);
-                    pingaMarkers[markerIndex].setMap(null);
-                    if (markerIndex > -1) {
-                        pingaMarkers.splice(markerIndex, 1);
-                    }
                     closeInfos();
-                }
-            })
+//                }
+//            })
         });
 
 //        CREATE PINGA STUFF
@@ -448,10 +452,33 @@
         });
 
 
+
+
+
+
+
+//    SOCKET STUFF
+
         dispatcher.bind('pingas.new', function(pinga) {
-            console.log("marker gotten");
-            console.log(pinga.marker);
             addMarker(pinga.marker);
+            console.log("PINGA CREATED")
+            $.ajax({
+                url: '/users/' + <%= @user.id %>,
+                type: 'PUT',
+                success: function (data) {
+                    updateLists(data);
+                }
+            });
+        });
+
+        dispatcher.bind('pingas.destroy', function(pingaId) {
+            console.log("PINGA DELETED")
+            var markerIndex = findMarkerIndex(pingaId);
+            pingaMarkers[markerIndex].setMap(null);
+            if (markerIndex > -1) {
+                pingaMarkers.splice(markerIndex, 1);
+            }
+            $('.' + pingaId).remove();
             $.ajax({
                 url: '/users/' + <%= @user.id %>,
                 type: 'PUT',
@@ -461,11 +488,6 @@
             });
         });
     }
-
-
-
-
-//    SOCKET STUFF
 
 
 

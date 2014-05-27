@@ -4,10 +4,6 @@ class TaskController < WebsocketRails::BaseController
     controller_store[:message_count] = 0
   end
 
-  def create_pinga
-
-  end
-
   def create
     user = User.find(session[:user_id])
     pinga = Pinga.new
@@ -23,6 +19,14 @@ class TaskController < WebsocketRails::BaseController
     pinga_marker = create_marker(pinga, user)
     pinga_list_item = "woo"
     broadcast_message :new, {marker: pinga_marker, list_item: pinga_list_item}, :namespace => 'pingas'
+  end
+
+  def destroy
+    pinga = Pinga.find(message)
+    pinga.status = "cancelled"
+    if pinga.save
+      broadcast_message :destroy, message, :namespace => 'pingas'
+    end
   end
 end
 
