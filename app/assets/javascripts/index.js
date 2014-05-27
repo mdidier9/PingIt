@@ -42,8 +42,29 @@ $(function() {
 
     $('input[id^="my_"]').on('click', function(event){
         console.log("correct item clicked yo");
-        console.log(event.target.checked); // if true : DONT WANT TO LISTEN
-        // console.log
+        var listening = !(event.target.checked);
+        var ucId = $(this).val();
+
+        // if (event.target.checked) {
+        //    var listening = false; // DONT WANT TO LISTEN 
+        // } else {
+        //     var listening = true; // WANT TO LISTEN
+        // }
+
+        $.ajax({
+            url: '/user_categories/' + ucId,
+            type: 'PUT',
+            data: { new_listening_status: listening},
+            dataType: 'json',
+            success: function (data) {
+                if (data.listening) {
+                    // they are listening. we need to uncheck the boxes.
+                } else {
+                    // they are not listening. we need to check the boxes.
+                }
+            }
+        });
+
         // check to see if they are listening or un-listening.
         // unlistening: check is true
         // listening: check is false

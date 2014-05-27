@@ -30,7 +30,7 @@
   <div id="my_format">
     <% @user.user_categories.each do |uc| %>
       <%= label_tag("my_#{uc.category.title}", uc.category.title, class:"styled-label") do %>
-        <%= check_box_tag("my_#{uc.category.title}", "1", !(uc.listening_status), {id: "my_#{uc.category.title}"}) %>
+        <%= check_box_tag("my_#{uc.category.title}", "#{uc.id}", !(uc.listening_status), {id: "my_#{uc.category.title}"}) %>
         <span><%= uc.category.title %></span>
       <% end %>
     <% end %>

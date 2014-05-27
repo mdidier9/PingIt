@@ -3,6 +3,7 @@ Ping::Application.routes.draw do
   resources :pingas
   resources :users
   resources :user_pingas, only:[:update]
+  resources :user_categories, only:[:update]
 
   match 'sessions/new', to: 'sessions#new', via: [:get]
   match 'auth/:provider/callback', to: 'sessions#create', via: [:get, :post]
