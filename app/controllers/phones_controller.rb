@@ -1,5 +1,5 @@
 class PhonesController < ApplicationController
-skip_before_filter :require_login, :only => [:recieve_request_get_events, :recieve_request_create_event, :recieve_request_register_rsvp_info] 
+skip_before_filter :require_login, :only => [:recieve_request_get_events, :recieve_request_create_event, :recieve_request_register_rsvp_info, :check_for_user] 
 
 	respond_to :json
 
@@ -68,10 +68,61 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
 	end
 
 	def check_for_user
-	p params[:data] 
+		puts "?????????????????????????????????????????????????????"
+		p params
+		uid = params[:data][:uid] 
+		user = User.find_by_uid(uid)
+		@bool = "nothing"
+		if user
+			puts "USER FOUND:"
+			p user.name 
+			@bool = "true"
+		else
+			@user = User.new
+			@user.oauth_token = params[:data][:oauth_token]
+			@user.oauth_expires_at = params[:data][:oauth_expires_at]
+			@user.name = params[:data][:name]
+			@user.uid = params[:data][:uid]
+			@user.provider = "facebook"
+			@user.listening_radius = 1
+			@user.save
+
+			puts "FUCKING USER"
+			p @user
+			@bool = "new user created"
+		end
+		@bool_hash = {user_exists: @bool}
+		puts "THIS IS BOOL HASH"
+		p @bool_hash 
+		respond_with @bool_hash
 	end
-	
+
 end
+
+
+  # create_table "users", force: true do |t|
+  #   t.string   "oauth_token"
+  #   t.datetime "oauth_expires_at"
+  #   t.float    "latitude"
+  #   t.float    "longitude"
+  #   t.datetime "created_at"
+  #   t.datetime "updated_at"
+  #   t.string   "name"
+  #   t.string   "provider"
+  #   t.string   "uid"
+  #   t.string   "ip_address"
+  #   t.float    "listening_radius"
+  # end
+
+
+
+
+
+
+
+
+
+
 
 =begin
 
