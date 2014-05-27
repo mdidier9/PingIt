@@ -10,9 +10,6 @@ class UserPingasController < ApplicationController
 
     if user_pinga.rsvp_status == "attending"
       render json: {attending: true}
-      # respond_to do |format|
-      #   format.js { render json: {attending: true} }
-      # end
     else
       render json: {attending: false}
     end
