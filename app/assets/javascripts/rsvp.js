@@ -1,6 +1,6 @@
 $(function() {
 
-  $('.rsvp').on("click", function(event){
+  $(document).on("click", '.rsvp', function(event){
     userPingaId = /\d*$/.exec(this.id)[0];
     var correctDiv = this;
     var current = $($(this).find(':first-child')).html();
