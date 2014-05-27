@@ -8,7 +8,7 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
 		@pinga_array = []
 
 		Pinga.all.each_with_index do |ping_obj, index|
-			@pinga_array.push(ping_obj.attributes.merge('start_time' => ping_obj.start_time.strftime('%Y-%m-%d %H:%M:%S %z'))) #add more keys and values for time paramters
+			@pinga_array.push(ping_obj.attributes.merge('start_time' => ping_obj.start_time.strftime('%Y-%m-%d %H:%M:%S %z'), 'end_time' => ping_obj.end_time.strftime('%Y-%m-%d %H:%M:%S %z'))) #add more keys and values for time paramters
 		end
 		p @pinga_array
 		respond_with @pinga_array
@@ -29,23 +29,59 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
 		@pinga.description = @data[:description]
 		# p @data[:description]
 		@pinga.start_time = @data[:start_time]
-		# p @data[:start_time]
-		@pinga.duration = @data[:duration]
-		# p @data[:duration]
+
 		@pinga.address = @data[:address] #WHAT IF THE ADDRESS IS INCORRECT (do we need validations on the phone?)
 		# p @data[:address]
 		@pinga.creator_id = 1 #THIS IS HARDCODED (need have some information about the user somewhere at login)
 		@pinga.save
-		p @pinga
 		respond_with @data
 	end
 
-	def recieve_request_register_rsvp_info
-		p "THIS IS INSIDE REGISTER RSVP ACTION"
-		@rsvp_array = params[:data]
-		p @rsvp_array
-		respond_with @rsvp_array
+end
+
+=begin
+
+# validate user has chosen a valid start time
+	- convert selected_hour to military time # 17
+		if /pm/.match(selectedhour)
+			add 12 to the integer hour of the string (regex)
+		else
+			just grab the integer
+	- (now selected_hour is an integer corresponding to military hour)
+	- current_hour = Time.now.hour # already in military time # 18
+	- last_valid_hour = current_hour - 11 # 7
+	- if (selected_hour > last_valid_hour && selected_hour < current_hour)
+			# INVALID
+	- end
+
+
+# send params to controller in correct format (so it can properly be parsed & saved to db)
+	start_time => "6:00PM"
+	if start_time.hour < current_time.hour
+		date_string = tomorrow's date (in form of 'Mon Mar 26')
+	else
+		date_string = today's date (in form of 'Mon Mar 26')
 	end
+
+	params[:start_time] => "6:00PM"
+	time_string = date_string + params[:start_time]
+	Time.parse(time_string) # this will return the format you need to save to db
+
+
+selected_hr = starttime.hr
+
+
+if selected_hr <= now.hr 
+	then we create a string with tomorrow's date ()
+else
+
+=end		
+
+
+#start_time
+
+#duration
+
 
 		#TO DO
 		#---------------------------------------------------------------------------
@@ -73,4 +109,3 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
     #How do we want to sanitize data? (trailing space?, newline? ) 
 	
 
-end
