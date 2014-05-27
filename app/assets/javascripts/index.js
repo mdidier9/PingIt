@@ -4,9 +4,9 @@ $(function() {
     for (var i = 0; i < allBoxes.length; i++) {
         var category = allBoxes[i].id;
         if (allBoxes[i].checked) {
-            $("."+category).hide();
+            $(".main_list."+category).hide();
         } else {
-            $("."+category).show();
+            $(".main_list."+category).show();
         }
     }
 
@@ -20,23 +20,23 @@ $(function() {
   // $( "#my_format" ).buttonset();
 
 	$('#format :checkbox').click(function() {
-    var $this = $(this);
-    if ($this.is(':checked')) {
-        console.log(this.id);
-        var category = this.id;
-        $("."+category).hide();
-        findPingasWithCategory(this.id).forEach (function(pinga) {
-            pinga.setMap(null);
-        })
+        var $this = $(this);
+        if ($this.is(':checked')) {
+            console.log(this.id);
+            var category = this.id;
+            $("."+category).hide();
+            findPingasWithCategory(this.id).forEach (function(pinga) {
+                pinga.setMap(null);
+            })
 
-    } else {
-        var category = this.id;
-        $("."+category).show();
-        console.log(findPingasWithCategory(this.id));
-        findPingasWithCategory(this.id).forEach (function(pinga) {
-            pinga.setMap(map);
-        })
-    }
+        } else {
+            var category = this.id;
+            $("."+category).show();
+            console.log(findPingasWithCategory(this.id));
+            findPingasWithCategory(this.id).forEach (function(pinga) {
+                pinga.setMap(map);
+            })
+        }
 	});
 
 // slider
