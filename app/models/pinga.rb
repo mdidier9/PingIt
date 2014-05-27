@@ -18,9 +18,8 @@ class Pinga < ActiveRecord::Base
     else
       self.status == "expired"
     end
-    if self.save
-      broadcast_message :new, {marker: pinga_marker}, :namespace => 'pingas'
-    end
+    self.save
+    WebsocketRails[:pingas].trigger('update', {id: self.id, status: self.status, category: self.category.title}.to_json)
   end
 
   def put_in_queue

@@ -1,6 +1,9 @@
 class TaskController < WebsocketRails::BaseController
   def initialize_session
-    # perform application setup here
+    # 20.times {puts "************************"}
+    # 100.times { puts self.connection }
+    # 20.times {puts "************************"}
+    # puts self.connection_store.push(self.connection)
     controller_store[:message_count] = 0
   end
 
@@ -17,7 +20,6 @@ class TaskController < WebsocketRails::BaseController
     pinga.save
     pinga.put_in_queue
 
-
     user_pinga = UserPinga.new
     user_pinga.user = user
     user_pinga.pinga = pinga
@@ -26,7 +28,6 @@ class TaskController < WebsocketRails::BaseController
 
     pinga_marker = create_marker(pinga, user)
     broadcast_message :new, {marker: pinga_marker}, :namespace => 'pingas'
-
   end
 
   def destroy
