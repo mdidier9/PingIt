@@ -22,9 +22,11 @@ $(function() {
         dataType: 'json',
         success: function (data) {
           if(data.attending == true) {
-            $($(correctDiv).find(':first-child')).html("You are going!");
+            $($(correctDiv).find(':first-child')).html("You are going!"); // THIS NEEDS TO APPLY TO ALL VIEWS
+            // RSVP count += 1 ON ALL VIEWS
           } else {
-            $($(correctDiv).find(':first-child')).html("You are not going!");
+            $($(correctDiv).find(':first-child')).html("You are not going!"); // THIS NEEDS TO APPLY TO ALL VIEWS
+            // RSVP count -= 1 ON ALL VIEWS
           }
         }
       });
