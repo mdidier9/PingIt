@@ -1,4 +1,5 @@
-dispatcher = new WebSocketRails('localhost:5000/websocket');
+//dispatcher = new WebSocketRails('localhost:5000/websocket');
+dispatcher = new WebSocketRails('pinggit.herokuapp.com/websocket');
 channel = dispatcher.subscribe('pingas');
 
 function submitToSocket(data) {
