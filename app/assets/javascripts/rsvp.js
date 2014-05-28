@@ -23,14 +23,12 @@ $(function() {
         success: function (data) {
           var rsvpSpan = $('span[class=rsvp-count-' + pingaId + ']')
           var currentCount = parseFloat(rsvpSpan.html());
-          // var currentCount = rsvp
           if(data.attending == true) {
             $("."+currentPingaDivClass).html("<p>You are going!</p>");
             rsvpSpan.html(currentCount+1);
           } else {
             $("."+currentPingaDivClass).html("<p>You are not going!</p>");
             rsvpSpan.html(currentCount-1);
-            // RSVP count -= 1 ON ALL VIEWS
           }
         }
       });
