@@ -55,13 +55,10 @@
             center: map.getCenter(),
             radius: <%= @user.listening_radius * 1609.344 %>
         };
-        console.log(<%= @user.listening_radius%>);
-        console.log(radiusOptions.radius);
         radiusCircle = new google.maps.Circle(radiusOptions);
 
         google.maps.event.addListener(user_marker, "dragend", function(event) {
             var point = user_marker.getPosition();
-            console.log(point.k);
             map.panTo(point);
                 $.ajax({
                     url: '/users/' + <%= @user.id %>,
@@ -145,7 +142,6 @@
             var infowindow = new google.maps.InfoWindow();
             google.maps.event.addListener(marker,'click', (function(marker,content,infowindow){
                 return function() {
-                    console.log(marker);
                     closeInfos();
                     infowindow.setContent(content);
                     infowindow.open(map,marker);
@@ -263,7 +259,6 @@
 
         function showNew() {
             newPingaMarker.setMap(map);
-            console.log("create new pinga")
             newPingaMarker.setPosition(user_marker.position);
             closeInfos();
             $('#show').css('display', 'none');
@@ -338,7 +333,6 @@
 
         $(document).on('click', '.delete_pinga_button', function(event){
             event.preventDefault();
-            console.log(this.id);
             deleteToSocket(this.id);
 //            $.ajax({
 //                url: '/pingas/' + this.id,
@@ -460,7 +454,6 @@
 
         dispatcher.bind('pingas.new', function(pinga) {
             addMarker(pinga.marker);
-            console.log("PINGA CREATED")
             $.ajax({
                 url: '/users/' + <%= @user.id %>,
                 type: 'PUT',
@@ -471,13 +464,25 @@
         });
 
         dispatcher.bind('pingas.destroy', function(pingaId) {
-            console.log("PINGA DELETED")
             var markerIndex = findMarkerIndex(pingaId);
             pingaMarkers[markerIndex].setMap(null);
             if (markerIndex > -1) {
                 pingaMarkers.splice(markerIndex, 1);
             }
             $('.' + pingaId).remove();
+            $.ajax({
+                url: '/users/' + <%= @user.id %>,
+                type: 'PUT',
+                success: function (data) {
+                    updateLists(data);
+                }
+            });
+        });
+
+        channel.bind('update', function(message) {
+            var pinga = JSON.parse( message );
+            var markerIndex = findMarkerIndex(pinga.id);
+            pingaMarkers[markerIndex].setIcon('assets/' + pinga.status + '/' + pinga.category + '.png');
             $.ajax({
                 url: '/users/' + <%= @user.id %>,
                 type: 'PUT',

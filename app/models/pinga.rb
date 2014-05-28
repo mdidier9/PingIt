@@ -12,6 +12,21 @@ class Pinga < ActiveRecord::Base
   before_validation :calculate_end_time
   before_save :geocode, :check_status
 
+  def perform
+    if Time.now < self.end_time 
+      self.status == "active"
+    else
+      self.status == "expired"
+    end
+    self.save
+    WebsocketRails[:pingas].trigger('update', {id: self.id, status: self.status, category: self.category.title}.to_json)
+  end
+
+  def put_in_queue
+    Delayed::Job.enqueue(self, 0, self.start_time)
+    Delayed::Job.enqueue(self, 0, self.end_time)
+  end
+
   private
 
   def calculate_end_time
@@ -31,4 +46,6 @@ class Pinga < ActiveRecord::Base
       self.status = "error unknown check times"
     end
   end
+
+
 end
