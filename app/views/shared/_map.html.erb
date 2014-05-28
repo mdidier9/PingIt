@@ -460,7 +460,7 @@
 
 //    SOCKET STUFF
 
-        dispatcher.bind('new', function(pinga) {
+        dispatcher.bind('pingas.new', function(pinga) {
             addMarker(pinga.marker);
             $.ajax({
                 url: '/users/' + <%= @user.id %>,
@@ -470,6 +470,10 @@
                 }
             });
         });
+
+        dispatcher.bind('phone', function(message) {
+            console.log('new pinga from phone');
+        })
 
         dispatcher.bind('pingas.destroy', function(pingaId) {
             var markerIndex = findMarkerIndex(pingaId);
