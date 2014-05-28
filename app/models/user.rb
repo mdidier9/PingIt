@@ -88,7 +88,7 @@ class User < ActiveRecord::Base
   end
 
   def your_created_pingas
-    self.created_pingas.sort_by { |pinga| pinga.start_time }
+    self.created_pingas.select {|pinga| pinga.status != "cancelled" }.sort_by { |pinga| pinga.start_time }
   end
 
   def in_listening_radius_of(pinga)
