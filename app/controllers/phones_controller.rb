@@ -7,34 +7,34 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
 		p "THIS IS INSIDE GET EVENTS ACTION ********************"
 
 		@user = User.find_by_uid(params[:data][:uid])
-		@user.latitude = params[:data][:latitude]
-		@user.longitude = params[:data][:longitude]
-		@user.save
+		# @user.latitude = params[:data][:latitude]
+		# @user.longitude = params[:data][:longitude]
+		# @user.save
 
-		pingas_active_near = @user.active_pingas_in_listening_radius
-		pingas_pending_near = @user.pending_pingas_in_listening_radius
-		pingas_far = @user.pingas_outside_listening_radius
+		# pingas_active_near = @user.active_pingas_in_listening_radius
+		# pingas_pending_near = @user.pending_pingas_in_listening_radius
+		# pingas_far = @user.pingas_outside_listening_radius
 		
-		@pinga_hash = {pingas_active_in_radius: [], pingas_pending_in_radius: [], pingas_outside_radius: []}
+		# @pinga_hash = {pingas_active_in_radius: [], pingas_pending_in_radius: [], pingas_outside_radius: []}
 		
 
-		pingas_active_near.each_with_index do |ping_obj, index|
-			(@pinga_hash[:pingas_active_in_radius]).push(ping_obj.attributes.merge('start_time' => ping_obj.start_time.strftime('%Y-%m-%d %H:%M:%S %z'), 'end_time' => ping_obj.end_time.strftime('%Y-%m-%d %H:%M:%S %z'))) #add more keys and values for time paramters
-		end
-
-		pingas_pending_near.each_with_index do |ping_obj, index|
-			(@pinga_hash[:pingas_pending_in_radius]).push(ping_obj.attributes.merge('start_time' => ping_obj.start_time.strftime('%Y-%m-%d %H:%M:%S %z'), 'end_time' => ping_obj.end_time.strftime('%Y-%m-%d %H:%M:%S %z'))) #add more keys and values for time paramters
-		end
-
-		pingas_far.each_with_index do |ping_obj, index|
-			@pinga_hash[:pingas_outside_radius].push(ping_obj.attributes.merge('start_time' => ping_obj.start_time.strftime('%Y-%m-%d %H:%M:%S %z'), 'end_time' => ping_obj.end_time.strftime('%Y-%m-%d %H:%M:%S %z'))) #add more keys and values for time paramters
-		end				
-
-		# Pinga.all.each_with_index do |ping_obj, index|
-		# 	@pinga_array.push(ping_obj.attributes.merge('start_time' => ping_obj.start_time.strftime('%Y-%m-%d %H:%M:%S %z'), 'end_time' => ping_obj.end_time.strftime('%Y-%m-%d %H:%M:%S %z'))) #add more keys and values for time paramters
+		# pingas_active_near.each_with_index do |ping_obj, index|
+		# 	(@pinga_hash[:pingas_active_in_radius]).push(ping_obj.attributes.merge('start_time' => ping_obj.start_time.strftime('%Y-%m-%d %H:%M:%S %z'), 'end_time' => ping_obj.end_time.strftime('%Y-%m-%d %H:%M:%S %z'))) #add more keys and values for time paramters
 		# end
 
-		respond_with @pinga_hash
+		# pingas_pending_near.each_with_index do |ping_obj, index|
+		# 	(@pinga_hash[:pingas_pending_in_radius]).push(ping_obj.attributes.merge('start_time' => ping_obj.start_time.strftime('%Y-%m-%d %H:%M:%S %z'), 'end_time' => ping_obj.end_time.strftime('%Y-%m-%d %H:%M:%S %z'))) #add more keys and values for time paramters
+		# end
+
+		# pingas_far.each_with_index do |ping_obj, index|
+		# 	@pinga_hash[:pingas_outside_radius].push(ping_obj.attributes.merge('start_time' => ping_obj.start_time.strftime('%Y-%m-%d %H:%M:%S %z'), 'end_time' => ping_obj.end_time.strftime('%Y-%m-%d %H:%M:%S %z'))) #add more keys and values for time paramters
+		# end				
+
+		# # Pinga.all.each_with_index do |ping_obj, index|
+		# # 	@pinga_array.push(ping_obj.attributes.merge('start_time' => ping_obj.start_time.strftime('%Y-%m-%d %H:%M:%S %z'), 'end_time' => ping_obj.end_time.strftime('%Y-%m-%d %H:%M:%S %z'))) #add more keys and values for time paramters
+		# # end
+
+		# respond_with @pinga_hash
 	end
 
 
