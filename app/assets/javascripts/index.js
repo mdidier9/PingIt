@@ -15,29 +15,21 @@ $(function() {
     // viewing preferences default on homepage load
     showPingasAccordingToPrefs();
 
-// click
+    // click
     $("#tabs").tabs();
     $("#my_tabs").tabs();
   
-// checkbox viewing changes but not persisted
-  // $( "#check" ).button();
-  // $( "#format" ).buttonset();
-  // $( "#my_format" ).buttonset();
-
 	$('#format :checkbox').click(function(event) {
         var $this = $(this);
         if ($this.is(':checked')) {
-            console.log(this.id);
             var category = this.id;
             $("."+category).hide();
             findPingasWithCategory(this.id).forEach (function(pinga) {
                 pinga.setMap(null);
             })
-
         } else {
             var category = this.id;
             $("."+category).show();
-            console.log(findPingasWithCategory(this.id));
             findPingasWithCategory(this.id).forEach (function(pinga) {
                 pinga.setMap(map);
             })
@@ -49,12 +41,6 @@ $(function() {
         var listening = !(event.target.checked);
         var ucId = $(this).val();
 
-        // if (event.target.checked) {
-        //    var listening = false; // DONT WANT TO LISTEN 
-        // } else {
-        //     var listening = true; // WANT TO LISTEN
-        // }
-
         $.ajax({
             url: '/user_categories/' + ucId,
             type: 'PUT',
@@ -62,11 +48,17 @@ $(function() {
             dataType: 'json',
             success: function (data) {
                 if (data.listening) {
-                    $('input[type="checkbox"][id="' + data.category + '"]').prop("checked", false);
                     // they are listening. we need to uncheck the boxes.
+                    $('input[type="checkbox"][id="' + data.category + '"]').prop("checked", false);
+                    findPingasWithCategory(data.category).forEach (function(pinga) {
+                        pinga.setMap(map);
+                    })
                 } else {
-                    $('input[type="checkbox"][id="' + data.category + '"]').prop("checked", true);
                     // they are not listening. we need to check the boxes.
+                    $('input[type="checkbox"][id="' + data.category + '"]').prop("checked", true);
+                    findPingasWithCategory(data.category).forEach (function(pinga) {
+                        pinga.setMap(null);
+                    })
                 }
                 showPingasAccordingToPrefs();
             }
