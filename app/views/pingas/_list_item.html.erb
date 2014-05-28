@@ -6,11 +6,8 @@
     <p><%= @user.distance(pinga) %> mi</p>
     <% if pinga.status == "pending" %>
         <p><%= start_time(pinga) %></p>
-        <p>RSVP Count: <%= pinga.user_pingas.where(rsvp_status: "attending").count %></p>
     <% end %>
-    <% if pinga.status == "active" %>
-      <p>Attendee Count: <%= pinga.user_pingas.where(attend_status: "attended").count %></p>
-    <% end %>
+    <p>RSVP Count: <%= pinga.user_pingas.where(rsvp_status: "attending").count %></p>
   </div>
   <% current_user_pinga = @user.user_pingas.find_by_pinga_id(pinga.id)%>
   <% if current_user_pinga %>
