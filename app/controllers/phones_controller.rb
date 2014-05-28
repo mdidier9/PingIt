@@ -1,5 +1,5 @@
 class PhonesController < ApplicationController
-skip_before_filter :require_login, :only => [:recieve_request_get_events, :recieve_request_create_event, :recieve_request_register_rsvp_info, :check_for_user] 
+skip_before_filter :require_login, :only => [:recieve_request_get_events, :recieve_request_create_event, :recieve_request_register_rsvp_info, :check_for_user, :set_radius] 
 
 	respond_to :json
 
@@ -11,8 +11,12 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
 		
 		@user.listening_radius = radius
 		@user.save
-		respond_with @user.attributes
 
+		puts "???????????????????????????????????????????????????????????????"
+		p @user.attributes
+		@check_hash = {radius_set_to: @user.listening_radius, for_this_person: @user.name} 
+		p @check_hash
+		respond_with @check_hash
 	end
 
 	def recieve_request_get_events
