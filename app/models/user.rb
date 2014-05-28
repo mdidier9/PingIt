@@ -84,7 +84,13 @@ class User < ActiveRecord::Base
   end
 
   def pingas_rsvpd_to
-    pingas = self.user_pingas.where(rsvp_status: "attending").map{|user_pinga|user_pinga.pinga}.sort_by { |pinga| pinga.start_time }
+    pingas = self.user_pingas.where(rsvp_status: "attending").map { |user_pinga|
+      user_pinga.pinga
+    }.select { |pinga|
+      pinga.status == "active" || pinga.status == "pending"
+    }.sort_by { |pinga|
+      pinga.start_time
+    }
   end
 
   def your_created_pingas

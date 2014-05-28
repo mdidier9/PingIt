@@ -5,11 +5,16 @@
   height: 200px;
 }
 
+#pinga-logo {
+  float:left;
+  margin: 30px 20px 10px 30px;
+}
+
 #login {
 	text-align: center;
 	font-size: 250%;
-	background-color:rgba(0,0,0,0.5);
-  border-radius: 25px;
+	background-color: #35393C;
+  border-radius: 15px;
 	margin:0 auto;
 	/*margin-top: 40px;*/
 	width: 50%;
@@ -17,8 +22,15 @@
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
+#header {
+  font-family: 'Neuton', serif;
+  letter-spacing: 4px;
+  font-size: 2.0em;
+}
+
 body {
-  /*background: url('/assets/skyline.jpg') no-repeat center center fixed;*/
+  font-family: 'Georgia';
+  font-size: 1.00em;
   background: url('/assets/skyline.jpg') no-repeat center center;
   background-size: 100% auto;
   min-width: 1000px;
@@ -36,10 +48,11 @@ html {
 }
 
 a {
-  color: black;
+  color: #EFE6AB;
+/*  color: black;
   text-decoration: none;
   color: white;
-  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;*/
 }
 
 .footer {
@@ -51,7 +64,7 @@ a {
   column-count:3;
   -moz-column-count:3; /* Firefox */
   -webkit-column-count:3; /* Safari and Chrome */
-  background-color:rgba(0,0,0,0.5);
+  background-color:#35393C;
 
   color: #F2E9E1;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
