@@ -10,9 +10,6 @@ function showPingasAccordingToPrefs () {
     }
 }
 
-function getNewRsvps () {
-
-}
 
 $(function() {  
 
@@ -27,13 +24,13 @@ $(function() {
         var $this = $(this);
         if ($this.is(':checked')) {
             var category = this.id;
-            $("."+category).hide();
+            $(".main_list."+category).hide();
             findPingasWithCategory(this.id).forEach (function(pinga) {
                 pinga.setMap(null);
             })
         } else {
             var category = this.id;
-            $("."+category).show();
+            $(".main_list."+category).show();
             findPingasWithCategory(this.id).forEach (function(pinga) {
                 pinga.setMap(map);
             })
@@ -41,7 +38,6 @@ $(function() {
 	});
 
     $('input[id^="my_"]').on('click', function(event){
-        console.log("correct item clicked yo");
         var listening = !(event.target.checked);
         var ucId = $(this).val();
 
