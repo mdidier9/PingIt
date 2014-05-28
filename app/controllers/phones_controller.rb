@@ -29,10 +29,6 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
 
 
 
-
-
-
-
 	#-----------------------------------------------------------------------------------------------------	
 
 
