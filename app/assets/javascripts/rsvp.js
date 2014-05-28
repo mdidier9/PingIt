@@ -1,6 +1,7 @@
 $(function() {
 
   $(document).on("click", 'div[class^=rsvp]', function(event){
+    var currentDiv = this;
     userPingaId = /\d*$/.exec(this.id)[0];
     var currentPingaDivClass = $(this).attr("class");
     var pingaId = /\d*$/.exec(currentPingaDivClass)[0];
@@ -22,6 +23,8 @@ $(function() {
         success: function (data) {
           var rsvpSpan = $('span[class=rsvp-count-' + pingaId + ']')
           var currentCount = parseFloat(rsvpSpan.html());
+          var parentDiv = $(currentDiv).parent();
+          console.log(parentDiv);
           if(data.attending == true) {
             $("."+currentPingaDivClass).html("<p>You are going!</p>");
             rsvpSpan.html(currentCount+1);
@@ -29,6 +32,7 @@ $(function() {
             $("."+currentPingaDivClass).html("<p>You are not going!</p>");
             rsvpSpan.html(currentCount-1);
           }
+          $('ul[id=rsvp]').prepend(parentDiv.clone());
         }
       });
     }

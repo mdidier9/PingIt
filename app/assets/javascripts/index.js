@@ -10,6 +10,10 @@ function showPingasAccordingToPrefs () {
     }
 }
 
+function getNewRsvps () {
+
+}
+
 $(function() {  
 
     // viewing preferences default on homepage load
