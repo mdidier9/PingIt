@@ -65,7 +65,7 @@ gem 'rails_12factor'
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
 # Use unicorn as the app server
-gem 'unicorn', '~> 4.8.3'
+# gem 'unicorn', '~> 4.8.3'
 
 # coveralls
 gem 'coveralls', require: false
