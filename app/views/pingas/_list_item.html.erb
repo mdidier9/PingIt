@@ -14,7 +14,7 @@
   </div>
   <% current_user_pinga = @user.user_pingas.find_by_pinga_id(pinga.id)%>
   <% if current_user_pinga %>
-    <div class="rsvp" id="rsvp-id-<%=current_user_pinga.id%>">
+    <div class="rsvp-id-<%=current_user_pinga.id%>" id="rsvp-id-<%=current_user_pinga.id%>">
       <% if current_user_pinga.rsvp_status == "attending" %>
         <p>You are going!</p>
       <% elsif current_user_pinga.rsvp_status.nil? %>
