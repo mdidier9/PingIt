@@ -1,35 +1,35 @@
 <div class="index_list" id="index_list">
-    <div id="format">
-      <input type="checkbox" id="Food"><label for="Food">Food</label>
-      <input type="checkbox" id="Social"><label for="Social">Social</label>
-      <input type="checkbox" id="Sports"><label for="Sports">Sports</label>
-      <input type="checkbox" id="Entertainment"><label for="Entertainment">Entertainment</label>
-      <input type="checkbox" id="Deals"><label for="Deals">Deals</label>
-      <input type="checkbox" id="Other"><label for="Other">Other</label>  
-    </div>
+  <div id="format">
+    <% @user.user_categories.each do |uc| %>
+        <%= label_tag(uc.category.title, uc.category.title, class:"styled-label") do %>
+          <%= check_box_tag(uc.category.title, "1", !(uc.listening_status), {id: uc.category.title}) %>
+          <span><%= uc.category.title %></span>
+        <% end %>
+    <% end %>
+  </div>
 
-    <div id="tabs">
-      <ul>
-        <li><a href="#tabs-1">Nearest Pings</a></li>
-        <li><a href="#tabs-2">Newest Pings</a></li>
-        <li><a href="#tabs-3">Starting Soonest</a></li>
+  <div id="tabs">
+    <ul>
+      <li><a href="#tabs-1">Nearest Pings</a></li>
+      <li><a href="#tabs-2">Newest Pings</a></li>
+      <li><a href="#tabs-3">Starting Soonest</a></li>
+    </ul>
+    <div class="scroll" id="tabs-1">
+      <ul id="nearest" class="ping_list">
+          <%= render partial: "list", locals: {list: @pingas_by_distance, main_list: true } %>
       </ul>
-      <div class="scroll" id="tabs-1">
-        <ul id="nearest" class="ping_list">
-            <%= render partial: "list", locals: {list: @pingas_by_distance, main_list: true } %>
-        </ul>
-      </div>
-      <div class="scroll" id="tabs-2">
-        <ul id="newest" class="ping_list">
-            <%= render partial: "list", locals: {list: @pingas_by_received_time, main_list: true } %>
-        </ul>
-      </div>
-      <div class="scroll" id="tabs-3">
-        <ul id="soonest" class="ping_list">
-            <%= render partial: "list", locals: {list: @pingas_by_start_time, main_list: true } %>
-        </ul>
-      </div>
     </div>
+    <div class="scroll" id="tabs-2">
+      <ul id="newest" class="ping_list">
+          <%= render partial: "list", locals: {list: @pingas_by_received_time, main_list: true } %>
+      </ul>
+    </div>
+    <div class="scroll" id="tabs-3">
+      <ul id="soonest" class="ping_list">
+          <%= render partial: "list", locals: {list: @pingas_by_start_time, main_list: true } %>
+      </ul>
+    </div>
+  </div>
   <%= link_to "Create Ping!", new_pinga_path, 'class' => 'button', 'id' => 'new_pinga_button' %>
 
 </div>

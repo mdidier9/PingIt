@@ -1,0 +1,23 @@
+.styled-label {
+    float:left;
+    width:4.0em;
+    background-color:#911;
+    color:#fff;
+    border-radius: 5px;
+}
+
+.styled-label span {
+    text-align:center;
+    padding:3px 0px;
+    display:block;
+}
+
+.styled-label input {
+    position:absolute;
+    top:-20px;
+}
+
+.styled-label input:checked + span {
+    background-color: #CCC;
+    border-radius: 5px;
+}

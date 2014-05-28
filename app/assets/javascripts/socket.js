@@ -1,11 +1,10 @@
 dispatcher = new WebSocketRails('localhost:3000/websocket');
+channel = dispatcher.subscribe('pingas');
 
 function submitToSocket(data) {
-    dispatcher.trigger('tasks.create', data);
+    dispatcher.trigger('pingas.create', data);
 }
 
 function deleteToSocket(id) {
-    console.log(id);
-    console.log("message from deletetosocket");
-    dispatcher.trigger('tasks.destroy', id)
+    dispatcher.trigger('pingas.destroy', id)
 }
