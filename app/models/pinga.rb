@@ -22,6 +22,10 @@ class Pinga < ActiveRecord::Base
     WebsocketRails[:pingas].trigger('update', {id: self.id, status: self.status, category: self.category.title}.to_json)
   end
 
+  def dispatch
+    WebsocketRails[:pingas].trigger('phone', {id: self.id, status: self.status, category: self.category.title}.to_json)
+  end
+
   def put_in_queue
     Delayed::Job.enqueue(self, 0, self.start_time)
     Delayed::Job.enqueue(self, 0, self.end_time)

@@ -116,10 +116,10 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
 		user_pinga.attend_status = "creator"
 		user_pinga.save  
 #------------------------------------------------------------------------------
-		
+		@pinga.dispatch
     # WebsocketRails[:pingas].trigger('phone', {id: @pinga.id, status: @pinga.status, category: @pinga.category.title}.to_json)
 
-    broadcast_message :phone, {marker: "hello"}
+    # broadcast_message :phone, {marker: "hello"}
 
 		puts "THIS IS THIS THE CREATED EVENT"
 		p @pinga
