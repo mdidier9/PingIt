@@ -10,18 +10,18 @@
 
   <div id="tabs">
     <ul>
-      <li><a href="#tabs-1">Nearest Pings</a></li>
-      <li><a href="#tabs-2">Newest Pings</a></li>
+      <li><a href="#tabs-1">Newest Pings</a></li> <!--Nearest Pings-->
+      <li><a href="#tabs-2">Nearest Pings</a></li> <!--Newest Pings-->
       <li><a href="#tabs-3">Starting Soonest</a></li>
     </ul>
     <div class="scroll" id="tabs-1">
-      <ul id="nearest" class="ping_list">
-          <%= render partial: "list", locals: {list: @pingas_by_distance, main_list: true } %>
+      <ul id="newest" class="ping_list">
+          <%= render partial: "list", locals: {list: @pingas_by_received_time, main_list: true } %>
       </ul>
     </div>
     <div class="scroll" id="tabs-2">
-      <ul id="newest" class="ping_list">
-          <%= render partial: "list", locals: {list: @pingas_by_received_time, main_list: true } %>
+      <ul id="nearest" class="ping_list">
+          <%= render partial: "list", locals: {list: @pingas_by_distance, main_list: true } %>
       </ul>
     </div>
     <div class="scroll" id="tabs-3">
