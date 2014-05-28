@@ -22,40 +22,10 @@ class PingasController < ApplicationController
     render :json => { show: render_to_string(partial: "pingas/show", locals: { pinga: Pinga.find(params[:id].to_i) }) }
   end
 
-  # def create
-  #   today = params[:today]
-  #   pinga_params = params[:data]
-  #   100.times puts"="
-  #   p params
-  #   100.times puts"="
-  #   params = pinga_params
-  #   @user = User.find(session[:user_id])
-  #   @pinga = Pinga.new
-  #   @pinga.title = params["pinga"]["title"]
-  #   @pinga.category_id = params["pinga"]["category_id"]
-  #   @pinga.description = params["pinga"]["description"]
-  #   @pinga.address = params["pinga"]["address"]
-  #   @pinga.duration = params["duration"].to_i
-  #   @pinga.start_time = Time.parse("#{today} #{params["pinga"]["start_time"]}")
-  #   @pinga.creator = @user
-
-  #   if @pinga.save
-  #     render :json => @pinga.id
-  #   else
-  #     render :json => false
-  #   end
-  # end
-
   def destroy
     @pinga = Pinga.find(params[:id])
     @pinga.status = "cancelled"
     if @pinga.save
-      # render :json => {markers: pinga_markers,
-      #                  newest: render_to_string(:partial => "/pingas/list", :locals => { list: @pingas_by_received_time }),
-      #                  nearest: render_to_string(:partial => "/pingas/list", :locals => { list: @pingas_by_distance }),
-      #                  soonest: render_to_string(:partial => "/pingas/list", :locals => { list: @pingas_by_start_time })
-      #
-      # }
       render :json => params[:id]
     else
       render :json => false

@@ -140,6 +140,7 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
 
 		@pinga.creator_id = 1 #THIS IS HARDCODED (need have some information about the user somewhere at login)
 		@pinga.save
+    WebsocketRails[:pingas].trigger('update', {id: @pinga.id, status: @pinga.status, category: @pinga.category.title}.to_json)
 		puts "THIS IS THIS THE CREATED EVENT"
 		p @pinga
 		respond_with @data
