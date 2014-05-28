@@ -14,7 +14,7 @@ class TaskController < WebsocketRails::BaseController
     pinga.start_time = Time.parse("#{message[:today]} #{message["pinga[start_time]"]}")
     pinga.creator = user
     pinga.save
-    # pinga.put_in_queue
+    pinga.put_in_queue
 
     user_pinga = UserPinga.new
     user_pinga.user = user
