@@ -13,7 +13,7 @@ Bundler.require(:default, Rails.env)
 
 module Ping
   class Application < Rails::Application
-
+    config.serve_static_assets = true
     config.i18n.enforce_available_locales = false
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
