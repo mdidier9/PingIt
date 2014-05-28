@@ -7,11 +7,11 @@
     <% if pinga.status == "pending" %>
         <p><%= start_time(pinga) %></p>
     <% end %>
-    <p>RSVP Count: <%= pinga.user_pingas.where(rsvp_status: "attending").count %></p>
+    <p>RSVP Count: <span class="rsvp-count-<%=pinga.id%>"><%= pinga.user_pingas.where(rsvp_status: "attending").count %></span></p>
   </div>
   <% current_user_pinga = @user.user_pingas.find_by_pinga_id(pinga.id)%>
   <% if current_user_pinga %>
-    <div class="rsvp-id-<%=current_user_pinga.id%>" id="rsvp-id-<%=current_user_pinga.id%>">
+    <div class="rsvp-div-pinga-id-<%=pinga.id%>" id="rsvp-id-<%=current_user_pinga.id%>">
       <% if current_user_pinga.rsvp_status == "attending" %>
         <p>You are going!</p>
       <% elsif current_user_pinga.rsvp_status.nil? %>
