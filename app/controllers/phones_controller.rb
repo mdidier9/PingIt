@@ -99,27 +99,20 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
 
 
 	def recieve_request_create_event
-		p "THIS IS INSIDE CREATE EVENT ACTION ********************"
+		p "THIS IS INSIDE CREATE EVENT ACTION *************************************************************************************************************************************************************************************************************************************************************************************************************************************************************"
 		
 		@data = params[:data]
-		# p "THIS IS THE PINGA INFO"
+		@user = User.find_by_uid(@data[:uid])
 		@pinga = Pinga.new
 		@pinga.title = @data[:title]
-		# p @data[:title]
-		@pinga.status = "pending" #THIS IS HARDCODED (this needs to be checked agianst the start time)
-		# p Category.find_by_title(@data[:category]).id
+		#@pinga.status = "pending" #SHOULD NOT NEED TO HARDCODE IF DELAYED JOBS IS WORKING
 		@pinga.category_id = Category.find_by_title(@data[:category]).id
 		@pinga.description = @data[:description]
-		# p @data[:description]
 		@pinga.address = @data[:address] #WHAT IF THE ADDRESS IS INCORRECT (do we need validations on the phone?)
-		# p @data[:address]
 		@pinga.duration = @data[:duration]
 
-		# @pinga.start_time = @data[:start_time]
-
-
+#---------------------------------------------------------------------------creating pinga.start_time
 		selected_hour = ((/^\d+/.match(@data[:start_time]))[0]).to_i
-		# if (/[P|p]/.match(@data[:start_time])) != nil
 		selected_hour += 12 if (/[P|p]/.match(@data[:start_time]))
 		current_hour = Time.now.hour
 		last_valid_hour = current_hour - 11
@@ -141,22 +134,35 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
 		 today_string = Date.today.strftime("%a %b %d %Y") + " #{@data[:start_time]}"
 		 @pinga.start_time = Time.parse(today_string)
 		end
-
+#---------------------------------------------------------------------------------------------------
+		@pinga.creator_id = @user.id 	
+		@pinga.save
 
 #-------------------------------------------------------creating user_pinga
-		# user_pinga = UserPinga.new
+	#   user_pinga = UserPinga.new
   #   user_pinga.user = user
   #   user_pinga.pinga = pinga
   #   user_pinga.rsvp_status = "creator"
   #   user_pinga.attend_status = "creator"
   #   user_pinga.save
+
+		user_pinga = UserPinga.new
+		user_pinga.user = @user
+		user_pinga.pinga = @pinga
+		user_pinga.rsvp_status = "creator"
+		user_pinga.attend_status = "creator"
+		user_pinga.save  
 #------------------------------------------------------------------------------
 
+		#@pinga.creator_id = 1 #THIS IS HARDCODED 
 
-		@pinga.creator_id = 1 #THIS IS HARDCODED (need have some information about the user somewhere at login)
-		@pinga.save
-		puts "THIS IS THIS THE CREATED EVENT"
+		puts "THIS IS THIS THE PINGA"
 		p @pinga
+		puts "THIS IS THE USER"
+		p @user
+		puts "THIS IS THE USER_PINGA"
+		p user_pinga 
+
 		respond_with @data
 	end
 
@@ -185,19 +191,7 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
 end
 
 
-  # create_table "users", force: true do |t|
-  #   t.string   "oauth_token"
-  #   t.datetime "oauth_expires_at"
-  #   t.float    "latitude"
-  #   t.float    "longitude"
-  #   t.datetime "created_at"
-  #   t.datetime "updated_at"
-  #   t.string   "name"
-  #   t.string   "provider"
-  #   t.string   "uid"
-  #   t.string   "ip_address"
-  #   t.float    "listening_radius"
-  # end
+  
 
 
 
