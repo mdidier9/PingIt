@@ -9,6 +9,7 @@
         markers = <%=raw @pinga_markers.to_json %>;
         pingaMarkers = [];
         infos = [];
+        console.log("changed");
 
 //        var map_style = [{featureType:"administrative",stylers:[{visibility:"off"}]},{featureType:"administrative.locality",elementType:"labels",stylers:[{visibility:"simplified"},{saturation:100},{color:"#ff4702"}]},{featureType:"road",stylers:[{saturation:-100},{visibility:"simplified"},{lightness:-25}]},{featureType:"water",stylers:[{color:"#5f1bff"},{saturation:100},{visibility:"on"},{lightness:-38}]},{featureType:"landscape.natural.terrain",stylers:[{visibility:"off"}]},{featureType:"poi",stylers:[{visibility:"off"}]},{featureType:"poi.park",stylers:[{visibility:"simplified"},{color:"#d3ff44"},{lightness:-32},{saturation:30}]},{featureType:"landscape.natural",elementType:"geometry.fill",stylers:[{visibility:"on"},{color:"#797679"},{gamma:4.92},{lightness:-47}]},{}]
 //        var map_style = [{featureType:"water",elementType:"geometry",stylers:[{color:"#a2daf2"}]},{featureType:"landscape.man_made",elementType:"geometry",stylers:[{color:"#f7f1df"}]},{featureType:"landscape.natural",elementType:"geometry",stylers:[{color:"#d0e3b4"}]},{featureType:"landscape.natural.terrain",elementType:"geometry",stylers:[{visibility:"off"}]},{featureType:"poi.park",elementType:"geometry",stylers:[{color:"#bde6ab"}]},{featureType:"poi",elementType:"labels",stylers:[{visibility:"off"}]},{featureType:"poi.medical",elementType:"geometry",stylers:[{color:"#fbd3da"}]},{featureType:"poi.business",stylers:[{visibility:"off"}]},{featureType:"road",elementType:"geometry.stroke",stylers:[{visibility:"off"}]},{featureType:"road",elementType:"labels",stylers:[{visibility:"off"}]},{featureType:"road.highway",elementType:"geometry.fill",stylers:[{color:"#ffe15f"}]},{featureType:"road.highway",elementType:"geometry.stroke",stylers:[{color:"#efd151"}]},{featureType:"road.arterial",elementType:"geometry.fill",stylers:[{color:"#ffffff"}]},{featureType:"road.local",elementType:"geometry.fill",stylers:[{color:"black"}]},{featureType:"transit.station.airport",elementType:"geometry.fill",stylers:[{color:"#cfb2db"}]}]
@@ -37,7 +38,7 @@
             position: map.getCenter(),
             map: map,
 //            icon: image,
-            icon: 'assets/pingaMarker.png',
+            icon: 'pingaMarker.png',
             title: "user"
         });
         user_marker.setDraggable (true);
@@ -45,7 +46,7 @@
         newPingaMarker = new google.maps.Marker({
             position: map.getCenter(), // this should be the user's location
             map: null,
-            icon: 'assets/pingaMarker.png',
+            icon: 'pingaMarker.png',
             title: 'Your current location',
             draggable: true
         });
@@ -265,7 +266,7 @@
         function showNew() {
             newPingaMarker.setMap(map);
             newPingaMarker.setPosition(user_marker.position);
-            user_marker.setIcon('assets/<%= @user.gender %>.png');
+            user_marker.setIcon('<%= @user.gender %>.png');
             closeInfos();
             $('#show').css('display', 'none');
             $('#index_list').css('display', 'none');
@@ -277,7 +278,7 @@
 
         function showList() {
             newPingaMarker.setMap(null);
-            user_marker.setIcon('assets/pingaMarker.png');
+            user_marker.setIcon('pingaMarker.png');
             closeInfos();
             $('#show').css('display', 'none');
             $('#new').css('display', 'none');
@@ -290,7 +291,7 @@
         function showShow(id) {
             newPingaMarker.setMap(null);
             user_marker.setDraggable (true);
-            user_marker.setIcon('assets/pingaMarker.png');
+            user_marker.setIcon('pingaMarker.png');
             var marker = findMarkerById(id);
             var infowindow = new google.maps.InfoWindow();
             var content = marker.infowindow;
@@ -471,6 +472,10 @@
             });
         });
 
+        dispatcher.bind('phone', function(message) {
+            console.log('new pinga from phone');
+        })
+
         dispatcher.bind('pingas.destroy', function(pingaId) {
             var markerIndex = findMarkerIndex(pingaId);
             pingaMarkers[markerIndex].setMap(null);
@@ -490,7 +495,7 @@
         channel.bind('update', function(message) {
             var pinga = JSON.parse( message );
             var markerIndex = findMarkerIndex(pinga.id);
-            pingaMarkers[markerIndex].setIcon('assets/' + pinga.category + '_' + pinga.status + '.png');
+            pingaMarkers[markerIndex].setIcon(pinga.category + '_' + pinga.status + '.png');
             $.ajax({
                 url: '/users/' + <%= @user.id %>,
                 type: 'PUT',
