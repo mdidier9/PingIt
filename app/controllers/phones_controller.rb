@@ -3,6 +3,18 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
 
 	respond_to :json
 
+	def set_radius
+		uid = params[:data][:uid]
+		radius = params[:data][:radius]
+
+		@user = User.find_by_uid(uid)
+		
+		@user.listening_radius = radius
+		@user.save
+		respond_with @user.attributes
+
+	end
+
 	def recieve_request_get_events
 		p "THIS IS INSIDE GET EVENTS ACTION ********************"
 
@@ -30,9 +42,9 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
 			@pinga_hash[:pingas_outside_radius].push(ping_obj.attributes.merge('start_time' => ping_obj.start_time.strftime('%Y-%m-%d %H:%M:%S %z'), 'end_time' => ping_obj.end_time.strftime('%Y-%m-%d %H:%M:%S %z'))) #add more keys and values for time paramters
 		end				
 
-		# Pinga.all.each_with_index do |ping_obj, index|
-		# 	@pinga_array.push(ping_obj.attributes.merge('start_time' => ping_obj.start_time.strftime('%Y-%m-%d %H:%M:%S %z'), 'end_time' => ping_obj.end_time.strftime('%Y-%m-%d %H:%M:%S %z'))) #add more keys and values for time paramters
-		# end
+		# # Pinga.all.each_with_index do |ping_obj, index|
+		# # 	@pinga_array.push(ping_obj.attributes.merge('start_time' => ping_obj.start_time.strftime('%Y-%m-%d %H:%M:%S %z'), 'end_time' => ping_obj.end_time.strftime('%Y-%m-%d %H:%M:%S %z'))) #add more keys and values for time paramters
+		# # end
 
 		respond_with @pinga_hash
 	end
