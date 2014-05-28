@@ -19,7 +19,7 @@ class TaskController < WebsocketRails::BaseController
     user_pinga = UserPinga.new
     user_pinga.user = user
     user_pinga.pinga = pinga
-    user_pinga.rsvp_status = "creator"
+    user_pinga.rsvp_status =   "creator"
     user_pinga.attend_status = "creator"
     user_pinga.save
 
