@@ -21,7 +21,7 @@ WebsocketRails.setup do |config|
   # multiple server instances.
   # * Requires Redis.
   # WebsocketRails.setup do |config|
-  config.synchronize = true
+  # config.synchronize = true
   # end
 
   # Prevent Thin from daemonizing (default is true)
@@ -31,20 +31,20 @@ WebsocketRails.setup do |config|
   # Will not be used unless standalone or synchronization mode
   # is enabled.
   # config.redis_options = {:host => 'localhost', :port => '6379'}
-  if ENV["RAILS_ENV"] == 'production'
-    uri = URI.parse(ENV["REDISTOGO_URL"])
-    config.redis_options = {
-        username: uri.user,
-        password: uri.password,
-        host: uri.host,
-        port: uri.port
-    }
-  else
-    config.redis_options = {
-        host: 'localhost',
-        port: '6379'
-    }
-  end
+  # if ENV["RAILS_ENV"] == 'production'
+  #   uri = URI.parse(ENV["REDISTOGO_URL"])
+  #   config.redis_options = {
+  #       username: uri.user,
+  #       password: uri.password,
+  #       host: uri.host,
+  #       port: uri.port
+  #   }
+  # else
+  #   config.redis_options = {
+  #       host: 'localhost',
+  #       port: '6379'
+  #   }
+  # end
   # config.redis_options = {url: ENV["REDISTOGO_URL"]}
 
   # By default, all subscribers in to a channel will be removed
