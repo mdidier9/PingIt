@@ -13,7 +13,7 @@ class Pinga < ActiveRecord::Base
   before_save :geocode, :check_status
 
   def perform
-    if Time.now < self.end_time
+    if Time.now < self.end_time 
       self.status == "active"
     else
       self.status == "expired"
