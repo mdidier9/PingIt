@@ -31,15 +31,15 @@ describe Pinga do
     pinga.should_not be_valid
   end
 
-  context "perform" do
-    it "should be active for an event with an end time that didn't occur yet" do
-      pinga.perform
-      expect(pinga.status).to eq("active")
-    end
+  # context "perform" do
+  #   it "should be active for an event with an end time that didn't occur yet" do
+  #     pinga.perform
+  #     expect(pinga.status).to eq("active")
+  #   end
 
-    it "should be expired for an event with a end time after now" do
-      pinga_expired.perform
-      expect(pinga_expired.status).to eq("expired")
-    end
-  end
+  #   it "should be expired for an event with a end time after now" do
+  #     pinga_expired.perform
+  #     expect(pinga_expired.status).to eq("expired")
+  #   end
+  # end
 end
