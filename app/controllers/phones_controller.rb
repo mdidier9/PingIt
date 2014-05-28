@@ -5,14 +5,76 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
 
 	def recieve_request_get_events
 		p "THIS IS INSIDE GET EVENTS ACTION ********************"
-		@pinga_array = []
 
-		Pinga.all.each_with_index do |ping_obj, index|
-			@pinga_array.push(ping_obj.attributes.merge('start_time' => ping_obj.start_time.strftime('%Y-%m-%d %H:%M:%S %z'), 'end_time' => ping_obj.end_time.strftime('%Y-%m-%d %H:%M:%S %z'))) #add more keys and values for time paramters
+		@user = User.find_by_uid(params[:data][:uid])
+		@user.latitude = params[:data][:latitude]
+		@user.longitude = params[:data][:longitude]
+		@user.save
+
+		pingas_active_near = @user.active_pingas_in_listening_radius
+		pingas_pending_near = @user.pending_pingas_in_listening_radius
+		pingas_far = @user.pingas_outside_listening_radius
+		
+		@pinga_hash = {pingas_active_in_radius: [], pingas_pending_in_radius: [], pingas_outside_radius: []}
+		
+
+		pingas_active_near.each_with_index do |ping_obj, index|
+			(@pinga_hash[:pingas_active_in_radius]).push(ping_obj.attributes.merge('start_time' => ping_obj.start_time.strftime('%Y-%m-%d %H:%M:%S %z'), 'end_time' => ping_obj.end_time.strftime('%Y-%m-%d %H:%M:%S %z'))) #add more keys and values for time paramters
 		end
-		p @pinga_array
-		respond_with @pinga_array
+
+		pingas_pending_near.each_with_index do |ping_obj, index|
+			(@pinga_hash[:pingas_pending_in_radius]).push(ping_obj.attributes.merge('start_time' => ping_obj.start_time.strftime('%Y-%m-%d %H:%M:%S %z'), 'end_time' => ping_obj.end_time.strftime('%Y-%m-%d %H:%M:%S %z'))) #add more keys and values for time paramters
+		end
+
+		pingas_far.each_with_index do |ping_obj, index|
+			@pinga_hash[:pingas_outside_radius].push(ping_obj.attributes.merge('start_time' => ping_obj.start_time.strftime('%Y-%m-%d %H:%M:%S %z'), 'end_time' => ping_obj.end_time.strftime('%Y-%m-%d %H:%M:%S %z'))) #add more keys and values for time paramters
+		end				
+
+		# Pinga.all.each_with_index do |ping_obj, index|
+		# 	@pinga_array.push(ping_obj.attributes.merge('start_time' => ping_obj.start_time.strftime('%Y-%m-%d %H:%M:%S %z'), 'end_time' => ping_obj.end_time.strftime('%Y-%m-%d %H:%M:%S %z'))) #add more keys and values for time paramters
+		# end
+
+		respond_with @pinga_hash
 	end
+
+
+#USE THIS TO CREATE RELATIONSHIP BETWEEN PINGAS
+
+ # def update_user_pingas
+ #    Pinga.near(self, self.listening_radius).where(status: ["pending", "active"]).each do |pinga|
+ #      self.pingas << pinga unless self.pingas.include?(pinga)
+ #    end
+ #    self.save
+ #  end
+
+ 
+
+  #  def create
+  #   user = User.find(session[:user_id])
+  #   pinga = Pinga.new
+  #   pinga.title = message["pinga[title]"]
+  #   pinga.category_id = message["pinga[category_id]"]
+  #   pinga.description = message["pinga[description]"]
+  #   pinga.address = message["pinga[address]"]
+  #   pinga.duration = message["duration"].to_i
+  #   pinga.start_time = Time.parse("#{message[:today]} #{message["pinga[start_time]"]}")
+  #   pinga.creator = user
+  #   pinga.save
+
+  #   user_pinga = UserPinga.new
+  #   user_pinga.user = user
+  #   user_pinga.pinga = pinga
+  #   user_pinga.rsvp_status = "creator"
+  #   user_pinga.attend_status = "creator"
+  #   user_pinga.save
+
+  #   pinga_marker = create_marker(pinga, user)
+  #   broadcast_message :new, {marker: pinga_marker}, :namespace => 'pingas'
+  # end
+
+
+
+
 
 
 	def recieve_request_create_event
@@ -68,14 +130,10 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
 	end
 
 	def check_for_user
-		puts "?????????????????????????????????????????????????????"
-		p params
 		uid = params[:data][:uid] 
 		user = User.find_by_uid(uid)
 		@bool = "nothing"
 		if user
-			puts "USER FOUND:"
-			p user.name 
 			@bool = "true"
 		else
 			@user = User.new
@@ -87,13 +145,9 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
 			@user.listening_radius = 1
 			@user.save
 
-			puts "FUCKING USER"
-			p @user
 			@bool = "new user created"
 		end
 		@bool_hash = {user_exists: @bool}
-		puts "THIS IS BOOL HASH"
-		p @bool_hash 
 		respond_with @bool_hash
 	end
 
