@@ -21,6 +21,24 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
 		@user.longitude = params[:data][:longitude]
 		@user.save
 
+
+	#-----------------------------------------------------------------updating attending status based on rsvp
+
+	
+
+
+
+
+
+
+
+
+	#-----------------------------------------------------------------------------------------------------	
+
+
+
+
+
 		@user.update_user_pingas
 		"ALL USER PINGAS (update_user_pingas)"
 		p @user.pingas 
@@ -61,6 +79,7 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
 		@pinga.description = @data[:description]
 		@pinga.address = @data[:address] #WHAT IF THE ADDRESS IS INCORRECT (do we need validations on the phone?)
 		@pinga.duration = @data[:duration]
+
 
 #---------------------------------------------------------------------------creating pinga.start_time
 		selected_hour = ((/^\d+/.match(@data[:start_time]))[0]).to_i
@@ -141,7 +160,7 @@ def recieve_request_register_rsvp_info
 	user_pinga = UserPinga.where(user_id: user.id ,pinga_id: pinga.id)
 	p user_pinga 
 
-
+#---------------------------------------------------------updating rsvp status upon button push
 	unless user_pinga.rsvp_status == "creator"
 		if params[:rsvp_status] == "attending"
 			user_pinga.rsvp_status = params[:rsvp_status]
@@ -152,6 +171,7 @@ def recieve_request_register_rsvp_info
 		p "THIS USER_PINGA IS NOT FOR A CREATOR"
 		p user_pinga
 	end
+#-------------------------------------------------------------------------------------------
 
 	respond_with params
 end 
