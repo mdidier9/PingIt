@@ -25,13 +25,6 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
 		"ALL USER PINGAS (update_user_pingas)"
 		p @user.pingas 
 
-		# def update_user_pingas
-	 #    Pinga.near(self, self.listening_radius).where(status: ["pending", "active"]).each do |pinga|
-	 #      self.pingas << pinga unless self.pingas.include?(pinga)
-	 #    end
-  #   self.save
-  # 	end
-
 		pingas_active_near = @user.active_pingas_in_listening_radius
 		pingas_pending_near = @user.pending_pingas_in_listening_radius
 		pingas_far = @user.pingas_outside_listening_radius
@@ -51,55 +44,13 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
 			@pinga_hash[:pingas_outside_radius].push(ping_obj.attributes.merge('start_time' => ping_obj.start_time.strftime('%Y-%m-%d %H:%M:%S %z'), 'end_time' => ping_obj.end_time.strftime('%Y-%m-%d %H:%M:%S %z'))) #add more keys and values for time paramters
 		end				
 
-		# # Pinga.all.each_with_index do |ping_obj, index|
-		# # 	@pinga_array.push(ping_obj.attributes.merge('start_time' => ping_obj.start_time.strftime('%Y-%m-%d %H:%M:%S %z'), 'end_time' => ping_obj.end_time.strftime('%Y-%m-%d %H:%M:%S %z'))) #add more keys and values for time paramters
-		# # end
-
 		respond_with @pinga_hash
 	end
 
 
-#USE THIS TO CREATE RELATIONSHIP BETWEEN PINGAS
-
- # def update_user_pingas
- #    Pinga.near(self, self.listening_radius).where(status: ["pending", "active"]).each do |pinga|
- #      self.pingas << pinga unless self.pingas.include?(pinga)
- #    end
- #    self.save
- #  end
-
- 
-
-  #  def create
-  #   user = User.find(session[:user_id])
-  #   pinga = Pinga.new
-  #   pinga.title = message["pinga[title]"]
-  #   pinga.category_id = message["pinga[category_id]"]
-  #   pinga.description = message["pinga[description]"]
-  #   pinga.address = message["pinga[address]"]
-  #   pinga.duration = message["duration"].to_i
-  #   pinga.start_time = Time.parse("#{message[:today]} #{message["pinga[start_time]"]}")
-  #   pinga.creator = user
-  #   pinga.save
-
-  #   user_pinga = UserPinga.new
-  #   user_pinga.user = user
-  #   user_pinga.pinga = pinga
-  #   user_pinga.rsvp_status = "creator"
-  #   user_pinga.attend_status = "creator"
-  #   user_pinga.save
-
-  #   pinga_marker = create_marker(pinga, user)
-  #   broadcast_message :new, {marker: pinga_marker}, :namespace => 'pingas'
-  # end
-
-
-
-
-
 
 	def recieve_request_create_event
-		p "THIS IS INSIDE CREATE EVENT ACTION *************************************************************************************************************************************************************************************************************************************************************************************************************************************************************"
+		p "THIS IS INSIDE CREATE EVENT ACTION ************************************************************************************"
 		
 		@data = params[:data]
 		@user = User.find_by_uid(@data[:uid])
@@ -139,13 +90,6 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
 		@pinga.save
 
 #-------------------------------------------------------creating user_pinga
-	#   user_pinga = UserPinga.new
-  #   user_pinga.user = user
-  #   user_pinga.pinga = pinga
-  #   user_pinga.rsvp_status = "creator"
-  #   user_pinga.attend_status = "creator"
-  #   user_pinga.save
-
 		user_pinga = UserPinga.new
 		user_pinga.user = @user
 		user_pinga.pinga = @pinga
@@ -153,8 +97,6 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
 		user_pinga.attend_status = "creator"
 		user_pinga.save  
 #------------------------------------------------------------------------------
-
-		#@pinga.creator_id = 1 #THIS IS HARDCODED 
 
 		puts "THIS IS THIS THE PINGA"
 		p @pinga
@@ -188,19 +130,83 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
 		respond_with @bool_hash
 	end
 
+def recieve_request_register_rsvp_info
+	puts "INSIDE RSVP REQUEST"
+	p params[:data][:uid]
+	p params[:data][:rsvp_status]
+	p params[:data][:event_id]
+
+	user = User.find_by_uid(params[:data][:uid])
+	pinga = Pinga.find_by_id(params[:data][:event_id])
+	user_pinga = UserPinga.where(user_id: user.id ,pinga_id: pinga.id)
+	p user_pinga 
+
+	# if params[:rsvp_status] == "attending"
+	# 	user_pinga.rsvp_status = params[:rsvp_status]
+	# else
+	# 	user_pinga.rsvp_status = nil
+	# end
+	# user_pinga.save
+	# p user_pinga
+
+	respond_with params
+end 
+
+  # def update
+  #   user_pinga = UserPinga.find(params[:id])
+  #   if params[:rsvp_status] == "attending"
+  #     user_pinga.rsvp_status = params[:rsvp_status]
+  #   else
+  #     user_pinga.rsvp_status = nil
+  #   end
+  #   user_pinga.save
+
+  #   if user_pinga.rsvp_status == "attending"
+  #     render json: {attending: true}
+  #   else
+  #     render json: {attending: false}
+  #   end
+  # end
+
+
 end
 
+#------------------------------------------------------------------------------------------------------
+#USE THIS TO CREATE RELATIONSHIP BETWEEN PINGAS AND USERS IN RANGE
+
+ # def update_user_pingas
+ #    Pinga.near(self, self.listening_radius).where(status: ["pending", "active"]).each do |pinga|
+ #      self.pingas << pinga unless self.pingas.include?(pinga)
+ #    end
+ #    self.save
+ #  end
+
+ #USE THIS TO CREATE RELATIONSHIP BETWEN PINGAS AND CREATORS
+  #  def create
+  #   user = User.find(session[:user_id])
+  #   pinga = Pinga.new
+  #   pinga.title = message["pinga[title]"]
+  #   pinga.category_id = message["pinga[category_id]"]
+  #   pinga.description = message["pinga[description]"]
+  #   pinga.address = message["pinga[address]"]
+  #   pinga.duration = message["duration"].to_i
+  #   pinga.start_time = Time.parse("#{message[:today]} #{message["pinga[start_time]"]}")
+  #   pinga.creator = user
+  #   pinga.save
+
+  #   user_pinga = UserPinga.new
+  #   user_pinga.user = user
+  #   user_pinga.pinga = pinga
+  #   user_pinga.rsvp_status = "creator"
+  #   user_pinga.attend_status = "creator"
+  #   user_pinga.save
+
+  #   pinga_marker = create_marker(pinga, user)
+  #   broadcast_message :new, {marker: pinga_marker}, :namespace => 'pingas'
+  # end
+#-----------------------------------------------------------------------------------------------------
 
   
-
-
-
-
-
-
-
-
-
 
 
 =begin
