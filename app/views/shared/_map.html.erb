@@ -26,18 +26,18 @@
         map = new google.maps.Map(document.getElementById('map'),
                 mapOptions);
 
-        var image = new google.maps.MarkerImage(
-                'http://plebeosaur.us/etc/map/bluedot_retina.png',
-                null, // size
-                null, // origin
-                new google.maps.Point( 8, 8 ), // anchor (move to center of marker)
-                new google.maps.Size( 17, 17 ) // scaled size (required for Retina display icon)
-        );
+//        var image = new google.maps.MarkerImage(
+//                'http://plebeosaur.us/etc/map/bluedot_retina.png',
+//                null, // size
+//                null, // origin
+//                new google.maps.Point( 8, 8 ), // anchor (move to center of marker)
+//                new google.maps.Size( 17, 17 ) // scaled size (required for Retina display icon)
+//        );
         user_marker = new google.maps.Marker({
             position: map.getCenter(),
             map: map,
 //            icon: image,
-            icon: 'assets/user.png',
+            icon: 'assets/pingaMarker.png',
             title: "user"
         });
         user_marker.setDraggable (true);
@@ -45,6 +45,7 @@
         newPingaMarker = new google.maps.Marker({
             position: map.getCenter(), // this should be the user's location
             map: null,
+            icon: 'assets/pingaMarker.png',
             title: 'Your current location',
             draggable: true
         });
@@ -264,6 +265,7 @@
         function showNew() {
             newPingaMarker.setMap(map);
             newPingaMarker.setPosition(user_marker.position);
+            user_marker.setIcon('assets/<%= @user.gender %>.png');
             closeInfos();
             $('#show').css('display', 'none');
             $('#index_list').css('display', 'none');
@@ -275,6 +277,7 @@
 
         function showList() {
             newPingaMarker.setMap(null);
+            user_marker.setIcon('assets/pingaMarker.png');
             closeInfos();
             $('#show').css('display', 'none');
             $('#new').css('display', 'none');
@@ -287,6 +290,7 @@
         function showShow(id) {
             newPingaMarker.setMap(null);
             user_marker.setDraggable (true);
+            user_marker.setIcon('assets/pingaMarker.png');
             var marker = findMarkerById(id);
             var infowindow = new google.maps.InfoWindow();
             var content = marker.infowindow;
