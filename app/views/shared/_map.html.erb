@@ -460,7 +460,7 @@
 
 //    SOCKET STUFF
 
-        dispatcher.bind('pingas.new', function(pinga) {
+        dispatcher.bind('new', function(pinga) {
             addMarker(pinga.marker);
             $.ajax({
                 url: '/users/' + <%= @user.id %>,
