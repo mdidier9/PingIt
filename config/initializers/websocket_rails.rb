@@ -21,7 +21,7 @@ WebsocketRails.setup do |config|
   # multiple server instances.
   # * Requires Redis.
   # WebsocketRails.setup do |config|
-  #   config.synchronize = true
+  config.synchronize = true
   # end
 
   # Prevent Thin from daemonizing (default is true)
