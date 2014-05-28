@@ -1,6 +1,4 @@
-$(function() {  
-
-    // viewing preferences default on homepage load
+function showPingasAccordingToPrefs () {
     var allBoxes = $('input[type="checkbox"]:not([id^="my_"])');
     for (var i = 0; i < allBoxes.length; i++) {
         var category = allBoxes[i].id;
@@ -10,6 +8,12 @@ $(function() {
             $(".main_list."+category).show();
         }
     }
+}
+
+$(function() {  
+
+    // viewing preferences default on homepage load
+    showPingasAccordingToPrefs();
 
 // click
     $("#tabs").tabs();
@@ -58,19 +62,15 @@ $(function() {
             dataType: 'json',
             success: function (data) {
                 if (data.listening) {
+                    $('input[type="checkbox"][id="' + data.category + '"]').prop("checked", false);
                     // they are listening. we need to uncheck the boxes.
                 } else {
+                    $('input[type="checkbox"][id="' + data.category + '"]').prop("checked", true);
                     // they are not listening. we need to check the boxes.
                 }
+                showPingasAccordingToPrefs();
             }
         });
-
-        // check to see if they are listening or un-listening.
-        // unlistening: check is true
-        // listening: check is false
-        // send ajax call to user_categories controller and update listening_status to true or false accordingly
-        // success:
-        // check/uncheck corresponding listening button on front page
     });
 
 // slider

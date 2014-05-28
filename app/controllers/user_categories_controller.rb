@@ -5,6 +5,6 @@ class UserCategoriesController < ApplicationController
     user_cat.listening_status = params[:new_listening_status]
     user_cat.save
 
-    render json: {listening: user_cat.listening_status}
+    render json: {listening: user_cat.listening_status, category: user_cat.category.title}
   end
 end
