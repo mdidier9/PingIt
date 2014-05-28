@@ -30,4 +30,5 @@ Ping::Application.configure do
 
 
   config.middleware.delete Rack::Lock
+  ENV["REDISTOGO_URL"] = 'redis://localhost:6379'
 end
