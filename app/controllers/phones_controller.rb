@@ -3,6 +3,18 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
 
 	respond_to :json
 
+	def set_radius
+		uid = params[:data][:uid]
+		radius = params[:data][:radius]
+
+		@user = User.find_by_uid(uid)
+		
+		@user.listening_radius = radius
+		@user.save
+		respond_with @user.attributes
+
+	end
+
 	def recieve_request_get_events
 		p "THIS IS INSIDE GET EVENTS ACTION ********************"
 
