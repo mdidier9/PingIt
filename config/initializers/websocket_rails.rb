@@ -20,9 +20,9 @@ WebsocketRails.setup do |config|
   # Change to true to enable channel synchronization between
   # multiple server instances.
   # * Requires Redis.
-  WebsocketRails.setup do |config|
-    config.synchronize = true
-  end
+  # WebsocketRails.setup do |config|
+  #   config.synchronize = true
+  # end
 
   # Prevent Thin from daemonizing (default is true)
   # config.daemonize = false
