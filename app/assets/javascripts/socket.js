@@ -1,4 +1,4 @@
-dispatcher = new WebSocketRails('localhost:3000/websocket');
+dispatcher = new WebSocketRails('localhost:5000/websocket');
 channel = dispatcher.subscribe('pingas');
 
 function submitToSocket(data) {
