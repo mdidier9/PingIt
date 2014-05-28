@@ -6,16 +6,10 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
 	def set_radius
 		uid = params[:data][:uid]
 		radius = params[:data][:radius]
-
 		@user = User.find_by_uid(uid)
-		
 		@user.listening_radius = radius
 		@user.save
-
-		puts "???????????????????????????????????????????????????????????????"
-		p @user.attributes
 		@check_hash = {radius_set_to: @user.listening_radius, for_this_person: @user.name} 
-		p @check_hash
 		respond_with @check_hash
 	end
 
@@ -26,6 +20,17 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
 		@user.latitude = params[:data][:latitude]
 		@user.longitude = params[:data][:longitude]
 		@user.save
+
+		@user.update_user_pingas
+		"ALL USER PINGAS (update_user_pingas)"
+		p @user.pingas 
+
+		# def update_user_pingas
+	 #    Pinga.near(self, self.listening_radius).where(status: ["pending", "active"]).each do |pinga|
+	 #      self.pingas << pinga unless self.pingas.include?(pinga)
+	 #    end
+  #   self.save
+  # 	end
 
 		pingas_active_near = @user.active_pingas_in_listening_radius
 		pingas_pending_near = @user.pending_pingas_in_listening_radius
@@ -136,6 +141,16 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
 		 today_string = Date.today.strftime("%a %b %d %Y") + " #{@data[:start_time]}"
 		 @pinga.start_time = Time.parse(today_string)
 		end
+
+
+#-------------------------------------------------------creating user_pinga
+		# user_pinga = UserPinga.new
+  #   user_pinga.user = user
+  #   user_pinga.pinga = pinga
+  #   user_pinga.rsvp_status = "creator"
+  #   user_pinga.attend_status = "creator"
+  #   user_pinga.save
+#------------------------------------------------------------------------------
 
 
 		@pinga.creator_id = 1 #THIS IS HARDCODED (need have some information about the user somewhere at login)
