@@ -31,4 +31,20 @@ describe PhonesController do
 		end
 	end	
 
+	context "check for user" do
+		it "checks for the existence of a valid user in the db" do
+			data = {data: {uid: "1"}}
+			get(:check_for_user, data.merge(format: :json))
+			bool_hash = {"user_exists" => "true"}
+			expect(JSON.parse(response.body)).to include(bool_hash)
+		end
+
+		it "checks for the existence of a user in the db and creates a new one" do
+			data = {data: {uid: "2"}}
+			get(:check_for_user, data.merge(format: :json))
+			bool_hash = {"user_exists" => "new user created"}
+			expect(JSON.parse(response.body)).to include(bool_hash)
+		end
+	end
+
 end
