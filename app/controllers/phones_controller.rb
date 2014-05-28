@@ -21,6 +21,24 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
 		@user.longitude = params[:data][:longitude]
 		@user.save
 
+
+	#-----------------------------------------------------------------updating attending status based on rsvp
+
+	
+
+
+
+
+
+
+
+
+	#-----------------------------------------------------------------------------------------------------	
+
+
+
+
+
 		@user.update_user_pingas
 		"ALL USER PINGAS (update_user_pingas)"
 		p @user.pingas 
@@ -62,6 +80,7 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
 		@pinga.address = @data[:address] #WHAT IF THE ADDRESS IS INCORRECT (do we need validations on the phone?)
 		@pinga.duration = @data[:duration]
 
+
 #---------------------------------------------------------------------------creating pinga.start_time
 		selected_hour = ((/^\d+/.match(@data[:start_time]))[0]).to_i
 		selected_hour += 12 if (/[P|p]/.match(@data[:start_time]))
@@ -97,13 +116,10 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
 		user_pinga.attend_status = "creator"
 		user_pinga.save  
 #------------------------------------------------------------------------------
-
-
-		@pinga.creator_id = 1 #THIS IS HARDCODED (need have some information about the user somewhere at login)
-		@pinga.save
+		
     WebsocketRails[:pingas].trigger('update', {id: @pinga.id, status: @pinga.status, category: @pinga.category.title}.to_json)
+		
 		puts "THIS IS THIS THE CREATED EVENT"
-
 		p @pinga
 		puts "THIS IS THE USER"
 		p @user
@@ -146,7 +162,7 @@ def recieve_request_register_rsvp_info
 	user_pinga = UserPinga.where(user_id: user.id ,pinga_id: pinga.id)
 	p user_pinga 
 
-
+#---------------------------------------------------------updating rsvp status upon button push
 	unless user_pinga.rsvp_status == "creator"
 		if params[:rsvp_status] == "attending"
 			user_pinga.rsvp_status = params[:rsvp_status]
@@ -157,6 +173,7 @@ def recieve_request_register_rsvp_info
 		p "THIS USER_PINGA IS NOT FOR A CREATOR"
 		p user_pinga
 	end
+#-------------------------------------------------------------------------------------------
 
 	respond_with params
 end 
