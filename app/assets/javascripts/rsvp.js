@@ -6,10 +6,8 @@ $(function() {
     var current = $($(this).find(':first-child')).html();
     if (current == "You are not going!") {
       var rsvp = "attending";
-      console.log("switch will be to attending");
     } else if (current == "You are going!") {
       var rsvp = "not attending";
-      console.log("switch will be to not attending");
     } else {
       var rsvp = null;
     }
