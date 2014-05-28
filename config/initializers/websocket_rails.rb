@@ -44,6 +44,7 @@ WebsocketRails.setup do |config|
   #       port: '6379'
   #   }
   # end
+  config.redis_options = {url: ENV["REDISTOGO_URL"]}
 
   # By default, all subscribers in to a channel will be removed
   # when that channel is made private. If you don't wish active
