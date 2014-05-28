@@ -37,7 +37,7 @@
             position: map.getCenter(),
             map: map,
 //            icon: image,
-            icon: 'assets/pingaMarker.png',
+            icon: 'pingaMarker.png',
             title: "user"
         });
         user_marker.setDraggable (true);
@@ -45,7 +45,7 @@
         newPingaMarker = new google.maps.Marker({
             position: map.getCenter(), // this should be the user's location
             map: null,
-            icon: 'assets/pingaMarker.png',
+            icon: 'pingaMarker.png',
             title: 'Your current location',
             draggable: true
         });
@@ -265,7 +265,7 @@
         function showNew() {
             newPingaMarker.setMap(map);
             newPingaMarker.setPosition(user_marker.position);
-            user_marker.setIcon('assets/<%= @user.gender %>.png');
+            user_marker.setIcon('<%= @user.gender %>.png');
             closeInfos();
             $('#show').css('display', 'none');
             $('#index_list').css('display', 'none');
@@ -277,7 +277,7 @@
 
         function showList() {
             newPingaMarker.setMap(null);
-            user_marker.setIcon('assets/pingaMarker.png');
+            user_marker.setIcon('pingaMarker.png');
             closeInfos();
             $('#show').css('display', 'none');
             $('#new').css('display', 'none');
@@ -290,7 +290,7 @@
         function showShow(id) {
             newPingaMarker.setMap(null);
             user_marker.setDraggable (true);
-            user_marker.setIcon('assets/pingaMarker.png');
+            user_marker.setIcon('pingaMarker.png');
             var marker = findMarkerById(id);
             var infowindow = new google.maps.InfoWindow();
             var content = marker.infowindow;
@@ -490,7 +490,7 @@
         channel.bind('update', function(message) {
             var pinga = JSON.parse( message );
             var markerIndex = findMarkerIndex(pinga.id);
-            pingaMarkers[markerIndex].setIcon('assets/' + pinga.category + '_' + pinga.status + '.png');
+            pingaMarkers[markerIndex].setIcon(pinga.category + '_' + pinga.status + '.png');
             $.ajax({
                 url: '/users/' + <%= @user.id %>,
                 type: 'PUT',
