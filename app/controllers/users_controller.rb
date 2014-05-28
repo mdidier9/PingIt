@@ -30,7 +30,7 @@ def pinga_markers
                  :longitude  => pinga.longitude,
                  :category   => pinga.category.title,
                  :infowindow => render_to_string(:partial => "/shared/infowindow", :locals => { pinga: pinga }),
-                 :picture => {  "url" => "assets/#{pinga.status}/#{pinga.category.title}.png",
+                 :picture => {  "url" => "assets/#{pinga.category.title}_#{pinga.status}.png",
                                 "width" => 20,
                                 "height" => 34}
       }
@@ -45,7 +45,7 @@ def pinga_markers
                  :longitude  => pinga.longitude,
                  :category   => pinga.category.title,
                  :infowindow => render_to_string(:partial => "/shared/infowindow", :locals => { pinga: pinga }),
-                 :picture => {  "url" => "assets/grey.png",
+                 :picture => {  "url" => "assets/#{pinga.category.title}_outside.png",
                                 "width" => 20,
                                 "height" => 34}
       }
