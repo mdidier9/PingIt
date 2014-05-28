@@ -38,6 +38,45 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
 	end
 
 
+#USE THIS TO CREATE RELATIONSHIP BETWEEN PINGAS
+
+ # def update_user_pingas
+ #    Pinga.near(self, self.listening_radius).where(status: ["pending", "active"]).each do |pinga|
+ #      self.pingas << pinga unless self.pingas.include?(pinga)
+ #    end
+ #    self.save
+ #  end
+
+ 
+
+  #  def create
+  #   user = User.find(session[:user_id])
+  #   pinga = Pinga.new
+  #   pinga.title = message["pinga[title]"]
+  #   pinga.category_id = message["pinga[category_id]"]
+  #   pinga.description = message["pinga[description]"]
+  #   pinga.address = message["pinga[address]"]
+  #   pinga.duration = message["duration"].to_i
+  #   pinga.start_time = Time.parse("#{message[:today]} #{message["pinga[start_time]"]}")
+  #   pinga.creator = user
+  #   pinga.save
+
+  #   user_pinga = UserPinga.new
+  #   user_pinga.user = user
+  #   user_pinga.pinga = pinga
+  #   user_pinga.rsvp_status = "creator"
+  #   user_pinga.attend_status = "creator"
+  #   user_pinga.save
+
+  #   pinga_marker = create_marker(pinga, user)
+  #   broadcast_message :new, {marker: pinga_marker}, :namespace => 'pingas'
+  # end
+
+
+
+
+
+
 	def recieve_request_create_event
 		p "THIS IS INSIDE CREATE EVENT ACTION ********************"
 		
