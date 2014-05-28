@@ -12,7 +12,6 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
 		@user.listening_radius = radius
 		@user.save
 		respond_with @user.attributes
-
 	end
 
 	def recieve_request_get_events

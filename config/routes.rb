@@ -16,5 +16,5 @@ Ping::Application.routes.draw do
   match 'phone/create_event', to: 'phones#recieve_request_create_event', via: [:get] 
   match 'phone/register_rsvp_info', to: 'phones#recieve_request_register_rsvp_info', via: [:get]
   match 'phone/checkforuser', to: 'phones#check_for_user', via: [:get]
-  match 'phone/set_radius', to: 'phones#set_radius' via: [:get]
+  match 'phone/set_radius', to: 'phones#set_radius', via: [:get]
 end
