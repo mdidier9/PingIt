@@ -141,13 +141,17 @@ def recieve_request_register_rsvp_info
 	user_pinga = UserPinga.where(user_id: user.id ,pinga_id: pinga.id)
 	p user_pinga 
 
-	# if params[:rsvp_status] == "attending"
-	# 	user_pinga.rsvp_status = params[:rsvp_status]
-	# else
-	# 	user_pinga.rsvp_status = nil
-	# end
-	# user_pinga.save
-	# p user_pinga
+
+	unless user_pinga.rsvp_status == "creator"
+		if params[:rsvp_status] == "attending"
+			user_pinga.rsvp_status = params[:rsvp_status]
+		else
+			user_pinga.rsvp_status = nil
+		end
+		user_pinga.save
+		p "THIS USER_PINGA IS NOT FOR A CREATOR"
+		p user_pinga
+	end
 
 	respond_with params
 end 
