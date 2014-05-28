@@ -4,7 +4,6 @@ $(function() {
     userPingaId = /\d*$/.exec(this.id)[0];
     var currentPingaDivClass = $(this).attr("class");
     var pingaId = /\d*$/.exec(currentPingaDivClass)[0];
-    console.log(pingaId);
     var current = $($(this).find(':first-child')).html();
     if (current == "You are not going!") {
       var rsvp = "attending";
