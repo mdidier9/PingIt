@@ -5,18 +5,13 @@
 	  <%= stylesheet_link_tag "application"%>
 	  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&libraries=places,geometry"></script>
     <script src='//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js' type='text/javascript'></script>
+    <link href='http://fonts.googleapis.com/css?family=Neuton:200,300,400,700,800' rel='stylesheet' type='text/css'>
     <%= javascript_include_tag "application"%>
 	  <%= csrf_meta_tags %>
 	</head>
 	<body>
     <%= render "layouts/topnav" %>
     <div class="container" style='width: 1100px; height: 520px;'>
-        <% if flash[:notice] %>
-          <div class="flash-notice">
-            <p class="flash-text"><%= flash[:notice] %></p>
-          </div>
-        <% end %>
-
         <div class="map">
         <%= render partial: "shared/map" %>
         </div>
@@ -24,7 +19,6 @@
             <%= yield %>
         </div>
     </div>
-    <%= render "layouts/footer" %>
     <script>google.maps.event.addDomListener(window, 'load', initialize);</script>
 	</body>
 </html>
