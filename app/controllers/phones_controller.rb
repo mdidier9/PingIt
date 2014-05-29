@@ -5,10 +5,10 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
 
 	def set_radius
 		uid = params[:data][:uid]
-		radius = params[:data][:radius]
+		# radius = params[:data][:radius]
 		@user = User.find_by_uid(uid)
-		@user.listening_radius = radius
-		@user.save
+		# @user.listening_radius = radius
+		# @user.save
 		@check_hash = {radius_set_to: @user.listening_radius, for_this_person: @user.name} 
 		respond_with @check_hash
 	end
@@ -23,11 +23,6 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
 
 
 	#-----------------------------------------------------------------updating attending status based on rsvp
-
-	
-
-
-
 
 	#-----------------------------------------------------------------------------------------------------	
 
