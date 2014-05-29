@@ -11,6 +11,6 @@ feature 'User browsing the website' do
     visit root_path
     mock_auth_hash
     click_link "sign_in"
-    page.should have_content("Ping Create")
+    page.should have_content("settings")
   end
 end
