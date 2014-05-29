@@ -1,52 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  	<link rel="stylesheet" href="/assets/landing.css">
+  	<script src="./new_files/jquery-1.10.2.js"></script>
+    <script src="./new_files/jquery-ui.js"></script>
+  </head>
 
-<!-- saved from url=(0038)http://localhost:3000/sessions/new#_=_ -->
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<link rel="stylesheet" href="http://localhost:3000/assets/landing.css">
-	<script src="./new_files/jquery-1.10.2.js"></script>
-  <script src="./new_files/jquery-ui.js"></script>
-</head>
+  <body>
+    <div id="landing_ping" style="top: 240px;">
+  	 <img src="./new_files/active-745bf76302d7e7350f40e30a492447ae.png">
+    </div>
 
-<body><div id="landing_ping" style="top: 240px;">
-	<img src="./new_files/active-745bf76302d7e7350f40e30a492447ae.png">
-</div>
+    <div id="wrapper">
+    	
+  		<div class="blurb">
+  			<h4><span id="event_title">Events</span> - When and Where they matter most</h4>
+  		</div>
 
-<div id="wrapper">
-	
-		<div class="blurb">
-			<h4><span id="event_title">Events</span> - When and Where they matter most</h4>
-		</div>
-		<div class="container">
-	    <div id="login">
-	    	<h1>PingIt</h1>
-	      <h4 id="fb"><a href="http://localhost:3000/auth/facebook" id="sign_in"><img alt="Facebook" border="0" src="./new_files/facebook.png" width="250"></a></h4>
-	    </div>
-		</div>
-		<div class="footer">
-  <div class="column-left">
-    <br>
-    <h1>Ping</h1>
-    <p>Create and Event that you want to share with others.  Anyone who is listening for your event nearby will be informed fo the event with a Ping!</p>
-  </div>
+  		<div class="container">
+  	    <div id="login">
+  	    	<h1>PingIt</h1>
+  	      <h4 id="fb"><a href="http://localhost:3000/auth/facebook" id="sign_in"><img alt="Facebook" border="0" src="./new_files/facebook.png" width="250"></a></h4>
+  	    </div>
+  		</div>
 
-  <div class="column-center">
-    <br>
-    <h1>Listen</h1>
-    <p>Listen for Pings according to your personal interests and preferred listening distance.  When a new event is created you will be informed right away!</p>
-  </div>
+  		<div class="footer">
+        <div class="column-left">
+          <br>
+          <h1>Ping</h1>
+          <p>Create and Event that you want to share with others.  Anyone who is listening for your event nearby will be informed fo the event with a Ping!</p>
+        </div>
+
+        <div class="column-center">
+          <br>
+          <h1>Listen</h1>
+          <p>Listen for Pings according to your personal interests and preferred listening distance.  When a new event is created you will be informed right away!</p>
+        </div>
 
 
-  <div class="column-right">
-    <br>
-      <h1>Do</h1>
-      <p>Spontaneous events happen all over the city each and every day.  With Ping-It, you can be made aware of these events and stay involved in your community!</p>
-  </div>
-</div>
-	
-</div>
+    <div class="column-right">
+      <br>
+        <h1>Do</h1>
+        <p>Spontaneous events happen all over the city each and every day.  With Ping-It, you can be made aware of these events and stay involved in your community!</p>
+    </div>
+    </div>
+    	
+    </div>
 
-<script>
-	$(function() {
-		var greenPing = $("#landing_ping")
-		greenPing.delay(1000).animate({top:"240px"}, 1000);
-	});
-</script></body></html>
+    <script>
+    	$(function() {
+    		var greenPing = $("#landing_ping")
+    		greenPing.delay(1000).animate({top:"240px"}, 1000);
+    	});
+    </script>
+  </body>
+</html>
