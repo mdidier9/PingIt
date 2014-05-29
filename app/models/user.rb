@@ -28,10 +28,12 @@ class User < ActiveRecord::Base
       user.provider = auth.provider
       user.uid = auth.uid
       user.name = auth.info.name
+      20.times{puts "********************"}
+      puts auth
       user.oauth_token = auth.credentials.token
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+      user.gender = auth.extra.raw_info.gender
       user.save!
-      p auth
     end
   end
 
@@ -43,11 +45,11 @@ class User < ActiveRecord::Base
   end
 
   def active_pingas_in_listening_radius
-    Pinga.near(self, self.listening_radius).where(status: "active")
+    Pinga.where(status: "active").near(self, self.listening_radius)
   end
 
   def pending_pingas_in_listening_radius
-    Pinga.near(self, self.listening_radius).where(status: "pending")
+    Pinga.where(status: "pending").near(self, self.listening_radius)
   end
 
   def pingas_outside_listening_radius
@@ -84,17 +86,11 @@ class User < ActiveRecord::Base
   end
 
   def pingas_rsvpd_to
-    pingas = self.user_pingas.where(rsvp_status: "attending").map { |user_pinga|
-      user_pinga.pinga
-    }.select { |pinga|
-      pinga.status == "active" || pinga.status == "pending"
-    }.sort_by { |pinga|
-      pinga.start_time
-    }
+    self.user_pingas.where(rsvp_status: "attending").map{|user_pinga|user_pinga.pinga}.select {|pinga| pinga.status != "cancelled" && pinga.status != "expired" }.sort_by { |pinga| pinga.start_time }
   end
 
   def your_created_pingas
-    self.created_pingas.select {|pinga| pinga.status != "cancelled" }.sort_by { |pinga| pinga.start_time }
+    self.created_pingas.select {|pinga| pinga.status != "cancelled" && pinga.status != "expired" }.sort_by { |pinga| pinga.start_time }
   end
 
   def in_listening_radius_of(pinga)

@@ -1,15 +1,22 @@
 .styled-label {
     float:left;
-    width:4.0em;
     background-color:#911;
-    color:#fff;
-    border-radius: 5px;
+    border: 1px #696758 solid ;
+    border-radius: 3px;
+    margin-left:10px;
+}
+
+.styled-label:hover {
+    cursor:pointer;
 }
 
 .styled-label span {
-    text-align:center;
-    padding:3px 0px;
-    display:block;
+    font-family: "Neuton";
+    font-size: 1.250em;
+    text-align:left;
+    color: #EFE6AB;
+    padding: 8px 12px;
+    display: block;
 }
 
 .styled-label input {
@@ -18,6 +25,5 @@
 }
 
 .styled-label input:checked + span {
-    background-color: #CCC;
-    border-radius: 5px;
+    background-color: #44484B;
 }

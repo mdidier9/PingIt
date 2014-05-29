@@ -16,11 +16,20 @@ $(function() {
     // viewing preferences default on homepage load
     showPingasAccordingToPrefs();
 
-    // click
-    $("#tabs").tabs();
-    $("#my_tabs").tabs();
+    // tab view on ready defaults to newest
+    $('#newest').show();
+    $('#nearest').hide();
+    $('#soonest').hide();
+
+    // tab clicks change lists
+    $(document).on("click", ".sorter-tabs", function(event) {
+        var neededUlId = ($(event.target).attr("class").split(" "))[1];
+        $('.scroll ul').hide();
+        $('ul[id='+neededUlId+']').show();
+    });
+
   
-	$('#format :checkbox').click(function(event) {
+    $('#format :checkbox').click(function(event) {
         var $this = $(this);
         if ($this.is(':checked')) {
             var category = this.id;
@@ -35,7 +44,7 @@ $(function() {
                 pinga.setMap(map);
             })
         }
-	});
+    });
 
     $('input[id^="my_"]').on('click', function(event){
         var listening = !(event.target.checked);
@@ -64,6 +73,8 @@ $(function() {
             }
         });
     });
+
+
 
 // slider
 

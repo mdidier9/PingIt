@@ -1,56 +1,106 @@
+/* color pallete */
 $red: #ed2224;
+$darkred: #911;
+$darkgray: #35393C;
+$lightergray: #44484B;
+$deadmiddle: #696758;
+$palestyellow: #EFE6AB;
+$midyellow: #C4BC8D;
+$palegray: #BFBFBF;
+
 $green: #0c7d5e;
-$grey: #332d2d;
 $white: #fbfbfb;
 $yellow: #ffe583;
-
-$brightgreen: green;
+$brightgreen: #39B549;
 $brightyellow: yellow;
 
 body {
-  background-color: $grey;
-  color: $green;
+  font-family: 'Neuton', serif;
 }
 
 .container {
-  margin: 20px auto;
-  width: 80%;
-  padding: 0px 20px 20px 20px;
+  margin: auto;
+  width: 90%;
 }
-
 
 .container div {
   display: inline-block;
 }
 
 
+#pinga-logo-sm {
+  width:40px;
+  height:67px;
+  margin-left:10px;
+}
+
+a {
+  text-decoration: none;
+}
+
+#topnav {
+  margin-bottom: 10px;
+}
+
+#home-link {
+  letter-spacing: 4.0px;
+  font-family: 'Neuton', serif;
+  margin-left: 20px;
+  font-size:3.50em;
+  color: $darkgray;
+  font-weight:bold;
+}
+
+#home-link:hover {
+  color: $red;
+}
+
+#settings {
+  font-size: 2.00em;
+  font-weight:bold;
+  letter-spacing: 1.25px;
+  color: $darkgray;
+  float:right;
+  margin:40px 30px 0px 0px;
+}
+
+#settings:hover {
+  color: $red;
+}
+
 .map {
-//  float: left;
-//  margin: 10px;
-  background-color: $yellow;
-  border:8px solid $yellow;
-  border-radius:10px;
+  background-color: $darkgray;
+  border:8px solid $darkgray;
+  border-radius:0px 5px 5px 0px;
 }
 
 .content {
-  background-color: $yellow;
-//  margin-left:20px;
-  float:right;
+  background-color: $darkgray;
+  border-radius: 5px 0px 0px 5px;
   width:550px;
-  height:570px;
-  border-radius:10px;
+  height:569px;
+  float:left;
 }
 
-#tabs  {
-//  float:right;
-  margin-left:6px;
-  height: 450px;
-  width:530px;
-//  background-color:$green;
+#tabs li.sorter-tabs {
+  list-style-type: none;
+  display: inline-block;
+  margin-right: 20px;
+  font-size: 2.00em;
+  color:$palestyellow;
 }
+
+
+#tabs li.sorter-tabs:hover {
+  cursor:pointer;
+  color:$red;
+}
+
 
 #my_tabs  {
-//  float:right;
+  background: transparent; 
+  border: none; 
+  /*float:right;*/
   margin-left:6px;
   height: 290px;
   width:530px;
@@ -65,23 +115,23 @@ li a {
 }
 
 .scroll {
-  height:370px;
+  height:390px;
   overflow:auto;
-  background-color:$green;
-//  list-style-type: none;
+  /*background-color:$green;*/
+  /*list-style-type: none;*/
 }
 
 .my_scroll {
   height:200px;
   overflow:auto;
-  background-color:$green;
+  /*background-color:$green;*/
 //  list-style-type: none;
 }
 
-//A PING
+/* a ping  */
 .ping {
-//  border-style:solid;
-  border:1px solid $grey;
+  border:1px solid $darkgray;
+  background-color: $darkgray;
   position:relative;
   right:25px;
   margin:0;
@@ -91,31 +141,34 @@ li a {
 }
 
 .ping_title {
-//  text-align: center;
-  width:520px;
-  p {
-    display: inline;
-  }
+  /*text-align: center;*/
+  /*width:520px;*/
+}
+
+.ping_title p {
+  font-size: 1.0em;
+  display: inline;
 }
 
 .active {
-  background-color: $green;
+  /*background-color: $palegray;*/
+  color:$brightgreen;
 }
 
 .active:hover {
-  background-color: $brightgreen;
+  /*background-color: $brightgreen;*/
   cursor:pointer;
 }
 
 .pending {
-  background-color: $yellow;
+  /*background-color: $palegray;*/
+  color: $palestyellow;
 }
 
 .pending:hover {
-  background-color: $brightyellow;
+  /*background-color: $brightyellow;*/
   cursor:pointer;
 }
-
 
 .ping_list {
   list-style-type: none;
@@ -123,41 +176,25 @@ li a {
 }
 
 #format {
-  padding: 10px;
-  margin-left:8px;
+  padding:10px 0px;
 }
 
-//HEADER
+/*HEADER*/
 #topnav {
   width:100%;
-  background-color:$green;
+  margin-top:30px;
   padding:2px;
-  padding-left:12%;
-  padding-right:12%;
-}
-
-#inner_top_nav {
-//  margin-left:10%;
-//  margin-right:10%;
-
 }
 
 #topnav div {
-  display:inline;
+  display: inline;
 }
 
-#home {
-  a {
-    font-size:50px;
-    color: $red;
-    font-weight:bold;
-    text-decoration: none;
-  }
-}
+
 
 #logout {
   a {
-    color:$grey;
+    color:$darkgray;
     text-decoration: none;
     font-weight:bold;
   }
@@ -166,18 +203,28 @@ li a {
 
 //FOOTER
 .footer {
-  margin: 20px auto;
+  margin: auto;
+  /*margin-left:-5px;*/
   width: 960px;
-  height:160px;
+  height:200px;
   padding: 0px 20px 20px 20px;
-  text-align:center;
+  text-align: justify;
   column-count:3;
   -moz-column-count:3; /* Firefox */
   -webkit-column-count:3; /* Safari and Chrome */
 }
 
+.footer h1 {
+  text-align: center;
+}
 
-//BUTTON
+.footer div {
+  /*margin-left: 10px;*/
+  color: $darkgray;
+}
+
+
+/*create ping button*/
 .button {
   -moz-box-shadow:inset 0px 1px 0px 0px #544b4b;
   -webkit-box-shadow:inset 0px 1px 0px 0px #544b4b;
@@ -215,20 +262,69 @@ li a {
   margin-left:185px;
   margin-top:3px;
 }
+
 .button:hover {
   background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #0c7d5f), color-stop(1, #11c293) );
   background:-moz-linear-gradient( center top, #0c7d5f 5%, #11c293 100% );
   filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#0c7d5f', endColorstr='#11c293');
   background-color:#0c7d5f;
-}.button:active {
+}
+
+.button:active {
    position:relative;
    top:1px;
  }
 
-.ui-button .ui-button-text
-{
+.ui-button .ui-button-text {
  line-height: 0.6;
  font-size:9pt;
  font-weight:700;
  padding: 5px 18px;
 }
+
+.ui-tabs-nav{
+  background:transparent;
+  border: none;
+}
+
+.ui-state-active .ui-tabs-active {
+  border:none;
+  font-color:$brightgreen;
+}
+
+
+.ui-tabs-anchor {
+  font-family: "Neuton";
+  font-size:1.250em;
+  background-color:$palestyellow;
+  margin-bottom:-35px;
+  height: 20px;
+  width:120px;
+/*  padding:20px 0 0 15px;*/
+  /*border: 1px solid $palestyellow;*/
+}
+
+/*#ui-id-1 {
+  font-family: "Georgia";
+  background-color:#35393C;
+
+}
+
+#ui-id-2 {
+  font-family: "Georgia";
+  background-color:#35393C;
+}
+
+#ui-id-3 {
+  font-family: "Georgia";
+  background-color:#35393C;
+}*/
+
+/*.ui-state-default {
+  font-family: "Georgia";
+  font-color: $red;
+  font-size:;
+}*/
+/*.ui-tabs-nav {
+  padding:none;
+}*/

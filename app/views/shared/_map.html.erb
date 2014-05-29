@@ -7,8 +7,22 @@
 <script>
     function initialize() {
         markers = <%=raw @pinga_markers.to_json %>;
+        user_listening_radius = <%= @user.listening_radius %>
+        image_paths = {};
+        <% @categories.each do |category| %>
+        image_paths["<%= category.title %>"] = {}
+        image_paths["<%= category.title %>"]["active"] = '<%= asset_path("#{category.title}_active.png") %>';
+        image_paths["<%= category.title %>"]["pending"] = '<%= asset_path("#{category.title}_pending.png") %>';
+        image_paths["<%= category.title %>"]["outside"] = '<%= asset_path("#{category.title}_outside.png") %>';
+        <% end %>
+        console.log(image_paths);
+        console.log(image_paths);
+
+
+        console.log(image_paths);
         pingaMarkers = [];
         infos = [];
+        console.log("changed five");
 
 //        var map_style = [{featureType:"administrative",stylers:[{visibility:"off"}]},{featureType:"administrative.locality",elementType:"labels",stylers:[{visibility:"simplified"},{saturation:100},{color:"#ff4702"}]},{featureType:"road",stylers:[{saturation:-100},{visibility:"simplified"},{lightness:-25}]},{featureType:"water",stylers:[{color:"#5f1bff"},{saturation:100},{visibility:"on"},{lightness:-38}]},{featureType:"landscape.natural.terrain",stylers:[{visibility:"off"}]},{featureType:"poi",stylers:[{visibility:"off"}]},{featureType:"poi.park",stylers:[{visibility:"simplified"},{color:"#d3ff44"},{lightness:-32},{saturation:30}]},{featureType:"landscape.natural",elementType:"geometry.fill",stylers:[{visibility:"on"},{color:"#797679"},{gamma:4.92},{lightness:-47}]},{}]
 //        var map_style = [{featureType:"water",elementType:"geometry",stylers:[{color:"#a2daf2"}]},{featureType:"landscape.man_made",elementType:"geometry",stylers:[{color:"#f7f1df"}]},{featureType:"landscape.natural",elementType:"geometry",stylers:[{color:"#d0e3b4"}]},{featureType:"landscape.natural.terrain",elementType:"geometry",stylers:[{visibility:"off"}]},{featureType:"poi.park",elementType:"geometry",stylers:[{color:"#bde6ab"}]},{featureType:"poi",elementType:"labels",stylers:[{visibility:"off"}]},{featureType:"poi.medical",elementType:"geometry",stylers:[{color:"#fbd3da"}]},{featureType:"poi.business",stylers:[{visibility:"off"}]},{featureType:"road",elementType:"geometry.stroke",stylers:[{visibility:"off"}]},{featureType:"road",elementType:"labels",stylers:[{visibility:"off"}]},{featureType:"road.highway",elementType:"geometry.fill",stylers:[{color:"#ffe15f"}]},{featureType:"road.highway",elementType:"geometry.stroke",stylers:[{color:"#efd151"}]},{featureType:"road.arterial",elementType:"geometry.fill",stylers:[{color:"#ffffff"}]},{featureType:"road.local",elementType:"geometry.fill",stylers:[{color:"black"}]},{featureType:"transit.station.airport",elementType:"geometry.fill",stylers:[{color:"#cfb2db"}]}]
@@ -26,18 +40,17 @@
         map = new google.maps.Map(document.getElementById('map'),
                 mapOptions);
 
-        var image = new google.maps.MarkerImage(
-                'http://plebeosaur.us/etc/map/bluedot_retina.png',
-                null, // size
-                null, // origin
-                new google.maps.Point( 8, 8 ), // anchor (move to center of marker)
-                new google.maps.Size( 17, 17 ) // scaled size (required for Retina display icon)
-        );
+//        var image = new google.maps.MarkerImage(
+//                'http://plebeosaur.us/etc/map/bluedot_retina.png',
+//                null, // size
+//                null, // origin
+//                new google.maps.Point( 8, 8 ), // anchor (move to center of marker)
+//                new google.maps.Size( 17, 17 ) // scaled size (required for Retina display icon)
+//        );
         user_marker = new google.maps.Marker({
             position: map.getCenter(),
             map: map,
-//            icon: image,
-            icon: 'assets/user.png',
+            icon: '<%= asset_path('pingaMarker.png') %>',
             title: "user"
         });
         user_marker.setDraggable (true);
@@ -45,6 +58,7 @@
         newPingaMarker = new google.maps.Marker({
             position: map.getCenter(), // this should be the user's location
             map: null,
+            icon: '<%= asset_path('pingaMarker.png') %>',
             title: 'Your current location',
             draggable: true
         });
@@ -118,16 +132,10 @@
                 position: latLng,
                 map: null,
                 title: marker_info.title,
-                icon: marker_info.picture.url,
+                icon: image_paths[marker_info.category][marker_info.status],
                 infowindow: marker_info.infowindow
             });
-//            console.log(marker_info.picture.url)
-//            if (marker_info.picture.url == "assets/active/Deals.png")
-//            {
-//                console.log("title set")
-//                marker.title = "active"
-//            }
-//            console.log(marker);
+
             if (marker_info.drop) {
                 marker.setAnimation(google.maps.Animation.DROP);
             }
@@ -205,6 +213,7 @@
                     step: 0.25,
                     slide: function(event, ui) {
                         $("#slider-value").html(ui.value);
+                        user_listening_radius = ui.value
                     }
                 }
         );
@@ -226,6 +235,7 @@
             var p = user_marker.position;
             radiusCircle.setCenter(new google.maps.LatLng(p.lat(),p.lng()));
             var radius_in_miles = $('#slider').slider('value');
+            user_listening_radius = radius_in_miles;
             radiusCircle.setRadius(radius_in_miles * 1609.344);
         }, 50);
 
@@ -264,6 +274,7 @@
         function showNew() {
             newPingaMarker.setMap(map);
             newPingaMarker.setPosition(user_marker.position);
+            user_marker.setIcon('<%= asset_path("#{@user.gender}.png") %>');
             closeInfos();
             $('#show').css('display', 'none');
             $('#index_list').css('display', 'none');
@@ -275,6 +286,7 @@
 
         function showList() {
             newPingaMarker.setMap(null);
+            user_marker.setIcon('<%= asset_path("pingaMarker.png") %>');
             closeInfos();
             $('#show').css('display', 'none');
             $('#new').css('display', 'none');
@@ -287,6 +299,7 @@
         function showShow(id) {
             newPingaMarker.setMap(null);
             user_marker.setDraggable (true);
+            user_marker.setIcon('<%= asset_path("pingaMarker.png") %>');
             var marker = findMarkerById(id);
             var infowindow = new google.maps.InfoWindow();
             var content = marker.infowindow;
@@ -374,6 +387,7 @@
             }
 
             if ($("#errors").children().size() === 0 && $('#start-time-validations').text() == ""){
+
                 var day = $('#today-tomorrow').text();
                 if (day == "") {
                     var today = new Date();
@@ -381,34 +395,13 @@
                     var today = /\w{2,3} \w* \d{1,2}/.exec(day)[0];
                 }
                 data = $('form').serializeObject();
+//                putInCreatedList(data);
                 data.today = today;
                 submitToSocket(data);
                 showList();
                 $('form')[0].reset();
                 $('#today-tomorrow').html('');
                 $('#start-time-validations').html('');
-//                $.ajax({
-//                    url: '/pingas',
-//                    type: 'POST',
-//                    data: {data: data, today: today},
-//                    dataType: 'json',
-//                    success: function (new_pinga_id) {
-//                        console.log("ajax success");
-//                        $.ajax({
-//                            url: '/users/' + <%= @user.id %>,
-//                            type: 'PUT',
-//                            success: function (data) {
-//                                updateLists(data);
-//                                updateMarkers(data.markers);
-//                                showShow(new_pinga_id);
-//                                $('form')[0].reset();
-//                                $('#today-tomorrow').html('');
-//                                $('#start-time-validations').html('');
-//                            }
-//                        });
-//
-//                    }
-//                })
             }
         });
 
@@ -467,6 +460,21 @@
             });
         });
 
+        channel.bind('new_from_phone', function(message) {
+            console.log('new pinga from phone' + message);
+            var pinga = JSON.parse( message );
+            addMarker(pinga.marker);
+            $.ajax({
+                url: '/users/' + <%= @user.id %>,
+                type: 'PUT',
+                success: function (data) {
+                    updateLists(data);
+                }
+            });
+        });
+
+
+
         dispatcher.bind('pingas.destroy', function(pingaId) {
             var markerIndex = findMarkerIndex(pingaId);
             pingaMarkers[markerIndex].setMap(null);
@@ -486,7 +494,10 @@
         channel.bind('update', function(message) {
             var pinga = JSON.parse( message );
             var markerIndex = findMarkerIndex(pinga.id);
-            pingaMarkers[markerIndex].setIcon('assets/' + pinga.category + '_' + pinga.status + '.png');
+            if (within_listening_radius(pingaMarkers[markerIndex], user_marker))
+            {
+                pingaMarkers[markerIndex].setIcon(image_paths[pinga.category][pinga.status]);
+            }
             $.ajax({
                 url: '/users/' + <%= @user.id %>,
                 type: 'PUT',
@@ -495,6 +506,34 @@
                 }
             });
         });
+
+
+        function within_listening_radius(pinga, user)
+        {
+            if (getDistanceFromLatLonInMi(pinga.position.k, pinga.position.A, user.position.k, user.position.A) < user_listening_radius)
+                return true;
+            return false;
+        }
+
+        function getDistanceFromLatLonInMi(lat1,lon1,lat2,lon2) {
+            var R = 3958.76; // Radius of the earth in mi
+            var dLat = deg2rad(lat2-lat1);  // deg2rad below
+            var dLon = deg2rad(lon2-lon1);
+            var a =
+                            Math.sin(dLat/2) * Math.sin(dLat/2) +
+                            Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+                            Math.sin(dLon/2) * Math.sin(dLon/2)
+                    ;
+            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            var d = R * c; // Distance in km
+            return d;
+        }
+
+        function deg2rad(deg) {
+            return deg * (Math.PI/180)
+        }
+
+
     }
 
 
