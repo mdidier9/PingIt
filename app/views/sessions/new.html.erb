@@ -6,19 +6,19 @@
 </head>
 
 <div id="landing_ping_1">
-	<img src="/assets/pending-dbd37421bd6acf8c45c8ab2137cb904d.png">
+	<img src="/assets/Other_pending.png">
 </div>
 
 <div id="landing_ping_2">
-	<img src="/assets/pending-dbd37421bd6acf8c45c8ab2137cb904d.png">
+	<img src="/assets/Sports_pending.png">
 </div>
 
 <div id="landing_ping_3">
-	<img src="/assets/pending-dbd37421bd6acf8c45c8ab2137cb904d.png">
+	<img src="/assets/Entertainment_active.png">
 </div>
 
 <div id="landing_ping_4">
-	<img src="/assets/pending-dbd37421bd6acf8c45c8ab2137cb904d.png">
+	<img src="/assets/Food_pending.png">
 </div>
 
 <div id="wrapper">
@@ -27,8 +27,17 @@
 	    <div id="login">
 	    	<div id="pinga-logo"><img src="/assets/logo.png"></div>
 	    	<h1 id="header">PingIt</h1>
-	    	<h6>events - when and where they matter most</h6>
-	      <h4 id="fb"><%= link_to image_tag("/assets/facebook.png", :border => 0, :width => 250), "/auth/facebook", id: "sign_in" %></h4>
+
+	    	<div id="events_div">
+	    		<div id="events_title">
+			    	<h5>Events - </h5>
+		    	</div>
+		    	<div id="events_slogan">
+		    		<h6><span class="italic">When</span> and <span class="italic">Where</span> They Matter Most</h6>
+		    	</div>
+	    	</div>
+
+	      <h4 id="fb"><%= link_to image_tag("/assets/facebook.png", :border => 0, :width => 230), "/auth/facebook", id: "sign_in" %></h4>
 	    </div>
 	    <%= render "layouts/footer" %>
 		</div>
