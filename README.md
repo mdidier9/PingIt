@@ -14,7 +14,7 @@ The purpose of PingIt is to offer a platform for people to create and find event
 
 PingIt is different from other event planning/finding apps.  PingIt allows users to filter events that are of interest to them by specific categories in addition to offering the user the opportunity to specify their "listening radius".  The user's listening radius can range from 1/4 mile to 20 miles and only displays the events located in the specified proximity to the user.
 
-Events we think would work well with PingIt include:
+Events perfect for PingIt:
   1. Pick-up sports games
   2. Spontaneous concerts or jam sessions
   3. Protests
