@@ -15,6 +15,7 @@ class TaskController < WebsocketRails::BaseController
     pinga.creator = user
     pinga.save
     pinga.put_in_queue
+    pinga.dispatch
 
     user_pinga = UserPinga.new
     user_pinga.user = user
@@ -42,7 +43,7 @@ def create_marker(pinga, user)
              :longitude  => pinga.longitude,
              :category   => pinga.category.title,
              :infowindow => render_to_string(:partial => "/shared/infowindow", :locals => { pinga: pinga }),
-             :picture => {  "url" => "#{pinga.category.title}_#{user.in_listening_radius_of(pinga) ? pinga.status : "outside" }.png",
+             :picture => {  "url" => "assets/#{pinga.category.title}_#{user.in_listening_radius_of(pinga) ? pinga.status : "outside" }.png",
                             "width" => 20,
                             "height" => 34},
              :drop => true
