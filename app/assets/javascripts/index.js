@@ -28,13 +28,13 @@ $(function() {
         $('ul[id='+neededUlId+']').show();
     });
 
-    $('#created').hide();
+    // tab view on user settings is always set to show rsvps first
     $('#rsvp').show();
+    $('#created').hide();
 
+    // tab clicks change user settings list
     $(document).on("click", ".tab_width", function(event) {
-        console.log("clicked here");
         var neededUlId = ($(event.target).attr("class").split(" "))[1];
-        console.log(neededUlId);
         $('.my_scroll ul').hide();
         $('ul[id='+neededUlId+']').show();
     });

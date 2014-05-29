@@ -95,7 +95,7 @@ a {
 }
 
 .content {
-  /*background-color: $darkgray;*/
+  background-color: $darkgray;
   border-radius: 5px 0px 0px 5px;
   width:550px;
   height:569px;
@@ -122,6 +122,11 @@ a {
   display: inline-block;
   /*margin-right: 20px;*/
   font-size: 2.00em;
+}
+
+#my_tabs li.tab_width:hover {
+  cursor:pointer;
+  color:$red;
 }
 
 #tabs li.sorter-tabs:hover {
