@@ -2,7 +2,7 @@
   margin: 30px auto;
   height: 10%;
   width: 1000px; 
-  height: 200px;
+  height: 150px;
 }
 
 #pinga-logo {
@@ -10,22 +10,24 @@
   margin: 30px 20px 10px 30px;
 }
 
-#login h1 {
-  font-family: tahoma;
-  color: #F2E9E1;
-}
 
 #login {
-	text-align: center;
-	font-size: 250%;
-	background-color: #35393C;
+  text-align: center;
+  font-size: 250%;
+  background-color: #35393C;
   border-radius: 15px;
-	margin:0 auto;
-	/*margin-top: 40px;*/
-	width: 500px;
-	color: #F2E9E1;
-  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-  background-color:rgba(0,0,0,0.7);
+  margin:0 auto;
+  /*margin-top: 40px;*/
+  width: 500px;
+  color: black;
+  /*text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;*/
+  background-color:rgba(0,0,0,0.0);
+}
+
+#login h1 {
+  font-family: 'Neuton', serif;
+  font-size: 330%;
+  color: black;
 }
 
 #events_div {
@@ -37,7 +39,7 @@
 
 #events_div h5 {
   margin-top: 35;
-  font-family: georgia;
+  font-family: 'Neuton', serif;
 }
 
 #events_div h6 {
@@ -117,16 +119,16 @@ a {
   -moz-column-count:3; /* Firefox */
   -webkit-column-count:3; /* Safari and Chrome */
   background-color:#35393C;
-  color: #F2E9E1;
+  color: #E8E8E8;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
   border-radius: 25px;
-  background-color:rgba(0,0,0,0.7);
+  background-color:rgba(0,0,0,0.4);
 }
 
 .blurb {
   text-align:center;
   font-size: 30px;
-  color: #CBE86B;
+  color: #EFE6AB;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
@@ -158,11 +160,11 @@ a {
 #landing_ping_3 {
   position: fixed; 
   top: -50px; 
-  left: 300px;
+  left: 280px;
 }
 
 #landing_ping_4 {
   position: fixed; 
   top: -50px; 
-  left: 950px;
+  left: 1000px;
 }

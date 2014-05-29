@@ -4,7 +4,7 @@ feature 'User browsing the website' do
 
   scenario "on homepage" do
     visit root_path
-    expect(page).to have_content("When and Where")
+    expect(page).to have_content("Ping")
   end
 
   scenario "can login with facebook" do

@@ -1,5 +1,6 @@
 <head>
 	<link rel="stylesheet" href="/assets/landing.css">
+	<link href='http://fonts.googleapis.com/css?family=Neuton:400,700' rel='stylesheet' type='text/css'>
 	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
   <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
   <link href='http://fonts.googleapis.com/css?family=Neuton:200,300,400,700,800' rel='stylesheet' type='text/css'>
@@ -28,16 +29,8 @@
 	    	<div id="pinga-logo"><img src="/assets/logo.png"></div>
 	    	<h1 id="header">PingIt</h1>
 
-	    	<div id="events_div">
-	    		<div id="events_title">
-			    	<h5>Events - </h5>
-		    	</div>
-		    	<div id="events_slogan">
-		    		<h6><span class="italic">When</span> and <span class="italic">Where</span> They Matter Most</h6>
-		    	</div>
-	    	</div>
 
-	      <h4 id="fb"><%= link_to image_tag("/assets/facebook.png", :border => 0, :width => 230), "/auth/facebook", id: "sign_in" %></h4>
+	      <h4 id="fb"><%= link_to image_tag("/assets/FacebookButton.png", :width => 300), "/auth/facebook", id: "sign_in" %></h4>
 	    </div>
 	    <%= render "layouts/footer" %>
 		</div>
@@ -53,6 +46,6 @@
 		ping1.delay(2000).animate({top:"240px"}, 1000);
 		ping2.delay(4100).animate({top:"130px"}, 1000);
 		ping3.delay(6500).animate({top:"120px"}, 1000);
-		ping4.delay(9000).animate({top:"220px"}, 1000);
+		ping4.delay(9500).animate({top:"275px"}, 1000);
 	});
 </script>
