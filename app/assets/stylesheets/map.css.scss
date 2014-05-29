@@ -45,7 +45,7 @@ $pulsecolor: #0c7d5e;
   box-shadow:inset 0 0 5px $pulsecolor, inset 0 0 5px $pulsecolor, inset 0 0 5px $pulsecolor, 0 0 5px $pulsecolor, 0 0 5px $pulsecolor, 0 0 5px $pulsecolor;
   /* set the ring's new dimension and re-center it */
   height:220px!important;
-  margin:-77px 0 0 -95px;
+  margin:-57px 0 0 -76px;
   width:220px!important;
 }
 /* hide the superfluous marker image since it would expand and shrink with its containing element */
@@ -56,6 +56,6 @@ $pulsecolor: #0c7d5e;
 /* compensate for iPhone and Android devices with high DPI, add iPad media query */
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (device-width: 768px) {
   #map div.gmnoprint[title="user"] {
-    margin:-77px 0 0 -95px;
+    margin:-73px 0 0 -99px;
   }
 }

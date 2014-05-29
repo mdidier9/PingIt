@@ -116,6 +116,7 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
                                                                  :drop => true
                                                                }
     }.to_json)
+    @pinga.put_in_queue
     # WebsocketRails[:pingas].trigger('phone', {id: @pinga.id, status: @pinga.status, category: @pinga.category.title}.to_json)
 
     # broadcast_message :phone, {marker: "hello"}
