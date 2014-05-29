@@ -25,12 +25,12 @@ $(function() {
           var rsvpSpan = $('span[class=rsvp-count-' + pingaId + ']')
           var currentCount = parseFloat(rsvpSpan.html());
           if(data.attending == true) {
-            $("."+currentPingaDivClass).html("<p>You are going!</p>");
+            $("."+currentPingaDivClass).html("<p class='rsvp-conf'>You are going!</p>");
             rsvpSpan.html(currentCount+1);
             var newShit = $($($(currentDiv).parent()).clone()).removeClass('main_list');
             $('ul[id=rsvp]').prepend(newShit);
           } else {
-            $("."+currentPingaDivClass).html("<p>You are not going!</p>");
+            $("."+currentPingaDivClass).html("<p class='rsvp-conf'>You are not going!</p>");
             rsvpSpan.html(currentCount-1);
             $("#rsvp .ping." + pingaId).remove();
           }
