@@ -4,6 +4,8 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
 require 'database_cleaner'
+# require 'fakeredis/rspec'
+# require 'fakeredis'
 require 'capybara/rails'
 require 'capybara/rspec'
 require 'coveralls'
@@ -45,8 +47,11 @@ RSpec.configure do |config|
   #   FactoryGirl.lint
   # end
 
-  #capybara config
+  # capybara config
   config.include Capybara::DSL
+
+  # fakeredis
+  
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
