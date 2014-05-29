@@ -27,7 +27,7 @@ class Pinga < ActiveRecord::Base
                                                                   :latitude   => self.latitude,
                                                                   :longitude  => self.longitude,
                                                                   :category   => self.category.title,
-                                                                  :infowindow => render_to_string(:partial => "/shared/infowindow", :locals => { pinga: self }),
+                                                                  # :infowindow => render_to_string(:partial => "/shared/infowindow", :locals => { pinga: self }),
                                                                   :drop => true
                                                                }.to_json
     })
