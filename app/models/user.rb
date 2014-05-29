@@ -45,11 +45,11 @@ class User < ActiveRecord::Base
   end
 
   def active_pingas_in_listening_radius
-    Pinga.near(self, self.listening_radius).where(status: "active")
+    Pinga.where(status: "active").near(self, self.listening_radius)
   end
 
   def pending_pingas_in_listening_radius
-    Pinga.near(self, self.listening_radius).where(status: "pending")
+    Pinga.where(status: "pending").near(self, self.listening_radius)
   end
 
   def pingas_outside_listening_radius
