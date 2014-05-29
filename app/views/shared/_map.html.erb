@@ -471,11 +471,20 @@
             });
         });
 
-        dispatcher.bind('new_from_phone', function(message) {
+        channel.bind('new_from_phone', function(message) {
             console.log('new pinga from phone' + message);
+            var pinga = JSON.parse( message );
+//            addMarker(pinga.marker);
+            $.ajax({
+                url: '/users/' + <%= @user.id %>,
+                type: 'PUT',
+                success: function (data) {
+                    updateLists(data);
+                }
+            });
         });
 
-        console.log("change six");
+        console.log("change seven");
 
 
 
@@ -496,7 +505,6 @@
         });
 
         channel.bind('update', function(message) {
-            console.log(message);
             var pinga = JSON.parse( message );
             var markerIndex = findMarkerIndex(pinga.id);
             pingaMarkers[markerIndex].setIcon('assets/' + pinga.category + '_' + pinga.status + '.png');
