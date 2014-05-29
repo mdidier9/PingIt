@@ -55,6 +55,21 @@ a {
   color: $red;
 }
 
+/*create ping button*/
+
+.button {
+  font-size: 2.00em;
+  font-weight:bold;
+  letter-spacing: 1.25px;
+  color: $darkgray;
+  float:right;
+  margin:40px 30px 0px 0px;
+}
+
+.button:hover {
+  color: $red;
+}
+
 #settings {
   font-size: 2.00em;
   font-weight:bold;
@@ -231,8 +246,7 @@ li a {
 }
 
 
-/*create ping button*/
-.button {
+/*.button {
   -moz-box-shadow:inset 0px 1px 0px 0px #544b4b;
   -webkit-box-shadow:inset 0px 1px 0px 0px #544b4b;
   box-shadow:inset 0px 1px 0px 0px #544b4b;
@@ -268,28 +282,28 @@ li a {
   text-shadow:1px 1px 0px #332d2d;
   margin-left:185px;
   margin-top:3px;
-}
+}*/
 
-.button:hover {
+/*.button:hover {
   background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #0c7d5f), color-stop(1, #11c293) );
   background:-moz-linear-gradient( center top, #0c7d5f 5%, #11c293 100% );
   filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#0c7d5f', endColorstr='#11c293');
   background-color:#0c7d5f;
-}
+}*/
 
-.button:active {
+/*.button:active {
    position:relative;
    top:1px;
- }
+ }*/
 
-.ui-button .ui-button-text {
+/*.ui-button .ui-button-text {
  line-height: 0.6;
  font-size:9pt;
  font-weight:700;
  padding: 5px 18px;
-}
+}*/
 
-.ui-tabs-nav{
+/*.ui-tabs-nav{
   background:transparent;
   border: none;
 }
@@ -297,19 +311,19 @@ li a {
 .ui-state-active .ui-tabs-active {
   border:none;
   font-color:$brightgreen;
-}
+}*/
 
 
-.ui-tabs-anchor {
+/*.ui-tabs-anchor {
   font-family: "Neuton";
   font-size:1.250em;
   background-color:$palestyellow;
   margin-bottom:-35px;
   height: 20px;
   width:120px;
-/*  padding:20px 0 0 15px;*/
-  /*border: 1px solid $palestyellow;*/
-}
+  padding:20px 0 0 15px;
+  border: 1px solid $palestyellow;
+}*/
 
 /*#ui-id-1 {
   font-family: "Georgia";
