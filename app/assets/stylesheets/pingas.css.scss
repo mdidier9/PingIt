@@ -42,7 +42,7 @@ a {
   margin-bottom: 10px;
 }
 
-#home-link {
+#home {
   letter-spacing: 4.0px;
   font-family: 'Neuton', serif;
   margin-left: 20px;
@@ -51,7 +51,7 @@ a {
   font-weight:bold;
 }
 
-#home-link:hover {
+#home:hover {
   color: $red;
 }
 
@@ -86,7 +86,7 @@ a {
 .map {
   background-color: $darkgray;
   border:8px solid $darkgray;
-  border-radius: 5px;
+  border-radius: 0px 5px 5px 0px;
 }
 
 #format {
@@ -104,8 +104,8 @@ a {
 
 #tabs li.sorter-tabs {
   list-style-type: none;
-  color: $darkgray;
-  background: $palestyellow;
+  color: $palestyellow;
+  /*background: $palestyellow;*/
   padding: 5px 10px;
   border-radius: 5px;
   display: inline-block;
@@ -115,8 +115,8 @@ a {
 
 #my_tabs li.tab_width {
   list-style-type: none;
-  color: $darkgray;
-  background: $palestyellow;
+  color: $palestyellow;
+  /*background: $palestyellow;*/
   /*padding: 5px 10px;*/
   border-radius: 5px;
   display: inline-block;
@@ -134,6 +134,9 @@ a {
   color:$red;
 }
 
+p.rsvp-conf {
+  color:$palestyellow;
+}
 
 #my_tabs  {
   background: transparent; 
@@ -148,17 +151,87 @@ a {
   width: 48.5%;
 }
 
+.user_name h2{
+  color:$palestyellow;
+  margin-left:10px;
+}
+
 li a {
   outline: none;
+}
+
+div.my_listen {
+  margin-top:-15px;
+}
+
+div.slider {
+  margin-top:-15px;
+  margin-left:10px;
+}
+
+#new h2{
+  color:$palestyellow;
+  margin-left:10px;
+  font-size:1.50em;
+}
+
+#form a {
+  margin-left:10px;
+  color:$palestyellow;
+  color:$red;
+  font-size:1.50em;
+}
+
+#form a:hover {
+  color:$palestyellow;
+}
+
+#form label {
+  margin-left:10px;
+  color:$palestyellow;
+  font-size:1.50em;
+}
+
+#form span {
+  color:$palestyellow;
+  font-size:1.50em;
+}
+
+#form input {
+  margin-left:10px;
+}
+
+#form textarea {
+  margin-left:10px;
+}
+
+#form select {
+  margin-left:10px;
+}
+
+#slider-value {
+  color:$palestyellow;
+  margin-left:10px;
+}
+
+#sign_out {
+  color:$palestyellow;
+  margin-left: 300px;
+}
+
+#sign_out:hover {
+  color:$red;
+}
+
+.user-settings {
+  color: $palestyellow;
+  font-size:1.1em;
+  margin-left: 10px;
 }
 
 .scroll {
   height:390px;
   overflow:auto;
-  /*margin-left:10px;*/
-  /*width:300px;*/
-  /*background-color:$green;*/
-  /*list-style-type: none;*/
 }
 
 .my_scroll {
@@ -171,7 +244,7 @@ li a {
 .ping {
   border:1px solid $darkgray;
   border-radius:2px;
-  background-color: $palestyellow;
+  background-color: $darkgray;
   position:relative;
   /*right:25px; DO NOT PUT THIS BACK*/
   margin:0;
@@ -180,6 +253,7 @@ li a {
 }
 
 .ping_title {
+
   /*text-align: center;*/
   /*width:520px;*/
 }
@@ -187,6 +261,7 @@ li a {
 .ping_title p {
   font-size: 1.0em;
   display: inline;
+  color: $palestyellow;
 }
 
 .active {
