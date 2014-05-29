@@ -395,7 +395,7 @@
                     var today = /\w{2,3} \w* \d{1,2}/.exec(day)[0];
                 }
                 data = $('form').serializeObject();
-//                putInCreatedList(data);
+                putInCreatedList(data);
                 data.today = today;
                 submitToSocket(data);
                 showList();
@@ -404,6 +404,18 @@
                 $('#start-time-validations').html('');
             }
         });
+
+        function putInCreatedList(data)
+        {
+            $.ajax({
+                url: '/users/' + <%= @user.id %>,
+                type: 'PUT',
+                success: function (data) {
+                    updateLists(data);
+                }
+            });
+            console.log(data);
+        }
 
         var geocoder = new google.maps.Geocoder();
 
@@ -494,7 +506,11 @@
         channel.bind('update', function(message) {
             var pinga = JSON.parse( message );
             var markerIndex = findMarkerIndex(pinga.id);
-            if (within_listening_radius(pingaMarkers[markerIndex], user_marker))
+            if (pinga.status == "expired")
+            {
+                pingaMarkers[markerIndex].setMap(null);
+            }
+            else if (within_listening_radius(pingaMarkers[markerIndex], user_marker))
             {
                 pingaMarkers[markerIndex].setIcon(image_paths[pinga.category][pinga.status]);
             }
