@@ -28,6 +28,17 @@ $(function() {
         $('ul[id='+neededUlId+']').show();
     });
 
+    $('#created').hide();
+    $('#rsvp').show();
+
+    $(document).on("click", ".tab_width", function(event) {
+        console.log("clicked here");
+        var neededUlId = ($(event.target).attr("class").split(" "))[1];
+        console.log(neededUlId);
+        $('.my_scroll ul').hide();
+        $('ul[id='+neededUlId+']').show();
+    });
+
   
     $('#format :checkbox').click(function(event) {
         var $this = $(this);
