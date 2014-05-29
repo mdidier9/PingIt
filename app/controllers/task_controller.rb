@@ -41,10 +41,8 @@ def create_marker(pinga, user)
              :latitude   => pinga.latitude,
              :longitude  => pinga.longitude,
              :category   => pinga.category.title,
+             :status     => "#{pinga.category.title}_#{user.in_listening_radius_of(pinga) ? pinga.status : "outside" }",
              :infowindow => render_to_string(:partial => "/shared/infowindow", :locals => { pinga: pinga }),
-             :picture => {  "url" => "assets/#{pinga.category.title}_#{user.in_listening_radius_of(pinga) ? pinga.status : "outside" }.png",
-                            "width" => 20,
-                            "height" => 34},
              :drop => true
             }
 end
