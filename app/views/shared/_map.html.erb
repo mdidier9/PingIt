@@ -15,7 +15,7 @@
         image_paths["<%= category.title %>"] = {}
         image_paths["<%= category.title %>"]["active"] = '<%= asset_path("#{category.title}_active.png") %>';
         image_paths["<%= category.title %>"]["pending"] = '<%= asset_path("#{category.title}_pending.png") %>';
-        image_paths["<%= category.title %>"]["inactive"] = '<%= asset_path("#{category.title}_inactive.png") %>';
+        image_paths["<%= category.title %>"]["outside"] = '<%= asset_path("#{category.title}_outside.png") %>';
         <% end %>
         console.log(image_paths);
         console.log(image_paths);
@@ -138,6 +138,10 @@
                 icon: image_paths[marker_info.category][marker_info.status],
                 infowindow: marker_info.infowindow
             });
+            console.log(marker_info.category);
+            console.log(marker_info.status);
+
+            console.log(image_paths[marker_info.category][marker_info.status]);
 //            console.log(marker_info.picture.url)
 //            if (marker_info.picture.url == "assets/active/Deals.png")
 //            {
