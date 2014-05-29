@@ -57,6 +57,7 @@ group :test do
   gem "capybara", '~> 2.2.1'
   gem "database_cleaner", '~> 1.2.0'
   gem 'shoulda-matchers', '~> 2.6.1'
+  # gem 'fakeredis', '~> 0.4.3'
 end
 
 gem 'rails_12factor'
