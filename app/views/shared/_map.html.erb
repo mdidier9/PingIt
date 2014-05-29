@@ -128,12 +128,29 @@
 
         function addMarker(marker_info) {
             var latLng = new google.maps.LatLng(marker_info.latitude, marker_info.longitude);
+//            var content = marker_info.infowindow;
+//
+//            infowindow = new InfoBox({
+//                content: content,
+//                disableAutoPan: false,
+//                maxWidth: 150,
+//                pixelOffset: new google.maps.Size(-140, 0),
+//                zIndex: null,
+//                boxStyle: {
+//                    background: "url('http://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobox/examples/tipbox.gif') no-repeat",
+//                    opacity: 0.9,
+//                    width: "280px"
+//                },
+//                closeBoxMargin: "12px 4px 2px 2px",
+//                closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif",
+//                infoBoxClearance: new google.maps.Size(1, 1)
+//            });
             var marker = new google.maps.Marker({
                 position: latLng,
                 map: null,
                 title: marker_info.title,
                 icon: image_paths[marker_info.category][marker_info.status],
-                infowindow: marker_info.infowindow
+                infowindow: infowindow
             });
 
             if (marker_info.drop) {
@@ -148,24 +165,66 @@
 
             marker.id = marker_info.id;
             marker.category = marker_info.category;
-//            if (marker.icon == 'assets/active.png') { marker.setAnimation(google.maps.Animation.BOUNCE);}
+            //////////////////////////////////////////////////////
+/// ADD CHANGE BOXLIST TO DEFAULT!@Q
 
-            var content = marker.infowindow;
-            var infowindow = new google.maps.InfoWindow();
-            google.maps.event.addListener(marker,'click', (function(marker,content,infowindow){
+            var myOptions = {
+                content: boxText
+                ,disableAutoPan: false
+                ,maxWidth: 0
+                ,pixelOffset: new google.maps.Size(-140, 0)
+                ,zIndex: null
+                ,boxStyle: {
+                    background: "url('tipbox.gif') no-repeat"
+                    ,opacity: 0.75
+                    ,width: "280px"
+                }
+                ,closeBoxMargin: "10px 2px 2px 2px"
+                ,closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif"
+                ,infoBoxClearance: new google.maps.Size(1, 1)
+                ,isHidden: false
+                ,pane: "floatPane"
+                ,enableEventPropagation: false
+            };
+
+            var ib = new InfoBox(myOptions);
+            boxList.push(ib);
+
+            google.maps.event.addListener(marker,'click',(function(marker, i) {
                 return function() {
-                    closeInfos();
-                    infowindow.setContent(content);
-                    infowindow.open(map,marker);
-                    infos[0]=infowindow;
-                    map.panTo(marker.position)
-                };
-            })(marker,content,infowindow));
-            google.maps.event.addListener(infowindow,'closeclick',function(){
-                showList(); //removes the marker
-            });
+                    boxList[i].open(map, this);
+                }
+            })(marker, i));
+
+            google.maps.event.addDomListener(boxList[i].content_,'click',(function(marker, i) {
+                return function() {
+                    alert('clicked ' + cityList[i][0])
+                }
+            })(marker, i));
+
+            //////////////////////////////////////////////////////
+
+
+
+//            var infowindow = new google.maps.InfoWindow();
+//            google.maps.event.addListener(marker,'click', (function(marker,content,infowindow){
+//                return function() {
+//
+//
+//                    closeInfos();
+//                    infowindow.setContent(content);
+//                    infowindow.open(map,marker);
+//                    infos[0]=infowindow;
+//                    map.panTo(marker.position);
+//                };
+//            })(marker,content,infowindow));
+//            google.maps.event.addListener(infowindow,'closeclick',function(){
+//                showList(); //removes the marker
+//            });
             pingaMarkers.push(marker);
         }
+
+
 
         function closeInfos(){
 
