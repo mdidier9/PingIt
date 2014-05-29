@@ -37,6 +37,8 @@ A final feature that PingIt offers is the ability for an event creator to determ
   * Facebook Omniauth
   * Google Maps
   * Geocoder
+  * Websocket
+  * Bubble-Wrap
 
 *****
 
