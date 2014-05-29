@@ -6,8 +6,14 @@
     margin-left:10px;
 }
 
+.styled-label:hover {
+    cursor:pointer;
+}
+
 .styled-label span {
-    text-align:center;
+    font-family: "Neuton";
+    font-size: 1.250em;
+    text-align:left;
     color: #EFE6AB;
     padding: 8px 12px;
     display: block;
