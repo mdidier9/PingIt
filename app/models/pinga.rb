@@ -23,7 +23,7 @@ class Pinga < ActiveRecord::Base
   end
 
   def dispatch_from_phone
-    WebsocketRails[:pingas].trigger('update', "hello")
+    WebsocketRails[:pingas].trigger('new_from_phone', "hello")
   end
 
   def put_in_queue_from_phone
