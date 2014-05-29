@@ -25,7 +25,7 @@ class Pinga < ActiveRecord::Base
   def put_in_queue
     Delayed::Job.enqueue(self, 0, self.start_time)
     Delayed::Job.enqueue(self, 0, self.end_time)
-  end
+  end# Etc/UTC
 
   private
 
