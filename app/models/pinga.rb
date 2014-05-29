@@ -14,35 +14,18 @@ class Pinga < ActiveRecord::Base
 
   def perform
     if Time.now < self.end_time 
-      self.status = "active"
+      self.status == "active"
     else
-      self.status = "expired"
+      self.status == "expired"
     end
     self.save
     WebsocketRails[:pingas].trigger('update', {id: self.id, status: self.status, category: self.category.title}.to_json)
   end
 
-  def dispatch_from_phone
-    WebsocketRails[:pingas].trigger('new_from_phone', {marker: { :id         => self.id,
-                                                                  :latitude   => self.latitude,
-                                                                  :longitude  => self.longitude,
-                                                                  :category   => self.category.title,
-                                                                  # :infowindow => render_to_string(:partial => "/shared/infowindow", :locals => { pinga: self }),
-                                                                  :drop => true
-                                                               }
-    }.to_json)
-  end
-
-  def put_in_queue_from_phone
-    Delayed::Job.enqueue(self, 0)
-    Delayed::Job.enqueue(self, 0, self.start_time)
-    Delayed::Job.enqueue(self, 0, self.end_time)
-  end
-
   def put_in_queue
     Delayed::Job.enqueue(self, 0, self.start_time)
     Delayed::Job.enqueue(self, 0, self.end_time)
-  end
+  end# Etc/UTC
 
   private
 
