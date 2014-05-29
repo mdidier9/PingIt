@@ -15,6 +15,10 @@ $brightyellow: yellow;
 
 .infobox-wrapper {
   display:none;
+  position:relative;
+  left:32px;
+//  z-index:100;
+
 }
 #infobox {
   border:2px solid black;
@@ -22,7 +26,6 @@ $brightyellow: yellow;
   background:#333;
   color:#FFF;
   font-family:Arial, Helvetica, sans-serif;
-  font-size:12px;
   padding: 5px 10px;
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
@@ -30,7 +33,8 @@ $brightyellow: yellow;
   text-shadow:0 -1px #000000;
   -webkit-box-shadow: 0 0  8px #000;
   box-shadow: 0 0 8px #000;
-  width:150px;
+  width:190px;
+  height:18px;
   text-align:center;
   font-size: 16px;
   font-weight:bold;
@@ -43,3 +47,22 @@ $brightyellow: yellow;
 #infobox a:hover {
   color:$red;
 }
+
+//.infobox-wrapper {
+//  display:none;
+//}
+//#infobox {
+//  border:2px solid black;
+//  margin-top: 8px;
+//  background:#333;
+//  color:#FFF;
+//  font-family:Arial, Helvetica, sans-serif;
+//  font-size:12px;
+//  padding: .5em 1em;
+//  -webkit-border-radius: 2px;
+//  -moz-border-radius: 2px;
+//  border-radius: 2px;
+//  text-shadow:0 -1px #000000;
+//  -webkit-box-shadow: 0 0  8px #000;
+//  box-shadow: 0 0 8px #000;
+//}

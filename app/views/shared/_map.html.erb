@@ -1,7 +1,7 @@
 <link href="http://code.google.com/apis/maps/documentation/javascript/examples/default.css" rel="stylesheet" type="text/css" />
 
 <div style='width: 520px;'>
-  <div id="map" style='width: 520px; height: 550px;'></div>
+  <div id="map" style='width: 100%; height: 550px;'></div>
 </div>
 
 <script>
@@ -68,7 +68,7 @@
         });
 
         var radiusOptions = {
-            strokeColor:"#0000FF",strokeOpacity: 1, strokeWeight: 0, fillColor: 'lightgreen',
+            strokeColor:"#0000FF",strokeOpacity: 1, strokeWeight: 0, fillColor: '#35393C',
             map: map,
             center: map.getCenter(),
             radius: <%= @user.listening_radius * 1609.344 %>
@@ -128,7 +128,7 @@
 
         function addMarker(marker_info) {
             var latLng = new google.maps.LatLng(marker_info.latitude, marker_info.longitude);
-//            var content = marker_info.infowindow;
+            var content = marker_info.infowindow;
 //
 //            infowindow = new InfoBox({
 //                content: content,
@@ -149,8 +149,8 @@
                 position: latLng,
                 map: null,
                 title: marker_info.title,
-                icon: image_paths[marker_info.category][marker_info.status],
-                infowindow: infowindow
+                icon: image_paths[marker_info.category][marker_info.status]
+//                infowindow: infowindow
             });
 
             if (marker_info.drop) {
@@ -165,79 +165,56 @@
 
             marker.id = marker_info.id;
             marker.category = marker_info.category;
+            pingaMarkers.push(marker);
+//            var i = findMarkerById(marker.id);
             //////////////////////////////////////////////////////
 /// ADD CHANGE BOXLIST TO DEFAULT!@Q
 
             var myOptions = {
-                content: boxText
-                ,disableAutoPan: false
-                ,maxWidth: 0
-                ,pixelOffset: new google.maps.Size(-140, 0)
-                ,zIndex: null
-                ,boxStyle: {
-                    background: "url('tipbox.gif') no-repeat"
-                    ,opacity: 0.75
-                    ,width: "280px"
-                }
-                ,closeBoxMargin: "10px 2px 2px 2px"
-                ,closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif"
-                ,infoBoxClearance: new google.maps.Size(1, 1)
-                ,isHidden: false
-                ,pane: "floatPane"
-                ,enableEventPropagation: false
+                content: content,
+
+                disableAutoPan: false,
+                maxWidth: 150,
+                pixelOffset: new google.maps.Size(-140, 0),
+                zIndex: null,
+                boxStyle: {
+                    background: "url('http://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobox/examples/tipbox.gif') no-repeat",
+                    opacity: 0.85,
+                    width: "280px"
+                },
+                closeBoxMargin: "8px 4px 2px 2px",
+                closeBoxURL: "<%= asset_path('close-icon-red.png') %>",
+                infoBoxClearance: new google.maps.Size(1, 1)
             };
 
             var ib = new InfoBox(myOptions);
-            boxList.push(ib);
+            infos.push(ib);
+            var i = infos.length - 1;
 
             google.maps.event.addListener(marker,'click',(function(marker, i) {
                 return function() {
-                    boxList[i].open(map, this);
+                    closeInfos();
+                    infos[i].open(map, this);
+                    map.panTo(marker.position);
                 }
             })(marker, i));
 
-            google.maps.event.addDomListener(boxList[i].content_,'click',(function(marker, i) {
+            google.maps.event.addListener(infos[i],'closeclick',(function(marker, i) {
                 return function() {
-                    alert('clicked ' + cityList[i][0])
+                    infos[i].close(map, this);
+                    map.panTo(user_marker.position);
+                    showList();
                 }
             })(marker, i));
-
-            //////////////////////////////////////////////////////
-
-
-
-//            var infowindow = new google.maps.InfoWindow();
-//            google.maps.event.addListener(marker,'click', (function(marker,content,infowindow){
-//                return function() {
-//
-//
-//                    closeInfos();
-//                    infowindow.setContent(content);
-//                    infowindow.open(map,marker);
-//                    infos[0]=infowindow;
-//                    map.panTo(marker.position);
-//                };
-//            })(marker,content,infowindow));
-//            google.maps.event.addListener(infowindow,'closeclick',function(){
-//                showList(); //removes the marker
-//            });
-            pingaMarkers.push(marker);
         }
 
 
 
         function closeInfos(){
 
-            if(infos.length > 0){
-
-                /* detach the info-window from the marker ... undocumented in the API docs */
-                infos[0].set("marker", null);
-
-                /* and close it */
-                infos[0].close();
-
-                /* blank the array */
-                infos.length = 0;
+            for(var i = 0; i < infos.length; i++)
+            {
+                infos[i].close();
             }
         }
 
@@ -334,6 +311,7 @@
             newPingaMarker.setMap(map);
             newPingaMarker.setPosition(user_marker.position);
             user_marker.setIcon('<%= asset_path("#{@user.gender}.png") %>');
+            map.panTo(user_marker.position);
             closeInfos();
             $('#show').css('display', 'none');
             $('#index_list').css('display', 'none');
@@ -360,15 +338,15 @@
             user_marker.setDraggable (true);
             user_marker.setIcon('<%= asset_path("pingaMarker.png") %>');
             var marker = findMarkerById(id);
-            var infowindow = new google.maps.InfoWindow();
+//            var infowindow = new google.maps.InfoWindow();
             var content = marker.infowindow;
-            closeInfos();
-            infowindow.setContent(content);
-            infowindow.open(map,marker);
-            infos[0]=infowindow;
-            google.maps.event.addListener(infowindow,'closeclick',function(){
-                showList();
-            });
+//            closeInfos();
+//            infowindow.setContent(content);
+//            infowindow.open(map,marker);
+//            infos[0]=infowindow;
+//            google.maps.event.addListener(infowindow,'closeclick',function(){
+//                showList();
+//            });
             map.panTo(marker.position);
             $.ajax({
                 url: '/pingas/' + id,
@@ -410,17 +388,8 @@
         $(document).on('click', '.delete_pinga_button', function(event){
             event.preventDefault();
             deleteToSocket(this.id);
-//            $.ajax({
-//                url: '/pingas/' + this.id,
-//                type: 'DELETE',
-//                data: {id: this.id},
-//                dataType: 'json',
-//                success: function (id) {
-//                    console.log(id);
-                    showList();
-                    closeInfos();
-//                }
-//            })
+            showList();
+            closeInfos();
         });
 
 //        CREATE PINGA STUFF
