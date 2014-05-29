@@ -116,7 +116,15 @@ skip_before_filter :require_login, :only => [:recieve_request_get_events, :recie
 		user_pinga.attend_status = "creator"
 		user_pinga.save  
 #------------------------------------------------------------------------------
-		@pinga.dispatch_from_phone
+		# @pinga.dispatch_from_phone
+    WebsocketRails[:pingas].trigger('new_from_phone', {marker: { :id         => @pinga.id,
+                                                                 :latitude   => @pinga.latitude,
+                                                                 :longitude  => @pinga.longitude,
+                                                                 :category   => @pinga.category.title,
+                                                                 :infowindow => render_to_string(:partial => "/shared/infowindow", :locals => { pinga: @pinga }),
+                                                                 :drop => true
+                                                               }
+    }.to_json)
     # WebsocketRails[:pingas].trigger('phone', {id: @pinga.id, status: @pinga.status, category: @pinga.category.title}.to_json)
 
     # broadcast_message :phone, {marker: "hello"}
