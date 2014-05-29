@@ -378,6 +378,7 @@
             }
 
             if ($("#errors").children().size() === 0 && $('#start-time-validations').text() == ""){
+
                 var day = $('#today-tomorrow').text();
                 if (day == "") {
                     var today = new Date();
@@ -385,34 +386,13 @@
                     var today = /\w{2,3} \w* \d{1,2}/.exec(day)[0];
                 }
                 data = $('form').serializeObject();
+//                putInCreatedList(data);
                 data.today = today;
                 submitToSocket(data);
                 showList();
                 $('form')[0].reset();
                 $('#today-tomorrow').html('');
                 $('#start-time-validations').html('');
-//                $.ajax({
-//                    url: '/pingas',
-//                    type: 'POST',
-//                    data: {data: data, today: today},
-//                    dataType: 'json',
-//                    success: function (new_pinga_id) {
-//                        console.log("ajax success");
-//                        $.ajax({
-//                            url: '/users/' + <%= @user.id %>,
-//                            type: 'PUT',
-//                            success: function (data) {
-//                                updateLists(data);
-//                                updateMarkers(data.markers);
-//                                showShow(new_pinga_id);
-//                                $('form')[0].reset();
-//                                $('#today-tomorrow').html('');
-//                                $('#start-time-validations').html('');
-//                            }
-//                        });
-//
-//                    }
-//                })
             }
         });
 
@@ -483,8 +463,6 @@
                 }
             });
         });
-
-        console.log("change eight");
 
 
 

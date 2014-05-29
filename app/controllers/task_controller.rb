@@ -15,7 +15,6 @@ class TaskController < WebsocketRails::BaseController
     pinga.creator = user
     pinga.save
     pinga.put_in_queue
-    pinga.dispatch
 
     user_pinga = UserPinga.new
     user_pinga.user = user
