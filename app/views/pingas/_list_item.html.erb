@@ -13,11 +13,11 @@
   <% if current_user_pinga %>
     <div class="rsvp-div-pinga-id-<%=pinga.id%>" id="rsvp-id-<%=current_user_pinga.id%>">
       <% if current_user_pinga.rsvp_status == "attending" %>
-        <p>You are going!</p>
+        <p class="rsvp-conf">You are going!</p>
       <% elsif current_user_pinga.rsvp_status.nil? %>
-        <p>You are not going!</p>
+        <p class="rsvp-conf">You are not going!</p>
       <% elsif current_user_pinga.rsvp_status == "creator" %>
-        <p>You are the creator of this event.</p>
+        <p class="rsvp-conf">You are the creator of this event.</p>
       <% else %>
         <p>Error: Check the rsvp_status of userpinga id <%= current_user_pinga.id %></p>
       <% end %>

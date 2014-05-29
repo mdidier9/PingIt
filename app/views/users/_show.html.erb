@@ -10,8 +10,8 @@
 
 <div id="my_tabs">
   <ul>
-    <li class="tab_width"><a href="#tabs_created_pings">My Created Pings</a></li>
-    <li class="tab_width"><a href="#tabs_rsvp_pings">My RSVP's</a></li>
+    <li class="tab_width rsvp">rsvps</li>
+    <li class="tab_width created">created pings</li>
   </ul>
   <div class="my_scroll" id="tabs_created_pings">
     <ul id="created" class="ping_list">
@@ -26,7 +26,7 @@
 </div>
 
 <div class="my_listen">
-  <h4>Adjust your listening preferences:</h4>
+  <h4 class="user-settings">adjust your category preferences:</h4>
   <div id="my_format">
     <% @user.user_categories.each do |uc| %>
       <%= label_tag("my_#{uc.category.title}", uc.category.title, class:"styled-label") do %>
@@ -39,7 +39,7 @@
 
 <br>
 <div class="slider">
-	<h4>My Listening Radius #this slider resets db's listen rad.</h4>
+	<h4 class="user-settings">expand your listening radius</h4>
 	<div id="slider" style='width: 400px;'></div><br>
 	<div id="slider-value"></div>
 </div>
