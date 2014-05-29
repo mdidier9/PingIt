@@ -1,7 +1,7 @@
 <li class="ping ping_link <%= "main_list" if main_list %> <%= pinga.category.title %> <%= pinga.status %> <%= pinga.id.to_s %> tab-styles">
 
   <div class="ping_title" id="<%= pinga.id.to_s %>" >
-    <%= image_tag pinga.status + '.png' %>
+    <%= image_tag pinga.category.title + "_" + pinga.status + '.png' %>
     <p><%= pinga.title %></p>
     <p><%= @user.distance(pinga) %> mi</p>
     <% if pinga.status == "pending" %>
