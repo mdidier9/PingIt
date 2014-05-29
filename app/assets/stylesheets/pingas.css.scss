@@ -74,8 +74,12 @@ a {
   border-radius:0px 5px 5px 0px;
 }
 
+#format {
+  background: $darkgray;
+}
+
 .content {
-  background-color: $darkgray;
+  /*background-color: $darkgray;*/
   border-radius: 5px 0px 0px 5px;
   width:550px;
   height:569px;
@@ -120,7 +124,7 @@ li a {
 .scroll {
   height:390px;
   overflow:auto;
-  /*margin-left:30px;*/
+  /*margin-left:10px;*/
   /*width:300px;*/
   /*background-color:$green;*/
   /*list-style-type: none;*/
@@ -129,20 +133,18 @@ li a {
 .my_scroll {
   height:200px;
   overflow:auto;
-  /*background-color:$green;*/
 //  list-style-type: none;
 }
 
 /* a ping  */
 .ping {
   border:1px solid $darkgray;
-  background-color: $darkgray;
+  background-color: $palestyellow;
   position:relative;
-  /*right:25px;*/
+  /*right:25px; DO NOT PUT THIS BACK*/
   margin:0;
   width:520px;
-
-  padding: 5px;
+  /*padding: 5px;*/
 }
 
 .ping_title {
@@ -157,7 +159,7 @@ li a {
 
 .active {
   /*background-color: $palegray;*/
-  color:$brightgreen;
+  color:$darkgray;
 }
 
 .active:hover {
@@ -167,7 +169,7 @@ li a {
 
 .pending {
   /*background-color: $palegray;*/
-  color: $palestyellow;
+  color: $darkgray;
 }
 
 .pending:hover {
