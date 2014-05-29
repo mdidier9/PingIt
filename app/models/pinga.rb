@@ -29,8 +29,8 @@ class Pinga < ActiveRecord::Base
                                                                   :category   => self.category.title,
                                                                   # :infowindow => render_to_string(:partial => "/shared/infowindow", :locals => { pinga: self }),
                                                                   :drop => true
-                                                               }.to_json
-    })
+                                                               }
+    }.to_json)
   end
 
   def put_in_queue_from_phone
