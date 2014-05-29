@@ -13,6 +13,7 @@ class Pinga < ActiveRecord::Base
   before_save :geocode, :check_status
 
   def perform
+    WebsocketRails[:pingas].trigger('phone', {id: self.id, status: self.status, category: self.category.title}.to_json)
     if Time.now < self.end_time 
       self.status == "active"
     else
@@ -24,6 +25,12 @@ class Pinga < ActiveRecord::Base
 
   def dispatch
     WebsocketRails[:pingas].trigger('phone', {id: self.id, status: self.status, category: self.category.title}.to_json)
+  end
+
+  def put_in_queue_from_phone
+    Delayed::Job.enqueue(self, 0)
+    Delayed::Job.enqueue(self, 0, self.start_time)
+    Delayed::Job.enqueue(self, 0, self.end_time)
   end
 
   def put_in_queue
