@@ -1,8 +1,8 @@
 .container {
-  margin: 50px auto;
+  margin: 30px auto;
   height: 10%;
   width: 1000px; 
-  height: 200px;
+  height: 150px;
 }
 
 #pinga-logo {
@@ -10,22 +10,76 @@
   margin: 30px 20px 10px 30px;
 }
 
+
 #login {
-	text-align: center;
-	font-size: 250%;
-	background-color: #35393C;
+  text-align: center;
+  font-size: 250%;
+  background-color: #35393C;
   border-radius: 15px;
-	margin:0 auto;
-	/*margin-top: 40px;*/
-	width: 50%;
-	color: #F2E9E1;
-  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  margin:0 auto;
+  /*margin-top: 40px;*/
+  width: 500px;
+  color: black;
+  /*text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;*/
+  background-color:rgba(0,0,0,0.0);
 }
+
+#login h1 {
+  font-family: 'Neuton', serif;
+  font-size: 330%;
+  color: black;
+}
+
+#events_div {
+    margin: 0;
+    padding: 0;
+    height: 150px;
+    float: left;
+}
+
+#events_div h5 {
+  margin-top: 35;
+  font-family: 'Neuton', serif;
+}
+
+#events_div h6 {
+  margin-top: 30;
+  font-family: georgia;
+}
+
+.italic {
+  font-style:italic;
+}
+
+#events_title {
+  width: 200px;
+  height: 150px;
+  /*background-color: #111;*/
+  padding: 0;
+  margin: 0;
+  float: left;
+  display: inline-block;
+  /*border: 1px solid white;*/
+  text-align: right;
+}
+
+#events_slogan {
+  width: 280px;
+  height: 150px;
+  padding: 0;
+  margin: 0;
+  display: inline-block;
+  float: right;
+  vertical-align: middle;
+}
+
 
 #header {
   font-family: 'Neuton', serif;
   letter-spacing: 4px;
-  font-size: 2.0em;
+  font-size: 2.5em;
+  padding-top: 25px;
+  margin: 0;
 }
 
 body {
@@ -65,21 +119,26 @@ a {
   -moz-column-count:3; /* Firefox */
   -webkit-column-count:3; /* Safari and Chrome */
   background-color:#35393C;
-
-  color: #F2E9E1;
+  color: #E8E8E8;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
   border-radius: 25px;
+  background-color:rgba(0,0,0,0.4);
 }
 
 .blurb {
   text-align:center;
   font-size: 30px;
-  color: #CBE86B;
+  color: #EFE6AB;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
 #fb {
-  padding-bottom: 10px;
+  padding-bottom: 15px;
+}
+
+.footer h1 {
+  font-family: "Arial";
+  margin-top: 10px;
 }
 
 #event_title {
@@ -101,11 +160,11 @@ a {
 #landing_ping_3 {
   position: fixed; 
   top: -50px; 
-  left: 300px;
+  left: 280px;
 }
 
 #landing_ping_4 {
   position: fixed; 
   top: -50px; 
-  left: 950px;
+  left: 1000px;
 }
