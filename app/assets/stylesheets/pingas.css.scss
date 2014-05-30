@@ -177,9 +177,40 @@ div.slider {
 
 #form a {
   margin-left:10px;
-  color:$palestyellow;
   color:$red;
   font-size:1.50em;
+}
+
+#form p {
+  margin-left:10px;
+  font-size:1.50em;
+  color:$palestyellow;
+  font-size:1.20em;
+}
+
+#show h2{
+  color:$palestyellow;
+  margin-left:10px;
+}
+
+#errors li {
+  color:$palestyellow;
+  list-style-type: none;
+  font-size: 1.20em;
+}
+
+#show p {
+  color: $palestyellow;
+  margin-left:10px;
+}
+
+#show a {
+  color: $red;
+  margin-left:10px;
+}
+
+#show a:hover {
+  color:$palestyellow;
 }
 
 #form a:hover {
