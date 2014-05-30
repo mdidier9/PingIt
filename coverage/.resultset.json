@@ -777,6 +777,7 @@
         1,
         1,
         1,
+        null,
         null
       ],
       "/Users/mdidier/Desktop/Ping/spec/models/user_pinga_spec.rb": [
@@ -1022,6 +1023,6 @@
         null
       ]
     },
-    "timestamp": 1401392480
+    "timestamp": 1401411253
   }
 }
