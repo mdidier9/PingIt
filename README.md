@@ -8,7 +8,7 @@
 Mobile Application Gihtub: [PingIt Mobile](https://github.com/rmathur101/PingMobile)
 
 #####Team PingIt
-  * [Dan Armstrong](https://github.com/wtfdaboo)
+  * [Dan Armstrong](https://github.com/danarmstrong-io)
   * [Rohan Mathur](https://github.com/rmathur101)
   * [Tam Dang](https://github.com/teedang19)
   * [Ron Gierlach](https://github.com/rongierlach)
