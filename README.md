@@ -8,11 +8,11 @@
 Mobile Application Gihtub: [PingIt Mobile](https://github.com/rmathur101/PingMobile)
 
 #####Team PingIt
-  1. [Dan Armstrong](https://github.com/wtfdaboo)
-  2. [Rohan Mathur](https://github.com/rmathur101)
-  3. [Tam Dang](https://github.com/teedang19)
-  4. [Ron Gierlach](https://github.com/rongierlach)
-  5. [Matt Didier](https://github.com/mdidier9)
+  * [Dan Armstrong](https://github.com/wtfdaboo)
+  * [Rohan Mathur](https://github.com/rmathur101)
+  * [Tam Dang](https://github.com/teedang19)
+  * [Ron Gierlach](https://github.com/rongierlach)
+  * [Matt Didier](https://github.com/mdidier9)
 
 *****
 "PingIt" is a Ruby on Rails web application complemented by a Ruby Motion iOS mobile application.
