@@ -1,6 +1,6 @@
 #[PingIt](http://pinggit.herokuapp.com/sessions/new)
 
-###Events - When and Where they matter most
+###Events - When and Where they matter most 
 
 [![Coverage Status](https://coveralls.io/repos/mdidier9/Ping/badge.png?branch=master)](https://coveralls.io/r/mdidier9/Ping?branch=master)              [![Build Status](https://travis-ci.org/mdidier9/Ping.svg?branch=master)](https://travis-ci.org/mdidier9/Ping)
 
