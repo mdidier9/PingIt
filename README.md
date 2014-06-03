@@ -2,7 +2,7 @@
 
 ###Events - When and Where they matter most 
 
-[![Coverage Status](https://coveralls.io/repos/mdidier9/Ping/badge.png?branch=master)](https://coveralls.io/r/mdidier9/Ping?branch=master)              [![Build Status](https://travis-ci.org/mdidier9/Ping.svg?branch=master)](https://travis-ci.org/mdidier9/Ping)
+[![Coverage Status](https://coveralls.io/repos/mdidier9/PingIt/badge.png?branch=master)](https://coveralls.io/r/mdidier9/PingIt?branch=master)              [![Build Status](https://travis-ci.org/mdidier9/Ping.svg?branch=master)](https://travis-ci.org/mdidier9/Ping)
 
 
 Mobile Application Gihtub: [PingIt Mobile](https://github.com/rmathur101/PingMobile)
