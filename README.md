@@ -1,4 +1,4 @@
-#PingIt
+#[PingIt](http://pinggit.herokuapp.com/sessions/new)
 
 ###Events - When and Where they matter most
 
