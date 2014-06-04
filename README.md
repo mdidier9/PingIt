@@ -5,7 +5,7 @@
 [![Coverage Status](https://coveralls.io/repos/mdidier9/PingIt/badge.png?branch=master)](https://coveralls.io/r/mdidier9/PingIt?branch=master)              [![Build Status](https://travis-ci.org/mdidier9/PingIt.svg?branch=master)](https://travis-ci.org/mdidier9/PingIt)
 
 
-Mobile Application Gihtub: [PingIt Mobile](https://github.com/rmathur101/PingMobile)
+Mobile Application Gihtub: [PingIt Mobile](https://github.com/rmathur101/PingItMobile)
 
 #####Team PingIt
   * [Dan Armstrong](https://github.com/danarmstrong-io)
